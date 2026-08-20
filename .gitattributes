@@ -1,0 +1,10 @@
+# Repo bouwt op Linux (Vercel), werkkopie is Windows. Tekstbestanden altijd met
+# LF in git, zodat diffs schoon blijven ongeacht het platform.
+* text=auto eol=lf
+
+# Binaire bestanden nooit converteren.
+*.woff2 binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.mp4   binary

@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   DESIGN TOKENS — single source of truth
+   Alle kleuren, spacing, radii, easings en durations staan hier. Componenten
+   verwijzen uitsluitend via Tailwind-utilities of var(--token) naar deze waarden.
+   ========================================================================== */
+@theme {
+  /* ---- Kleur ---- */
+  --color-ink: #0b0b0d; /* pagina-achtergrond */
+  --color-surface: #151517; /* kaarten, panelen */
+  --color-bone: #f4f4f5; /* primaire tekst */
+  --color-muted: #9b9ba1; /* secundaire tekst */
+
+  --color-brand: #e30613; /* accent rood */
+  --color-brand-deep: #b00410; /* gradient-start */
+  --color-brand-dark: #8f030d; /* gradient-eind */
+
+  /* Randen — oplopend in nadruk */
+  --color-hairline: rgb(255 255 255 / 0.08);
+  --color-hairline-strong: rgb(255 255 255 / 0.12);
+  --color-hairline-loud: rgb(255 255 255 / 0.22);
+
+  /* ---- Typografie ---- */
+  --font-display: var(--font-clash-display), "Clash Display", system-ui, sans-serif;
+  --font-sans: var(--font-satoshi), "Satoshi", system-ui, sans-serif;
+
+  --tracking-eyebrow: 0.3em;
+  --tracking-label: 0.24em;
+  --tracking-headline: -0.03em;
+  --tracking-title: -0.02em;
+
+  /* ---- Layout ---- */
+  --spacing-gutter: clamp(1.375rem, 4vw, 4rem); /* 22px → 64px */
+  --spacing-section: clamp(5.625rem, 13vh, 9.375rem); /* 90px → 150px */
+  --spacing-section-sm: clamp(2.75rem, 7vh, 5.5rem);
+
+  --container-shell: 87.5rem; /* 1400px */
+
+  /* ---- Radii ---- */
+  --radius-card: 1.25rem; /* 20px */
+  --radius-media: 1rem; /* 16px */
+  --radius-panel: 1.375rem; /* 22px */
+  --radius-icon: 0.875rem; /* 14px */
+  --radius-mark: 0.5625rem; /* 9px */
+  --radius-pill: 6.25rem; /* 100px */
+
+  /* ---- Motion ---- */
+  /* Twee families, bewust gescheiden.
+
+     `expo` is sterk front-loaded: bij een binnenkomst met veel bereik leest dat
+     als vaart, maar bij een hover van een paar pixels zit 90% van de beweging in
+     de eerste drie frames — dat oogt als een schok, niet als een animatie.
+
+     `interact` verdeelt de beweging veel gelijkmatiger en zet in met een lichte
+     aanloop. Gebruik die voor alles wat op hover of focus reageert. */
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1); /* binnenkomsten, groot bereik */
+  --ease-interact: cubic-bezier(0.4, 0.08, 0.2, 1); /* interacties, klein bereik */
+  --ease-out-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 500ms;
+  --duration-reveal: 900ms;
+  --duration-zoom: 700ms;
+
+  /* ---- Schaduw / glow ---- */
+  --shadow-glow: 0 0.625rem 2.125rem rgb(227 6 19 / 0.32);
+  --shadow-glow-strong: 0 0.875rem 2.75rem rgb(227 6 19 / 0.5);
+  --shadow-lift: 0 2.5rem 5rem rgb(0 0 0 / 0.55), 0 0.375rem 1.25rem rgb(0 0 0 / 0.4);
+
+  /* ---- Animaties ---- */
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* De strip staat twee keer in de DOM, dus -50% is één volledige cyclus. */
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ---- Breakpoints (uit het prototype) ---- */
+  --breakpoint-nav: 56.25rem; /* 900px — nav klapt naar burger */
+  --breakpoint-stack: 45rem; /* 720px — grids vallen terug naar één kolom */
+}
+
+/* Hero-doeken. De gekozen foto is licht van boven, dus de bovenrand is
+   zwaarder dan een standaard verloop: header en eyebrow moeten leesbaar zijn
+   zonder dat het beeld dichtslaat. */
+:root {
+  /* Verticaal: donker onder de header, open in het midden, dichtlopend naar
+     de paginakleur toe. */
+  --hero-overlay: linear-gradient(
+    180deg,
+    rgb(11 11 13 / 0.72) 0%,
+    rgb(11 11 13 / 0.34) 26%,
+    rgb(11 11 13 / 0.42) 48%,
+    rgb(11 11 13 / 0.86) 80%,
+    var(--color-ink) 100%
+  );
+
+  /* Horizontaal: zachte vignet links, zodat linksuitgelijnde tekst altijd
+     ondergrond heeft ongeacht wat er op de foto staat. */
+  --hero-veil: linear-gradient(90deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 58%);
+
+  /* Rode gloed die vanaf de onderrand omhoog komt. */
+  --hero-glow: radial-gradient(120% 90% at 50% 120%, rgb(227 6 19 / 0.16) 0%, transparent 55%);
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  /* Lenis stuurt scroll zelf aan; native smooth-scroll zou daarmee vechten. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    /* `clip` in plaats van `hidden`: dat voorkomt horizontale overflow zonder
+       van de body een scroll-container te maken, wat sticky-elementen breekt. */
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion: alles wat beweegt valt stil, layout blijft intact. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+@utility text-eyebrow {
+  font-size: clamp(0.66rem, 0.55rem + 0.5vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: clamp(0.18em, 0.1em + 0.35vw, var(--tracking-eyebrow));
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Tailwind kent geen `--duration-*` theme-namespace, dus `duration-base` en
+   consorten zouden niets genereren en stilzwijgend terugvallen op de standaard
+   van 150ms. Deze utilities koppelen de klassenamen alsnog aan de tokens. */
+@utility duration-fast {
+  transition-duration: var(--duration-fast);
+}
+@utility duration-base {
+  transition-duration: var(--duration-base);
+}
+@utility duration-slow {
+  transition-duration: var(--duration-slow);
+}
+@utility duration-zoom {
+  transition-duration: var(--duration-zoom);
+}
+
+/* Voor de word-reveal: de wrapper klipt, het kind schuift naar binnen. */
+@utility clip-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
