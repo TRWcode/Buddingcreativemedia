@@ -1,9 +1,10 @@
+import Image from "next/image";
 import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from "@/components/ui/icons";
 import { copyright, credit, footerColumns, footerNav, socialLinks } from "@/lib/content/footer";
 import type { SocialPlatform } from "@/lib/content/footer";
-import { site } from "@/lib/content/site";
+import { site, siteLogo } from "@/lib/content/site";
 
 const socialIcons: Record<SocialPlatform, typeof InstagramIcon> = {
   instagram: InstagramIcon,
@@ -17,19 +18,14 @@ export function Footer() {
       <Container className="pb-10 pt-[clamp(3.75rem,9vh,6rem)]">
         <div className="grid gap-11 stack:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <div className="mb-5.5 flex items-center gap-3">
-              <span
-                aria-hidden
-                className="flex size-[2.375rem] items-center justify-center rounded-mark bg-brand font-display text-[1.35rem] font-bold text-white"
-              >
-                {site.monogram}
-              </span>
-              <span className="whitespace-nowrap font-display text-[0.82rem] font-semibold uppercase leading-[1.05] tracking-[0.14em]">
-                {site.nameLines[0]}
-                <br />
-                <span className="text-muted">{site.nameLines[1]}</span>
-              </span>
-            </div>
+            <Image
+              src={siteLogo.src}
+              alt={siteLogo.alt}
+              width={siteLogo.width}
+              height={siteLogo.height}
+              sizes="240px"
+              className="mb-6 h-[2.625rem] w-auto"
+            />
             <p className="max-w-[19rem] leading-[1.6] text-muted">{site.description}</p>
           </div>
 

@@ -1,23 +1,26 @@
+import Image from "next/image";
 import { AnchorLink } from "@/components/ui/AnchorLink";
-import { site } from "@/lib/content/site";
+import { siteLogo } from "@/lib/content/site";
 
-/** Merk-lockup: rood vierkant monogram naast de tweeregelige naam. */
+/**
+ * Het merklogo in de header. Iets kleiner onder de nav-breakpoint, zodat het
+ * naast de burgerknop past zonder de gutter op te eten.
+ *
+ * `priority`: het logo staat boven de vouw op elke pagina en is klein genoeg
+ * om de herofoto niet van bandbreedte te beroven.
+ */
 export function Logo() {
-  const [firstLine, secondLine] = site.nameLines;
-
   return (
-    <AnchorLink href="#top" className="flex items-center gap-3" aria-label={`${site.name} — naar boven`}>
-      <span
-        aria-hidden
-        className="flex size-[2.375rem] shrink-0 items-center justify-center rounded-mark bg-brand font-display text-[1.35rem] font-bold leading-none text-white"
-      >
-        {site.monogram}
-      </span>
-      <span className="whitespace-nowrap font-display text-[0.82rem] font-semibold uppercase leading-[1.05] tracking-[0.14em]">
-        {firstLine}
-        <br />
-        <span className="text-muted">{secondLine}</span>
-      </span>
+    <AnchorLink href="#top" className="block shrink-0">
+      <Image
+        src={siteLogo.src}
+        alt={siteLogo.alt}
+        width={siteLogo.width}
+        height={siteLogo.height}
+        priority
+        sizes="220px"
+        className="h-8 w-auto nav:h-[2.375rem]"
+      />
     </AnchorLink>
   );
 }

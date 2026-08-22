@@ -97,8 +97,20 @@ bij met `object-cover`, dus een afwijkende ratio verliest randen.
 | `cases/marathon-aftermovie.jpg` | Casekaart 3 | 4:3 liggend | ✅ eigen foto |
 | `events/mini-shoot-almere.jpg` | Eventkaart | staand tot vierkant | ✅ eigen foto |
 | `cases/althio-portret-papieren.jpg` | Mozaïek Althio | 3:2 liggend | ✅ eigen foto |
+| `brand/logo.webp` | Merklogo in header en footer | 560×105, transparant | ✅ officieel logo |
 | `logos/*.png` | Klantenrij op de homepage | wit, transparant | ✅ zie hieronder |
 | `library/*.jpg` | Losse pool, deels in casemozaïeken | — | reserve |
+
+Het merklogo staat in [`site.ts`](lib/content/site.ts) als `siteLogo` en wordt op
+één plek gerenderd per plek: [`Logo.tsx`](components/layout/Logo.tsx) voor de
+header, de eerste kolom van de footer voor onderin. Het bestand is al bijgesneden
+tot de illustratie zelf — de aangeleverde versie had asymmetrische transparante
+marges (41px links, 39 rechts, 56 boven, 48 onder), waardoor het logo optisch
+scheef in de header hing. Ruimte eromheen regel je met CSS, niet met lege pixels.
+
+Het logo is deels rood en de header schuift ook over het rode CTA-blok. Daarom
+staat de balk in scroll-stand op `bg-ink/85` en niet lager: op een lichtere balk
+valt het merk tegen die achtergrond weg.
 
 Nog te leveren: de showreel-mp4 en een 1200×630 og-image (nu valt die terug op de
 herofoto, zie `metadata.openGraph` in `app/layout.tsx`).

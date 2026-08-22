@@ -15,6 +15,10 @@ import { useScrolled } from "@/lib/useScrolled";
  * Vaste header die bij het scrollen compacter wordt en een blurlaag krijgt.
  * De overgang loopt via CSS-transities, niet via JS, zodat er niets per frame
  * herberekend hoeft te worden.
+ *
+ * De balk is bewust vrij dekkend (85%): hij schuift ook over het rode CTA-blok,
+ * en het logo is deels rood — op een lichtere balk valt dat tegen die achtergrond
+ * weg.
  */
 export function Header() {
   const scrolled = useScrolled();
@@ -30,7 +34,7 @@ export function Header() {
           "fixed inset-x-0 top-0 z-1000 flex items-center justify-between px-gutter",
           "border-b transition-[padding,background-color,border-color] duration-base ease-interact",
           scrolled
-            ? "border-hairline bg-ink/70 py-3.5 backdrop-blur-[14px]"
+            ? "border-hairline bg-ink/85 py-3.5 backdrop-blur-[14px]"
             : "border-transparent bg-transparent py-5.5",
         )}
       >
