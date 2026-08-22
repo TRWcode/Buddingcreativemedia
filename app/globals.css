@@ -71,6 +71,9 @@
 
   /* ---- Animaties ---- */
   --animate-marquee: marquee 38s linear infinite;
+  /* Beeld leest trager dan tekst: dezelfde strip met foto's mag niet in hetzelfde
+     tempo langskomen als de woordenstrip onder de hero. */
+  --animate-marquee-slow: marquee 64s linear infinite;
 
   @keyframes marquee {
     from {
@@ -108,6 +111,19 @@
 
   /* Rode gloed die vanaf de onderrand omhoog komt. */
   --hero-glow: radial-gradient(120% 90% at 50% 120%, rgb(227 6 19 / 0.16) 0%, transparent 55%);
+
+  /* Casepagina's krijgen een zwaarder doek dan de homepage. De herofoto daar is
+     gekozen op de tekst die eroverheen komt; het sleutelbeeld van een case ligt
+     vast en kan overal licht zijn — zoals de goudkleurige gang bij Althio. Dit
+     verloop houdt de titel leesbaar ongeacht wat eronder ligt. */
+  --case-overlay: linear-gradient(
+    180deg,
+    rgb(11 11 13 / 0.78) 0%,
+    rgb(11 11 13 / 0.4) 28%,
+    rgb(11 11 13 / 0.66) 58%,
+    rgb(11 11 13 / 0.93) 84%,
+    var(--color-ink) 100%
+  );
 }
 
 /* ==========================================================================

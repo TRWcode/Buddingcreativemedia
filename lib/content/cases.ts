@@ -1,5 +1,357 @@
 import type { CtaLink, ImageAsset, SectionIntro } from "./types";
 
+/** Eén hoofdstuk uit het verhaal van een case: de vraag, de aanpak, het resultaat. */
+export interface CaseChapter {
+  readonly id: string;
+  readonly heading: string;
+  readonly body: string;
+}
+
+/**
+ * Beeld in de mozaïek van een casepagina. `full` beslaat de volle breedte,
+ * `half` staat naast een tweede beeld en `tall` is de staande variant daarvan.
+ */
+export interface CaseGalleryItem extends ImageAsset {
+  readonly span: "full" | "half" | "tall";
+}
+
+export interface CaseStudy {
+  readonly slug: string;
+  readonly title: string;
+  /** De titel opgebroken in regels; elke regel krijgt een eigen masked reveal. */
+  readonly titleLines: readonly string[];
+  readonly client: string;
+  readonly disciplines: readonly string[];
+  readonly year: string;
+  readonly location: string;
+  /** Eén zin — staat in de kaart, de meta-description en de social preview. */
+  readonly summary: string;
+  /** De grote openingszin boven het verhaal. */
+  readonly lead: string;
+  readonly chapters: readonly CaseChapter[];
+  /** Wat er is opgeleverd; verschijnt als lijst naast het verhaal. */
+  readonly deliverables: readonly string[];
+  /** Full-bleed opening van de detailpagina. */
+  readonly hero: ImageAsset;
+  /** Beeld in de kaart op de homepage — 4:3. */
+  readonly card: ImageAsset;
+  readonly gallery: readonly CaseGalleryItem[];
+}
+
+export const casesIntro: SectionIntro = {
+  eyebrow: "Uitgelicht werk",
+  title: "Onze Cases",
+  description: "Van idee tot impact. Zo brengen wij projecten tot leven.",
+};
+
+/**
+ * Alle cases, in de volgorde waarin ze ook naar elkaar doorlinken — onderaan
+ * elke detailpagina staat de volgende uit deze lijst.
+ */
+export const caseStudies: readonly CaseStudy[] = [
+  {
+    slug: "gemeente-almere",
+    title: "Onderneming van het Jaar",
+    titleLines: ["Onderneming", "van het Jaar"],
+    client: "Gemeente Almere",
+    disciplines: ["Fotografie", "Event"],
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Een volledige beeldcampagne rond de verkiezing tot Onderneming van het Jaar — van event-coverage tot portretten.",
+    lead: "Een avond die om herkenning draait: genomineerden, hun mensen en het moment waarop de winnaar bekend wordt. Dat vraagt om beeld dat de sfeer vasthoudt zonder de avond te onderbreken.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "Gemeente Almere zocht beeld dat de verkiezing in volle breedte vastlegt: de aanloop, de zaal, de sprekers en de uitreiking zelf. Bruikbaar voor pers en social, maar ook voor de eigen kanalen in de maanden erna.",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "We liepen de avond mee met een vast draaiboek voor de vaste momenten en ruimte voor alles daaromheen. Onopvallend werken, met natuurlijk licht waar het kon, zodat genomineerden zich niet gefotografeerd voelden maar gewoon hun avond hadden.",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "Een complete set beelden waarmee de gemeente direct na afloop naar buiten kon: sfeerbeeld uit de zaal, portretten van de winnaars en de uitreiking zelf. Rustig geregisseerd, met impact als resultaat.",
+      },
+    ],
+    deliverables: ["Event-coverage", "Portretten", "Persbeeld", "Social content"],
+    hero: {
+      src: "/media/cases/spotlight-onderneming-van-het-jaar.jpg",
+      alt: "Winnaars bekijken de gouden award tijdens de uitreiking",
+      width: 1200,
+      height: 800,
+    },
+    card: {
+      src: "/media/cases/spotlight-onderneming-van-het-jaar.jpg",
+      alt: "Winnaars bekijken de gouden award tijdens de uitreiking",
+      width: 1200,
+      height: 800,
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/library/zaal-publiek.jpg",
+        alt: "Volle zaal kijkt naar het podium tijdens de uitreiking",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "half",
+        src: "/media/library/eventsummit-podium.jpg",
+        alt: "Twee presentatoren op het podium met een bord in hun handen",
+        width: 1224,
+        height: 816,
+      },
+      {
+        span: "half",
+        src: "/media/library/spreker-oranje-pak.jpg",
+        alt: "Spreker in oranje pak met opgeheven armen op het podium",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "half",
+        src: "/media/library/blauw-podium-spreker.jpg",
+        alt: "Spreker in een blauw verlichte zaal met publiek op de voorgrond",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "half",
+        src: "/media/library/presentatie-scherm.jpg",
+        alt: "Presentatrice naast een groot scherm met beelden van het evenement",
+        width: 1200,
+        height: 800,
+      },
+    ],
+  },
+  {
+    slug: "jijbenm",
+    title: "Campagne & Promo Reels",
+    titleLines: ["Campagne &", "Promo Reels"],
+    client: "JijbenM",
+    disciplines: ["Drone", "Fotografie", "Videografie"],
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Korte, krachtige reels rond nieuwe kunstinstallaties en exposities — gemaakt om nieuwsgierig te maken.",
+    lead: "Voor de aankondiging van nieuwe kunstinstallaties en exposities zocht JijbenM naar korte, krachtige videocontent die nieuwsgierigheid opwekt en het publiek in beweging brengt.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "De reels moesten nieuwsgierigheid opwekken, informeren waar nodig en het publiek activeren om de exposities te bezoeken. Onder andere voor de exposities rondom Sacha Miyachi en Kamp Seedorf.",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "In overleg bepaalden we per campagne de insteek en het script. Afhankelijk van het doel kozen we voor een strakke, visuele edit of een meer informatieve benadering. Door tempo, beeldkeuze en montage bewust in te zetten, sloten de reels aan bij zowel de inhoud van de exposities als het publiek van JijbenM.",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "Een reeks promotionele reels met een groot bereik en veel interactie op social media. De video's droegen zichtbaar bij aan de aandacht voor de exposities en aan een goede opkomst, zowel online als fysiek in de tentoonstellingsruimte.",
+      },
+    ],
+    deliverables: ["Script & concept", "Dronebeeld", "Promo reels", "Campagnefotografie"],
+    hero: {
+      src: "/media/cases/campagne-promo-reels.jpg",
+      alt: "Campagnebeeld op het strand met opblaasbare flamingo's en studiolampen",
+      width: 1600,
+      height: 1068,
+    },
+    card: {
+      src: "/media/cases/campagne-promo-reels.jpg",
+      alt: "Campagnebeeld op het strand met opblaasbare flamingo's en studiolampen",
+      width: 1600,
+      height: 1068,
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/library/wit-pak-ballonnen.jpg",
+        alt: "Vrouw in wit pak met een tros witte ballonnen voor een gebouw",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "tall",
+        src: "/media/library/kinderboekenmuseum-ballonnen.jpg",
+        alt: "Tros witte ballonnen voor het Kinderboekenmuseum",
+        width: 600,
+        height: 900,
+      },
+      {
+        span: "half",
+        src: "/media/library/springtouw-schoolplein.jpg",
+        alt: "Groep kinderen springt touwtje op een plein",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "full",
+        src: "/media/library/speeltuin.jpg",
+        alt: "Kind klimt door een speeltoestel in het groen",
+        width: 1200,
+        height: 800,
+      },
+    ],
+  },
+  {
+    slug: "althio",
+    title: "Studio Portretsessie",
+    titleLines: ["Studio", "Portretsessie"],
+    client: "Althio",
+    disciplines: ["Fotografie", "Studio"],
+    year: "2024",
+    location: "Almere",
+    summary:
+      "Een portretserie met karakter: strak licht, een duidelijke lijn en ruimte voor eigenheid.",
+    lead: "Zakelijke portretten die niet als zakelijke portretten aanvoelen. Althio wilde beeld waarin de mensen achter het merk herkenbaar blijven — met lef in het licht en rust in de compositie.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "Een portretserie die op de site, op social en in presentaties naast elkaar kan staan zonder uit de toon te vallen. Eén visuele lijn, maar met genoeg variatie om niet als pasfoto's te lezen.",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "We bouwden een setup met sterk gericht licht en werkten per persoon een paar houdingen af — van neutraal tot uitgesproken. Door de achtergrond en het licht gelijk te houden en alleen de pose te variëren, blijft de serie samenhangend.",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "Een set portretten die als serie werkt en los van elkaar net zo goed staat. Direct inzetbaar voor de website, social en presentaties, en makkelijk aan te vullen zodra er nieuwe gezichten bijkomen.",
+      },
+    ],
+    deliverables: ["Studio-setup", "Portretserie", "Retouche", "Social-varianten"],
+    hero: {
+      src: "/media/cases/studio-portretsessie.jpg",
+      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
+      width: 1600,
+      height: 1068,
+    },
+    card: {
+      src: "/media/cases/studio-portretsessie.jpg",
+      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
+      width: 1600,
+      height: 1068,
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/cases/althio-portret-papieren.jpg",
+        alt: "Portret van een man op een bank met rondvliegende vellen papier",
+        width: 1600,
+        height: 1067,
+      },
+      {
+        span: "full",
+        src: "/media/diensten/fotografie.jpg",
+        alt: "Portret van een vrouw met een kop koffie in een lichte werkruimte",
+        width: 1600,
+        height: 1066,
+      },
+    ],
+  },
+  {
+    slug: "golazo",
+    title: "Marathon Aftermovie",
+    titleLines: ["Marathon", "Aftermovie"],
+    client: "Golazo Events NL",
+    disciplines: ["Videografie", "Event"],
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Een aftermovie die het tempo van de dag vasthoudt: start, publiek, finish en alles ertussenin.",
+    lead: "Duizenden deelnemers, één dag, en een film die daarna het hele jaar moet blijven werken. Golazo wilde een aftermovie die niet alleen laat zien wat er gebeurde, maar ook hoe het voelde.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "Een aftermovie voor social en voor de werving van de volgende editie. Kort genoeg om af te kijken, compleet genoeg om het hele evenement te vertegenwoordigen — van de jeugdstart tot de laatste finisher.",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "We legden vooraf de route en de vaste momenten vast en verdeelden de dag in blokken, zodat er niets tussen wal en schip viel. In de montage bouwden we op van rust naar tempo, gesneden op het ritme van de muziek en de energie langs het parcours.",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "Een aftermovie die het evenement in beeld samenvat, plus korte verticale edits voor social. Samen geven ze een compleet beeld van de dag — en een sterke aanleiding om je in te schrijven voor de volgende editie.",
+      },
+    ],
+    deliverables: ["Aftermovie", "Verticale social-edits", "Event-coverage", "Stills"],
+    hero: {
+      src: "/media/cases/marathon-aftermovie.jpg",
+      alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
+      width: 1200,
+      height: 800,
+    },
+    card: {
+      src: "/media/cases/marathon-aftermovie.jpg",
+      alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
+      width: 1200,
+      height: 800,
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/library/straatvoetbal.jpg",
+        alt: "Kinderen spelen straatvoetbal op een veldje tijdens het evenement",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "half",
+        src: "/media/library/beachvolleybal.jpg",
+        alt: "Beachvolleybaltoernooi met de skyline van Almere op de achtergrond",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "half",
+        src: "/media/library/skatepark-step.jpg",
+        alt: "Steppers en skaters op een schansje in het skatepark",
+        width: 1200,
+        height: 800,
+      },
+      {
+        span: "full",
+        src: "/media/library/urban-sports-water.jpg",
+        alt: "Deelnemers balanceren over een parcours boven het water",
+        width: 1200,
+        height: 800,
+      },
+    ],
+  },
+];
+
+/** Het pad van een casepagina. Eén plek, zodat links nooit uit de pas lopen. */
+export function caseHref(slug: string): string {
+  return `/cases/${slug}`;
+}
+
+export function findCaseStudy(slug: string): CaseStudy | undefined {
+  return caseStudies.find((item) => item.slug === slug);
+}
+
+/** De case die onderaan een detailpagina als volgende wordt aangeboden. */
+export function nextCaseStudy(slug: string): CaseStudy {
+  const index = caseStudies.findIndex((item) => item.slug === slug);
+  return caseStudies[(index + 1) % caseStudies.length]!;
+}
+
+/* ---------------------------------------------------------------------------
+   Afgeleide vormen voor de homepage. De casedata hierboven is de bron; deze
+   exports vertalen die naar wat de secties op de homepage nodig hebben.
+   --------------------------------------------------------------------------- */
+
 export interface CaseSpotlight {
   readonly badge: string;
   readonly title: string;
@@ -21,71 +373,39 @@ export interface CaseCard {
   readonly image: ImageAsset;
 }
 
-export const casesIntro: SectionIntro = {
-  eyebrow: "Uitgelicht werk",
-  title: "Onze Cases",
-  description: "Van idee tot impact. Zo brengen wij projecten tot leven.",
-};
+const SPOTLIGHT_SLUG = "gemeente-almere";
+
+const spotlightStudy = findCaseStudy(SPOTLIGHT_SLUG)!;
 
 export const caseSpotlight: CaseSpotlight = {
   badge: "Case in de spotlight",
-  title: "Gemeente Almere",
-  caption: "Onderneming van het Jaar",
-  description:
-    "Een volledige beeldcampagne rond de verkiezing tot Onderneming van het Jaar — van sfeervolle event-coverage tot krachtige portretten. Rustig geregisseerd, met impact als resultaat.",
-  tags: ["Fotografie", "Event", "2025"],
-  link: { label: "Bekijk case", href: "#cases" },
-  image: {
-    src: "/media/cases/spotlight-onderneming-van-het-jaar.jpg",
-    alt: "Winnaars bekijken de gouden award tijdens de uitreiking",
-    width: 1200,
-    height: 800,
-  },
+  title: spotlightStudy.client,
+  caption: spotlightStudy.title,
+  description: spotlightStudy.lead,
+  tags: [...spotlightStudy.disciplines, spotlightStudy.year],
+  link: { label: "Bekijk case", href: caseHref(spotlightStudy.slug) },
+  image: spotlightStudy.card,
 };
 
-export const caseCards: readonly CaseCard[] = [
-  {
-    id: "jijbenm",
-    title: "Campagne & Promo Reels",
-    client: "JijbenM",
-    disciplines: "Drone · Fotografie · Video",
-    year: "2025",
-    href: "#cases",
-    image: {
-      src: "/media/cases/campagne-promo-reels.jpg",
-      alt: "Campagnebeeld op het strand met opblaasbare flamingo's en studiolampen",
-      width: 1600,
-      height: 1068,
-    },
-  },
-  {
-    id: "althio",
-    title: "Studio Portretsessie",
-    client: "Althio",
-    disciplines: "Fotografie · Studio",
-    year: "2024",
-    href: "#cases",
-    image: {
-      src: "/media/cases/studio-portretsessie.jpg",
-      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
-      width: 1600,
-      height: 1068,
-    },
-  },
-  {
-    id: "golazo",
-    title: "Marathon Aftermovie",
-    client: "Golazo Events NL",
-    disciplines: "Videografie · Event",
-    year: "2025",
-    href: "#cases",
-    image: {
-      src: "/media/cases/marathon-aftermovie.jpg",
-      alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
-      width: 1200,
-      height: 800,
-    },
-  },
-];
+/** Vertaalt een case naar de kaartvorm die de homepage en het overzicht tonen. */
+export function toCaseCard(study: CaseStudy): CaseCard {
+  return {
+    id: study.slug,
+    title: study.title,
+    client: study.client,
+    disciplines: study.disciplines.join(" · "),
+    year: study.year,
+    href: caseHref(study.slug),
+    image: study.card,
+  };
+}
 
-export const casesCta: CtaLink = { label: "Meer Werk", href: "#cases" };
+/** De kaarten onder de spotlight — die case zelf staat er niet nog eens bij. */
+export const caseCards: readonly CaseCard[] = caseStudies
+  .filter((item) => item.slug !== SPOTLIGHT_SLUG)
+  .map(toCaseCard);
+
+/** Het overzicht van alle cases. */
+export const casesIndexHref = "/cases";
+
+export const casesCta: CtaLink = { label: "Meer Werk", href: casesIndexHref };

@@ -65,6 +65,16 @@ export const fadeUp: Variants = {
   shown: { opacity: 1, y: 0, transition: transition.reveal },
 };
 
+/**
+ * Beeld dat na binnenkomst uit een lichte overscale naar 1 zakt. Loopt langer
+ * door dan de fade eromheen, zodat het beeld nog even "ademt" nadat het kader
+ * al staat. Alleen `scale` — dus compositor-werk, geen herteken per frame.
+ */
+export const imageSettle: Variants = {
+  hidden: { scale: 1.07 },
+  shown: { scale: 1, transition: { duration: 1.4, ease: EASE_OUT_SOFT } },
+};
+
 /** Alleen fade — voor elementen waar verschuiven te druk wordt. */
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },

@@ -1,7 +1,7 @@
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from "@/components/ui/icons";
-import { copyright, footerColumns, footerNav, socialLinks } from "@/lib/content/footer";
+import { copyright, credit, footerColumns, footerNav, socialLinks } from "@/lib/content/footer";
 import type { SocialPlatform } from "@/lib/content/footer";
 import { site } from "@/lib/content/site";
 
@@ -39,13 +39,13 @@ export function Footer() {
             </p>
             <div className="flex flex-col gap-3 font-medium">
               {footerNav.map((link) => (
-                <Link
+                <AnchorLink
                   key={link.label}
                   href={link.href}
                   className="w-fit transition-colors duration-fast hover:text-brand"
                 >
                   {link.label}
-                </Link>
+                </AnchorLink>
               ))}
             </div>
           </nav>
@@ -86,9 +86,26 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-[clamp(2.75rem,6vh,4.25rem)] flex flex-wrap items-center justify-between gap-3.5 border-t border-hairline pt-6.5 text-[0.86rem] text-muted">
+        <div className="mt-[clamp(2.75rem,6vh,4.25rem)] flex flex-wrap items-center justify-between gap-x-6 gap-y-3.5 border-t border-hairline pt-6.5 text-[0.86rem] text-muted">
           <span>{copyright}</span>
           <span>{site.location}</span>
+          <span className="group/credit inline-flex items-center gap-1.5">
+            {credit.prefix}
+            <a
+              href={credit.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 font-medium text-bone transition-colors duration-fast hover:text-brand"
+            >
+              {credit.label}
+              <span
+                aria-hidden
+                className="text-brand transition-transform duration-base ease-interact group-hover/credit:-translate-y-px group-hover/credit:translate-x-px"
+              >
+                &#8599;
+              </span>
+            </a>
+          </span>
         </div>
       </Container>
     </footer>

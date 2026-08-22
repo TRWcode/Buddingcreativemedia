@@ -29,3 +29,10 @@ export const footerNav: readonly NavLink[] = [
 ];
 
 export const copyright = `© ${new Date().getFullYear()} Budding Creative Media`;
+
+/** Credit in de onderste balk — de partij die de site heeft gebouwd. */
+export const credit = {
+  prefix: "Website door",
+  label: "Stapit",
+  href: "https://stapit.com",
+} as const;

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Button } from "@/components/ui/Button";
 import { EASE_ENTRANCE, STAGGER, transition } from "@/lib/motion";
 import { navLinks, primaryCta, site } from "@/lib/content/site";
@@ -68,7 +68,7 @@ export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
           <nav className="relative my-auto flex flex-col gap-0.5" aria-label="Hoofdnavigatie">
             {navLinks.map((link, index) => (
               <motion.span key={link.label} variants={item}>
-                <Link
+                <AnchorLink
                   href={link.href}
                   onClick={onClose}
                   className="flex items-baseline gap-4 py-1.5 font-display text-[clamp(2.4rem,12vw,4rem)] font-semibold uppercase leading-[1.05] tracking-title transition-colors duration-fast hover:text-brand"
@@ -77,7 +77,7 @@ export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {link.label}
-                </Link>
+                </AnchorLink>
               </motion.span>
             ))}
           </nav>

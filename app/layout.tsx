@@ -51,7 +51,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="nl" className={`${clashDisplay.variable} ${satoshi.variable}`}>
+    // `scroll-behavior: smooth` staat globaal in de CSS. Next 16 laat dat bij
+    // routewissels standaard staan, waardoor de sprong naar boven bij het openen
+    // van een casepagina als een lange scroll leest. Dit attribuut zet de oude
+    // afhandeling terug: tijdens de navigatie even `auto`, daarna weer `smooth`.
+    <html
+      lang="nl"
+      data-scroll-behavior="smooth"
+      className={`${clashDisplay.variable} ${satoshi.variable}`}
+    >
       <body>
         {/* Zonder JS blijven reveal-elementen anders op opacity 0 staan. */}
         <noscript>

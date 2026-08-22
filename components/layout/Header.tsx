@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useId, useState } from "react";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Button } from "@/components/ui/Button";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Logo } from "./Logo";
@@ -43,13 +43,13 @@ export function Header() {
           className="hidden items-center gap-9 text-[0.92rem] font-medium nav:flex"
         >
           {navLinks.map((link) => (
-            <Link
+            <AnchorLink
               key={link.label}
               href={link.href}
               className="transition-colors duration-fast hover:text-brand"
             >
               {link.label}
-            </Link>
+            </AnchorLink>
           ))}
         </nav>
 

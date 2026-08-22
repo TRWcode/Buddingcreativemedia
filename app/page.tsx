@@ -1,4 +1,5 @@
 import { Cases } from "@/components/sections/Cases";
+import { Clients } from "@/components/sections/Clients";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { Events } from "@/components/sections/Events";
 import { Hero } from "@/components/sections/Hero";
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Hero />
       <Marquee />
       <Services />
+      <Clients />
       <Cases />
       <Werkwijze />
       <Events />

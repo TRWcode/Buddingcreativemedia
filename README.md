@@ -15,13 +15,16 @@ npm run typecheck  # tsc --noEmit
 ```
 app/
   layout.tsx        fonts, metadata, providers, header
-  page.tsx          stelt de secties samen
+  page.tsx          stelt de secties van de homepage samen
+  not-found.tsx     404
+  cases/[slug]/     detailpagina per case, statisch voorgebouwd
   globals.css       design tokens (@theme) + base + utilities
   fonts.ts          next/font/local
   fonts/            self-hosted variable woff2
 components/
   layout/           header, mobiel menu, logo, footer, cursor, smooth scroll
-  sections/         één component per sectie van de pagina
+  sections/         één component per sectie van de homepage
+  case/             de blokken van een casepagina
   ui/               herbruikbare bouwstenen en animatie-primitives
 lib/
   motion.ts         alle easings, durations en variants
@@ -31,12 +34,34 @@ design/             het originele Claude Design-prototype (referentie)
 _originals/         onbewerkte foto's, buiten git
 ```
 
+## Routes
+
+| Route | Bron |
+| --- | --- |
+| `/` | [`app/page.tsx`](app/page.tsx) |
+| `/cases` | [`app/cases/page.tsx`](app/cases/page.tsx) — overzicht van alle cases |
+| `/cases/[slug]` | [`app/cases/[slug]/page.tsx`](app/cases/%5Bslug%5D/page.tsx) — `generateStaticParams` bouwt elke case uit `caseStudies` voor |
+| 404 | [`app/not-found.tsx`](app/not-found.tsx) |
+
+`dynamicParams = false`: een slug die niet in de content staat geeft een 404 in
+plaats van een render on-demand.
+
 ## Secties
 
-De pagina is opgebouwd in [`app/page.tsx`](app/page.tsx):
-Hero → Marquee → Diensten → Cases → Werkwijze → Events → CTA, met header en footer
-in de layout. Elke sectie heeft een anker-id (`#diensten`, `#cases`, `#werkwijze`,
-`#events`, `#contact`) waar de navigatie via Lenis naartoe scrollt.
+De homepage is opgebouwd in [`app/page.tsx`](app/page.tsx):
+Hero → Marquee → Diensten → Klanten → Cases → Werkwijze → Events → CTA, met header
+en footer in de layout. Elke sectie heeft een anker-id (`#diensten`, `#cases`,
+`#werkwijze`, `#events`, `#contact`) waar de navigatie via Lenis naartoe scrollt.
+
+Een casepagina is opgebouwd uit [`components/case/`](components/case/):
+hero → gegevensbalk → filmstrip → verhaal → mozaïek → volgende case → CTA.
+
+**Ankerlinks vanaf een andere pagina.** De navigatie linkt naar secties op de
+homepage. Op de homepage moet dat een kaal anker blijven (`#cases`), anders kan
+`SmoothScroll` hem niet onderscheppen en scrollt Lenis er niet soepel naartoe;
+staat de bezoeker op een casepagina, dan moet er `/` voor. Dat verschil zit in
+[`components/ui/AnchorLink.tsx`](components/ui/AnchorLink.tsx) — gebruik die voor
+elke link naar een homepage-sectie, niet `next/link` rechtstreeks.
 
 Hover-effecten (beeldzoom, accentlijn, case-label, polaroid) draaien op CSS
 `group-hover`, niet op JS — die componenten blijven daardoor server components.
@@ -71,10 +96,53 @@ bij met `object-cover`, dus een afwijkende ratio verliest randen.
 | `cases/studio-portretsessie.jpg` | Casekaart 2 | 4:3 liggend | ✅ eigen foto |
 | `cases/marathon-aftermovie.jpg` | Casekaart 3 | 4:3 liggend | ✅ eigen foto |
 | `events/mini-shoot-almere.jpg` | Eventkaart | staand tot vierkant | ✅ eigen foto |
-| `library/*.jpg` | Nog niet geplaatst | — | reserve, klaar voor gebruik |
+| `cases/althio-portret-papieren.jpg` | Mozaïek Althio | 3:2 liggend | ✅ eigen foto |
+| `logos/*.png` | Klantenrij op de homepage | wit, transparant | ✅ zie hieronder |
+| `library/*.jpg` | Losse pool, deels in casemozaïeken | — | reserve |
 
 Nog te leveren: de showreel-mp4 en een 1200×630 og-image (nu valt die terug op de
 herofoto, zie `metadata.openGraph` in `app/layout.tsx`).
+
+### Klantlogo's
+
+De logo's in [`lib/content/clients.ts`](lib/content/clients.ts) staan als **witte
+monochrome PNG met alpha** in `public/media/logos/`. In eigen huisstijlkleur zijn
+ze op de donkere achtergrond onleesbaar (Aeres is donkergroen op wit) of eisen ze
+alle aandacht op. De rij rendert op 60% dekking en trekt bij hover bij.
+
+Een nieuw logo klaarmaken: neem het aan op witte of transparante ondergrond, maak
+er een wit silhouet met alpha van, snijd de marges eraf en zet het in
+`public/media/logos/`. Voeg daarna een item toe aan `clientLogos` met de
+werkelijke pixelmaten en een `height` — die optische hoogte verschilt per merk,
+want een breed wordmark weegt bij gelijke hoogte veel zwaarder dan een gestapeld
+logo. Een `href` is optioneel; alleen logo's met een href worden een link.
+
+### Beeld per case
+
+Elke case in [`lib/content/cases.ts`](lib/content/cases.ts) heeft een `hero`, een
+`card` (4:3, staat op de homepage) en een `gallery`. Elk mozaïekbeeld draagt zelf
+zijn `span`:
+
+| `span` | Kolommen | Uitsnede |
+| --- | --- | --- |
+| `full` | volle breedte | 16:9 |
+| `half` | halve breedte | 4:3 |
+| `tall` | halve breedte | 3:4, staand |
+
+Zorg dat elke rij vol loopt — twee `half`/`tall` naast elkaar, of een `full` —
+anders blijft er onderaan een halve kolom leeg staan. Zet een beeld niet én in de
+`hero` én in de `gallery`: het komt via de filmstrip toch al twee keer voorbij.
+
+> **Let op — de mozaïeken zijn nu opgevuld uit `library/`.** Alleen de herobeelden
+> en `althio-portret-papieren.jpg` horen echt bij hun case; de rest is op thema
+> gekozen als plaatsvervanger. Vervang ze door het echte materiaal per klant.
+> Twee dingen om dan meteen mee te nemen: `library/kinderboekenmuseum-ballonnen.jpg`
+> is maar 600×900 en wordt in de mozaïek opgeschaald, en Althio heeft nog te weinig
+> beeld voor een filmstrip (die verschijnt vanaf vier unieke foto's).
+
+Ook de casetekst is grotendeels een eerste opzet: alleen de JijbenM-copy komt van
+de bestaande site. Loop `lead`, `chapters` en `deliverables` van de andere drie na
+voordat de site live gaat.
 
 ## Smoothness
 
