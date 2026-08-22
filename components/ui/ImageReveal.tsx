@@ -9,7 +9,13 @@ import type { ImageAsset } from "@/lib/content/types";
 interface ImageRevealProps {
   image: ImageAsset;
   sizes: string;
-  /** Kader: aspect-ratio en eventuele afwijkende radius. */
+  /**
+   * Verhouding van het kader. Laat leeg om de aspect-klasse uit `className` te
+   * gebruiken; geef een getal mee om het beeld zijn eigen verhouding te laten
+   * houden en dus niet bij te snijden.
+   */
+  aspect?: number;
+  /** Kader: aspect-klasse en eventuele afwijkende radius. */
   className?: string;
   priority?: boolean;
 }
@@ -22,10 +28,17 @@ interface ImageRevealProps {
  * De binnenste laag erft de animatiestatus van de buitenste; alleen `opacity`
  * en `transform` bewegen, dus er valt niets te hertekenen per frame.
  */
-export function ImageReveal({ image, sizes, className, priority = false }: ImageRevealProps) {
+export function ImageReveal({
+  image,
+  sizes,
+  aspect,
+  className,
+  priority = false,
+}: ImageRevealProps) {
   return (
     <motion.figure
       data-motion
+      style={aspect ? { aspectRatio: aspect } : undefined}
       className={cn("relative overflow-hidden rounded-media border border-hairline", className)}
       variants={fadeUp}
       initial="hidden"

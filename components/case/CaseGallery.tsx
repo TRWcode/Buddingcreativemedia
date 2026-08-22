@@ -7,11 +7,16 @@ import type { CaseGalleryItem } from "@/lib/content/cases";
  * ruimte hij krijgt — `full` over de volle breedte, `half` en `tall` naast
  * elkaar — zodat de opbouw per case verschilt zonder dat hier iets aan moet.
  *
+ * `full` houdt bewust de eigen verhouding van het beeld. Een vaste uitsnede
+ * werkt tegen de foto: bij de groepsfoto van JijbenM zou een 16:9-kader precies
+ * de roze M van het dak snijden. Halve kolommen hebben wél een vaste verhouding,
+ * anders lijnen de rijen niet meer uit.
+ *
  * De rijen lijnen bovenaan uit: een staand beeld naast een liggend geeft dan
  * een bewuste versprong in plaats van twee uitgerekte kaders.
  */
 const spanLayout: Record<CaseGalleryItem["span"], string> = {
-  full: "stack:col-span-2 aspect-16/9",
+  full: "stack:col-span-2",
   half: "aspect-4/3",
   tall: "aspect-3/4",
 };
@@ -31,6 +36,7 @@ export function CaseGallery({ images }: { images: readonly CaseGalleryItem[] }) 
             key={image.src}
             image={image}
             sizes={spanSizes[image.span]}
+            aspect={image.span === "full" ? image.width / image.height : undefined}
             className={spanLayout[image.span]}
           />
         ))}

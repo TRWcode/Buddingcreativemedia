@@ -92,11 +92,11 @@ bij met `object-cover`, dus een afwijkende ratio verliest randen.
 | `video/showreel-poster.jpg` | Poster onder de play-knop | 3:2 liggend | ✅ eigen foto |
 | `video/showreel.mp4` | Showreel achter de play-knop | 16:9, H.264 | ⬜ **nog aanleveren** |
 | `cases/spotlight-onderneming-van-het-jaar.jpg` | Polaroid in Cases | vierkant-ish | ✅ eigen foto |
-| `cases/campagne-promo-reels.jpg` | Casekaart 1 | 4:3 liggend | ✅ eigen foto |
 | `cases/studio-portretsessie.jpg` | Casekaart 2 | 4:3 liggend | ✅ eigen foto |
 | `cases/marathon-aftermovie.jpg` | Casekaart 3 | 4:3 liggend | ✅ eigen foto |
 | `events/mini-shoot-almere.jpg` | Eventkaart | staand tot vierkant | ✅ eigen foto |
 | `cases/althio-portret-papieren.jpg` | Mozaïek Althio | 3:2 liggend | ✅ eigen foto |
+| `cases/jijbenm-*.webp` | Casekaart, hero en mozaïek JijbenM | wisselend | ✅ vijf eigen foto's |
 | `brand/logo.webp` | Merklogo in header en footer | 560×105, transparant | ✅ officieel logo |
 | `logos/*.png` | Klantenrij op de homepage | wit, transparant | ✅ zie hieronder |
 | `library/*.jpg` | Losse pool, deels in casemozaïeken | — | reserve |
@@ -137,20 +137,33 @@ zijn `span`:
 
 | `span` | Kolommen | Uitsnede |
 | --- | --- | --- |
-| `full` | volle breedte | 16:9 |
+| `full` | volle breedte | géén — houdt zijn eigen verhouding |
 | `half` | halve breedte | 4:3 |
 | `tall` | halve breedte | 3:4, staand |
 
-Zorg dat elke rij vol loopt — twee `half`/`tall` naast elkaar, of een `full` —
-anders blijft er onderaan een halve kolom leeg staan. Zet een beeld niet én in de
-`hero` én in de `gallery`: het komt via de filmstrip toch al twee keer voorbij.
+Een beeld op volle breedte wordt bewust niet bijgesneden: bij de groepsfoto van
+JijbenM zou een vast 16:9-kader precies de roze M van het dak afsnijden. Halve
+kolommen hébben een vaste verhouding, anders lijnen de rijen niet meer uit — houd
+daar dus rekening met wat er aan de zijkanten wegvalt.
 
-> **Let op — de mozaïeken zijn nu opgevuld uit `library/`.** Alleen de herobeelden
-> en `althio-portret-papieren.jpg` horen echt bij hun case; de rest is op thema
-> gekozen als plaatsvervanger. Vervang ze door het echte materiaal per klant.
-> Twee dingen om dan meteen mee te nemen: `library/kinderboekenmuseum-ballonnen.jpg`
-> is maar 600×900 en wordt in de mozaïek opgeschaald, en Althio heeft nog te weinig
-> beeld voor een filmstrip (die verschijnt vanaf vier unieke foto's).
+Zorg dat elke rij vol loopt — twee `half`/`tall` naast elkaar, of een `full` —
+anders blijft er onderaan een halve kolom leeg staan. Zet het herobeeld niet ook
+in de `gallery`: het komt via de filmstrip toch al voorbij. Het `card`-beeld juist
+wél — wie op de kaart klikt wil die foto op de pagina terugzien.
+
+Reken op vier tot zes foto's per case. Onder de vier verdwijnt de filmstrip
+(dan zou dezelfde foto binnen één scherm terugkomen) en blijft de mozaïek over.
+
+JijbenM is het model voor hoe zo'n set eruitziet: vijf foto's, waarvan één als
+hero, één als card en vier in de mozaïek.
+
+> **Let op — bij drie cases staan er nog plaatsvervangers in de mozaïek.**
+> Gemeente Almere, Althio en Golazo trekken hun beeld uit `library/`; alleen de
+> herobeelden, `althio-portret-papieren.jpg` en de complete JijbenM-set horen echt
+> bij hun case. Vervang ze door het echte materiaal per klant. Twee dingen om dan
+> meteen mee te nemen: `library/kinderboekenmuseum-ballonnen.jpg` is maar 600×900
+> en wordt in de mozaïek opgeschaald, en Althio heeft nog te weinig beeld voor een
+> filmstrip.
 
 Ook de casetekst is grotendeels een eerste opzet: alleen de JijbenM-copy komt van
 de bestaande site. Loop `lead`, `chapters` en `deliverables` van de andere drie na
