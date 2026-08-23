@@ -132,13 +132,13 @@ export const caseStudies: readonly CaseStudy[] = [
     slug: "jijbenm",
     title: "Campagne & Promo Reels",
     titleLines: ["Campagne &", "Promo Reels"],
-    client: "JijbenM",
+    client: "Jij Bent M",
     disciplines: ["Drone", "Fotografie", "Videografie"],
     year: "2025",
     location: "Almere",
     summary:
       "Korte, krachtige reels rond nieuwe kunstinstallaties en exposities — gemaakt om nieuwsgierig te maken.",
-    lead: "Voor de aankondiging van nieuwe kunstinstallaties en exposities zocht JijbenM naar korte, krachtige videocontent die nieuwsgierigheid opwekt en het publiek in beweging brengt.",
+    lead: "Voor de aankondiging van nieuwe kunstinstallaties en exposities zocht Jij Bent M naar korte, krachtige videocontent die nieuwsgierigheid opwekt en het publiek in beweging brengt.",
     chapters: [
       {
         id: "vraag",
@@ -148,7 +148,7 @@ export const caseStudies: readonly CaseStudy[] = [
       {
         id: "aanpak",
         heading: "Onze aanpak",
-        body: "In overleg bepaalden we per campagne de insteek en het script. Afhankelijk van het doel kozen we voor een strakke, visuele edit of een meer informatieve benadering. Door tempo, beeldkeuze en montage bewust in te zetten, sloten de reels aan bij zowel de inhoud van de exposities als het publiek van JijbenM.",
+        body: "In overleg bepaalden we per campagne de insteek en het script. Afhankelijk van het doel kozen we voor een strakke, visuele edit of een meer informatieve benadering. Door tempo, beeldkeuze en montage bewust in te zetten, sloten de reels aan bij zowel de inhoud van de exposities als het publiek van Jij Bent M.",
       },
       {
         id: "resultaat",
@@ -165,7 +165,7 @@ export const caseStudies: readonly CaseStudy[] = [
     },
     card: {
       src: "/media/cases/jijbenm-paviljoen-groepsfoto.webp",
-      alt: "Groep bezoekers poseert op het ronde platform voor het paviljoen van JijbentM",
+      alt: "Groep bezoekers poseert op het ronde platform voor het paviljoen van Jij Bent M",
       width: 1600,
       height: 1067,
     },
@@ -173,7 +173,7 @@ export const caseStudies: readonly CaseStudy[] = [
       {
         span: "full",
         src: "/media/cases/jijbenm-paviljoen-groepsfoto.webp",
-        alt: "Groep bezoekers poseert op het ronde platform voor het paviljoen van JijbentM",
+        alt: "Groep bezoekers poseert op het ronde platform voor het paviljoen van Jij Bent M",
         width: 1600,
         height: 1067,
       },
