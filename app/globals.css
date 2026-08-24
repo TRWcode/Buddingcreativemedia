@@ -75,6 +75,21 @@
      tempo langskomen als de woordenstrip onder de hero. */
   --animate-marquee-slow: marquee 64s linear infinite;
 
+  /* Filterwissel in het portfolio: het nieuwe raster komt op in plaats van te
+     verspringen. Opacity en transform, dus compositor-werk. */
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-out-soft) both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   @keyframes marquee {
     from {
       transform: translateX(0);

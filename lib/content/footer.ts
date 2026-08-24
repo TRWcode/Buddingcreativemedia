@@ -1,4 +1,5 @@
 import type { NavLink } from "./types";
+import { portfolioHref } from "./site";
 
 export type SocialPlatform = "instagram" | "facebook" | "youtube";
 
@@ -21,7 +22,7 @@ export const socialLinks: readonly SocialLink[] = [
 ];
 
 export const footerNav: readonly NavLink[] = [
-  { label: "Portfolio", href: "#cases" },
+  { label: "Portfolio", href: portfolioHref },
   { label: "Events", href: "#events" },
   { label: "Diensten", href: "#diensten" },
   { label: "Cases", href: "#cases" },

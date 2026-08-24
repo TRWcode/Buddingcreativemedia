@@ -25,8 +25,11 @@ export const siteLogo: ImageAsset = {
   height: 105,
 };
 
+/** Het pad van het portfolio-overzicht. Eén plek, zodat links niet uiteenlopen. */
+export const portfolioHref = "/portfolio";
+
 export const navLinks: readonly NavLink[] = [
-  { label: "Portfolio", href: "#cases" },
+  { label: "Portfolio", href: portfolioHref },
   { label: "Events", href: "#events" },
   { label: "Diensten", href: "#diensten" },
   { label: "Cases", href: "#cases" },

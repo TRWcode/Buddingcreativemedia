@@ -98,7 +98,6 @@ bij met `object-cover`, dus een afwijkende ratio verliest randen.
 | `cases/studio-portretsessie.jpg` | Casekaart 2 | 4:3 liggend | ✅ eigen foto |
 | `cases/marathon-aftermovie.jpg` | Casekaart 3 | 4:3 liggend | ✅ eigen foto |
 | `events/mini-shoot-almere.jpg` | Eventkaart | staand tot vierkant | ✅ eigen foto |
-| `cases/althio-portret-papieren.jpg` | Mozaïek Althio | 3:2 liggend | ✅ eigen foto |
 | `cases/jijbenm-*.webp` | Casekaart, hero en mozaïek JijbenM | wisselend | ✅ vijf eigen foto's |
 | `brand/logo.webp` | Merklogo in header en footer | 560×105, transparant | ✅ officieel logo |
 | `logos/*.png` | Klantenrij op de homepage | wit, transparant | ✅ zie hieronder |
@@ -141,6 +140,30 @@ Vervangen doe je zo: zet het echte bestand in `public/media/video/`, wijs `src`
 naar dat pad, haal `isPlaceholder` weg en trek een nieuwe poster uit de montage
 (`ffmpeg -i film.mp4 -ss 3 -frames:v 1 -q:v 3 poster.jpg`). Verwijder daarna de
 voorbeeldclip; die hoort niet in productie thuis.
+
+
+### Portfolio en categorieen
+
+Alle portfoliobeelden staan met hun categorie in
+[`portfolio.ts`](lib/content/portfolio.ts). De taxonomie is overgenomen van de
+huidige site: een keuze tussen Fotografie en Videografie, daarbinnen Bedrijven,
+Events, Portretten, Concepten, Fashion, Drone en Publicities.
+
+Een beeld krijgt precies een categorie. Een foto die in twee filters opduikt
+laat de bezoeker twijfelen of hij iets dubbel ziet, en telt bij het vullen van
+het raster twee keer mee. Het veld `shoot` groepeert beelden uit dezelfde
+opdracht; dat label verschijnt bij hover over een tegel.
+
+[`PortfolioGrid.tsx`](components/portfolio/PortfolioGrid.tsx) rendert het geheel
+op [`/portfolio`](app/portfolio/page.tsx). Filters staan in component-state en
+niet in de URL: een filter is hier een blik op dezelfde pagina, dus de
+terugknop hoort naar de vorige pagina te gaan en niet naar het vorige filter.
+Categorieen zonder werk worden weggelaten, zodat een filter nooit op een leeg
+raster uitkomt. Fashion en Videografie staan daarom nu nog niet in beeld.
+
+Het raster is een CSS-masonry (`columns`), zodat elk beeld zijn eigen
+verhouding houdt. Een vaste uitsnede zou hier tegen het werk in werken: een
+staand portret en een drone-panorama horen niet in hetzelfde kader.
 
 ### Klantlogo's
 
@@ -186,11 +209,11 @@ hero, één als card en vier in de mozaïek.
 
 > **Let op — bij drie cases staan er nog plaatsvervangers in de mozaïek.**
 > Gemeente Almere, Althio en Golazo trekken hun beeld uit `library/`; alleen de
-> herobeelden, `althio-portret-papieren.jpg` en de complete JijbenM-set horen echt
-> bij hun case. Vervang ze door het echte materiaal per klant. Twee dingen om dan
+> herobeelden en de complete JijbenM-set horen echt bij hun case. Vervang ze
+> door het echte materiaal per klant. Twee dingen om dan
 > meteen mee te nemen: `library/kinderboekenmuseum-ballonnen.jpg` is maar 600×900
-> en wordt in de mozaïek opgeschaald, en Althio heeft nog te weinig beeld voor een
-> filmstrip.
+> en wordt in de mozaïek opgeschaald, en Althio houdt na het opruimen van een
+> dubbele foto nog maar één mozaïekbeeld over, te weinig voor een filmstrip.
 
 Ook de casetekst is grotendeels een eerste opzet: alleen de JijbenM-copy komt van
 de bestaande site. Loop `lead`, `chapters` en `deliverables` van de andere drie na

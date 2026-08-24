@@ -280,15 +280,8 @@ export const caseStudies: readonly CaseStudy[] = [
     gallery: [
       {
         span: "full",
-        src: "/media/cases/althio-portret-papieren.jpg",
-        alt: "Portret van een man op een bank met rondvliegende vellen papier",
-        width: 1600,
-        height: 1067,
-      },
-      {
-        span: "full",
         src: "/media/diensten/fotografie.jpg",
-        alt: "Portret van een vrouw met een kop koffie in een lichte werkruimte",
+        alt: "Man in gouden jasje leest bladmuziek op een chesterfield terwijl vellen om hem heen vliegen",
         width: 1600,
         height: 1066,
       },
