@@ -12,7 +12,7 @@ export const werkwijzeIntro: SectionIntro & { readonly titleLines: readonly stri
   /** Laatste regel krijgt de accentkleur. */
   titleLines: ["Elk beeld", "vertelt een", "verhaal"],
   description:
-    "We hechten veel waarde aan een fijne samenwerking — dat zie je terug in het resultaat. Creativiteit, duidelijke communicatie en werk dat echt impact maakt, met plezier en betrokkenheid.",
+    "We hechten veel waarde aan een fijne samenwerking, en dat zie je terug in het resultaat. Creativiteit, duidelijke communicatie en werk dat echt impact maakt, met plezier en betrokkenheid.",
 };
 
 export const processSteps: readonly ProcessStep[] = [

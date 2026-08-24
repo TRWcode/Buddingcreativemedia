@@ -58,7 +58,7 @@ export const caseStudies: readonly CaseStudy[] = [
     year: "2025",
     location: "Almere",
     summary:
-      "Een volledige beeldcampagne rond de verkiezing tot Onderneming van het Jaar — van event-coverage tot portretten.",
+      "Een volledige beeldcampagne rond de verkiezing tot Onderneming van het Jaar, van event-coverage tot portretten.",
     lead: "Een avond die om herkenning draait: genomineerden, hun mensen en het moment waarop de winnaar bekend wordt. Dat vraagt om beeld dat de sfeer vasthoudt zonder de avond te onderbreken.",
     chapters: [
       {
@@ -137,7 +137,7 @@ export const caseStudies: readonly CaseStudy[] = [
     year: "2025",
     location: "Almere",
     summary:
-      "Korte, krachtige reels rond nieuwe kunstinstallaties en exposities — gemaakt om nieuwsgierig te maken.",
+      "Korte, krachtige reels rond nieuwe kunstinstallaties en exposities, gemaakt om nieuwsgierig te maken.",
     lead: "Voor de aankondiging van nieuwe kunstinstallaties en exposities zocht Jij Bent M naar korte, krachtige videocontent die nieuwsgierigheid opwekt en het publiek in beweging brengt.",
     chapters: [
       {
@@ -210,7 +210,7 @@ export const caseStudies: readonly CaseStudy[] = [
     location: "Almere",
     summary:
       "Een portretserie met karakter: strak licht, een duidelijke lijn en ruimte voor eigenheid.",
-    lead: "Zakelijke portretten die niet als zakelijke portretten aanvoelen. Althio wilde beeld waarin de mensen achter het merk herkenbaar blijven — met lef in het licht en rust in de compositie.",
+    lead: "Zakelijke portretten die niet als zakelijke portretten aanvoelen. Althio wilde beeld waarin de mensen achter het merk herkenbaar blijven, met lef in het licht en rust in de compositie.",
     chapters: [
       {
         id: "vraag",
@@ -220,7 +220,7 @@ export const caseStudies: readonly CaseStudy[] = [
       {
         id: "aanpak",
         heading: "Onze aanpak",
-        body: "We bouwden een setup met sterk gericht licht en werkten per persoon een paar houdingen af — van neutraal tot uitgesproken. Door de achtergrond en het licht gelijk te houden en alleen de pose te variëren, blijft de serie samenhangend.",
+        body: "We bouwden een setup met sterk gericht licht en werkten per persoon een paar houdingen af, van neutraal tot uitgesproken. Door de achtergrond en het licht gelijk te houden en alleen de pose te variëren, blijft de serie samenhangend.",
       },
       {
         id: "resultaat",
@@ -273,7 +273,7 @@ export const caseStudies: readonly CaseStudy[] = [
       {
         id: "vraag",
         heading: "De vraag",
-        body: "Een aftermovie voor social en voor de werving van de volgende editie. Kort genoeg om af te kijken, compleet genoeg om het hele evenement te vertegenwoordigen — van de jeugdstart tot de laatste finisher.",
+        body: "Een aftermovie voor social en voor de werving van de volgende editie. Kort genoeg om af te kijken, compleet genoeg om het hele evenement te vertegenwoordigen, van de jeugdstart tot de laatste finisher.",
       },
       {
         id: "aanpak",
@@ -283,7 +283,7 @@ export const caseStudies: readonly CaseStudy[] = [
       {
         id: "resultaat",
         heading: "Het resultaat",
-        body: "Een aftermovie die het evenement in beeld samenvat, plus korte verticale edits voor social. Samen geven ze een compleet beeld van de dag — en een sterke aanleiding om je in te schrijven voor de volgende editie.",
+        body: "Een aftermovie die het evenement in beeld samenvat, plus korte verticale edits voor social. Samen geven ze een compleet beeld van de dag, en een sterke aanleiding om je in te schrijven voor de volgende editie.",
       },
     ],
     deliverables: ["Aftermovie", "Verticale social-edits", "Event-coverage", "Stills"],

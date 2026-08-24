@@ -17,7 +17,7 @@ export const servicesIntro: SectionIntro = {
   eyebrow: "Wat we doen",
   title: "Diensten",
   description:
-    "Van krachtige fotografie tot doelgerichte video's — wij helpen merken, bedrijven en organisaties hun verhaal visueel sterk over te brengen.",
+    "Van krachtige fotografie tot doelgerichte video's: wij helpen merken, bedrijven en organisaties hun verhaal visueel sterk over te brengen.",
 };
 
 export const services: readonly Service[] = [

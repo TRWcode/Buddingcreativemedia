@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   if (!study) return {};
 
   const url = caseHref(study.slug);
-  const title = `${study.title} — ${study.client}`;
+  const title = `${study.title} · ${study.client}`;
   const images = [
     {
       url: study.hero.src,

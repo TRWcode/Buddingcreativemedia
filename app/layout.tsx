@@ -12,7 +12,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Fotografie & Video uit Almere`,
+    default: `${site.name} · Fotografie & Video uit Almere`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — Fotografie & Video uit Almere`,
+    title: `${site.name} · Fotografie & Video uit Almere`,
     description: site.description,
     // Placeholder: vervang door een 1200×630 share-image zodra die er is.
     images: [{ url: "/media/hero/hero-ballonnen.jpg", width: 2560, height: 1708, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Fotografie & Video uit Almere`,
+    title: `${site.name} · Fotografie & Video uit Almere`,
     description: site.description,
     images: ["/media/hero/hero-ballonnen.jpg"],
   },
