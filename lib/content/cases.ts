@@ -15,6 +15,28 @@ export interface CaseGalleryItem extends ImageAsset {
   readonly span: "full" | "half" | "tall";
 }
 
+/**
+ * De bewegende oplevering van een case. Zolang de echte montage nog niet is
+ * aangeleverd staat hier een voorbeeldclip uit de foto's van diezelfde case,
+ * herkenbaar gelabeld. Vervang `src` door het echte bestand en haal
+ * `isPlaceholder` weg, en hetzelfde kader toont de oplevering.
+ */
+export interface CaseVideo {
+  /** Pad naar het mp4-bestand in `public/`. Leeg zolang er niets te tonen is. */
+  readonly src?: string;
+  /**
+   * Waar in `src` nog niet de echte montage staat. Het blok toont dan een
+   * duidelijk label, zodat een voorbeeld nooit voor oplevering doorgaat.
+   */
+  readonly isPlaceholder?: boolean;
+  /** Still die onder de speler staat tot iemand op play drukt. */
+  readonly poster: ImageAsset;
+  /** Wat er te zien is; staat als eyebrow boven het kader. */
+  readonly label: string;
+  /** Bijschrift onder het kader. */
+  readonly caption: string;
+}
+
 export interface CaseStudy {
   readonly slug: string;
   readonly title: string;
@@ -35,6 +57,8 @@ export interface CaseStudy {
   readonly hero: ImageAsset;
   /** Beeld in de kaart op de homepage — 4:3. */
   readonly card: ImageAsset;
+  /** Videoblok op de detailpagina. Alleen bij cases waar video is opgeleverd. */
+  readonly video?: CaseVideo;
   readonly gallery: readonly CaseGalleryItem[];
 }
 
@@ -169,6 +193,18 @@ export const caseStudies: readonly CaseStudy[] = [
       width: 1600,
       height: 1067,
     },
+    video: {
+      src: "/media/video/jijbenm-reel-voorbeeld.mp4",
+      isPlaceholder: true,
+      poster: {
+        src: "/media/video/jijbenm-reel-poster.jpg",
+        alt: "Dronefoto van het park met het kunstwerk en de skyline van Almere",
+        width: 1152,
+        height: 648,
+      },
+      label: "Promo reel",
+      caption: "Dronebeeld en montage uit de reeks reels rond de exposities.",
+    },
     gallery: [
       {
         span: "full",
@@ -298,6 +334,18 @@ export const caseStudies: readonly CaseStudy[] = [
       alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
       width: 1200,
       height: 800,
+    },
+    video: {
+      src: "/media/video/golazo-aftermovie-voorbeeld.mp4",
+      isPlaceholder: true,
+      poster: {
+        src: "/media/video/golazo-aftermovie-poster.jpg",
+        alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
+        width: 1152,
+        height: 648,
+      },
+      label: "Aftermovie",
+      caption: "De hele dag samengevat, gesneden op het ritme van de muziek.",
     },
     gallery: [
       {

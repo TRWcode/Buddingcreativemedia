@@ -6,6 +6,7 @@ import { CaseHero } from "@/components/case/CaseHero";
 import { CaseMeta } from "@/components/case/CaseMeta";
 import { CaseNext } from "@/components/case/CaseNext";
 import { CaseStory } from "@/components/case/CaseStory";
+import { CaseVideo } from "@/components/case/CaseVideo";
 import { ContactCta } from "@/components/sections/ContactCta";
 import { caseHref, caseStudies, findCaseStudy, nextCaseStudy } from "@/lib/content/cases";
 
@@ -57,6 +58,7 @@ export default async function CasePage({ params }: CasePageProps) {
       <CaseMeta study={study} />
       <CaseFilmstrip images={[study.hero, ...study.gallery]} />
       <CaseStory study={study} />
+      {study.video ? <CaseVideo video={study.video} /> : null}
       <CaseGallery images={study.gallery} />
       <CaseNext study={nextCaseStudy(study.slug)} />
       <ContactCta />

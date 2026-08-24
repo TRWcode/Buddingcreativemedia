@@ -91,6 +91,9 @@ bij met `object-cover`, dus een afwijkende ratio verliest randen.
 | `diensten/videografie.jpg` | Dienstenkaart Videografie | 3:2 liggend | ✅ eigen foto |
 | `video/showreel-poster.jpg` | Poster onder de play-knop | 3:2 liggend | ✅ eigen foto |
 | `video/showreel.mp4` | Showreel achter de play-knop | 16:9, H.264 | ⬜ **nog aanleveren** |
+| `video/golazo-aftermovie-voorbeeld.mp4` | Videoblok case Golazo | 16:9, H.264 | 🟡 voorbeeldclip |
+| `video/jijbenm-reel-voorbeeld.mp4` | Videoblok case JijbenM | 16:9, H.264 | 🟡 voorbeeldclip |
+| `video/*-poster.jpg` | Poster onder de case-spelers | 16:9 liggend | 🟡 frame uit de voorbeeldclip |
 | `cases/spotlight-onderneming-van-het-jaar.jpg` | Polaroid in Cases | vierkant-ish | ✅ eigen foto |
 | `cases/studio-portretsessie.jpg` | Casekaart 2 | 4:3 liggend | ✅ eigen foto |
 | `cases/marathon-aftermovie.jpg` | Casekaart 3 | 4:3 liggend | ✅ eigen foto |
@@ -112,8 +115,30 @@ Het logo is deels rood en de header schuift ook over het rode CTA-blok. Daarom
 staat de balk in scroll-stand op `bg-ink/85` en niet lager: op een lichtere balk
 valt het merk tegen die achtergrond weg.
 
-Nog te leveren: de showreel-mp4 en een 1200×630 og-image (nu valt die terug op de
-herofoto, zie `metadata.openGraph` in `app/layout.tsx`).
+Nog te leveren: de showreel-mp4, de echte case-videos (zie hieronder) en een
+1200×630 og-image (nu valt die terug op de herofoto, zie `metadata.openGraph`
+in `app/layout.tsx`).
+
+### Video bij een case
+
+Een case krijgt een videoblok zodra er een `video` in [`cases.ts`](lib/content/cases.ts)
+staat; [`CaseVideo.tsx`](components/case/CaseVideo.tsx) rendert het tussen het
+verhaal en de mozaïek. Het blok heeft vier standen:
+
+| Content | Wat de bezoeker ziet |
+| --- | --- |
+| geen `video` | niets, geen leeg kader |
+| `video` zonder `src` | de poster met "Hier komt de video" eroverheen |
+| `video` met `src` + `isPlaceholder` | een werkende speler met het label **Voorbeeld** |
+| `video` met alleen `src` | de speler, zonder label |
+
+Golazo en JijbenM staan nu op de derde stand. De clips in `public/media/video/`
+zijn met ffmpeg gemaakt uit de foto's van diezelfde case (langzame zoom,
+crossfades, 12s, geen geluid), puur zodat de plek in de pagina te beoordelen is.
+Vervangen doe je zo: zet het echte bestand in `public/media/video/`, wijs `src`
+naar dat pad, haal `isPlaceholder` weg en trek een nieuwe poster uit de montage
+(`ffmpeg -i film.mp4 -ss 3 -frames:v 1 -q:v 3 poster.jpg`). Verwijder daarna de
+voorbeeldclip; die hoort niet in productie thuis.
 
 ### Klantlogo's
 
