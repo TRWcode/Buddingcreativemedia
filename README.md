@@ -133,8 +133,10 @@ verhaal en de mozaïek. Het blok heeft vier standen:
 | `video` met alleen `src` | de speler, zonder label |
 
 Golazo en JijbenM staan nu op de derde stand. De clips in `public/media/video/`
-zijn met ffmpeg gemaakt uit de foto's van diezelfde case (langzame zoom,
-crossfades, 12s, geen geluid), puur zodat de plek in de pagina te beoordelen is.
+zijn met ffmpeg gemaakt uit de foto's van diezelfde case: stilstaande beelden
+die in en uit elkaar overvloeien, 13s, geen geluid. Bewust geen zoom of pan.
+Een still die per frame herschaald wordt trilt zichtbaar, en zodra je ziet dat
+het een foto is leest de beweging als een fout in plaats van als montage.
 Vervangen doe je zo: zet het echte bestand in `public/media/video/`, wijs `src`
 naar dat pad, haal `isPlaceholder` weg en trek een nieuwe poster uit de montage
 (`ffmpeg -i film.mp4 -ss 3 -frames:v 1 -q:v 3 poster.jpg`). Verwijder daarna de
