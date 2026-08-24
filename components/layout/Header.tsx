@@ -31,7 +31,7 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-1000 flex items-center justify-between px-gutter",
+          "fixed inset-x-0 top-0 z-1000 flex items-center justify-between px-gutter print:hidden",
           "border-b transition-[padding,background-color,border-color] duration-base ease-interact",
           scrolled
             ? "border-hairline bg-ink/85 py-3.5 backdrop-blur-[14px]"

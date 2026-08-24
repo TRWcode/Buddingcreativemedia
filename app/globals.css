@@ -200,6 +200,49 @@
 }
 
 /* ==========================================================================
+   PRINT
+
+   Voor de juridische pagina's. Algemene voorwaarden worden bewaard, uitgeprint
+   en als pdf doorgestuurd; dat is geen randgeval maar de normale gang van zaken
+   bij een offerte. De donkere huisstijl is op papier onleesbaar en kost een
+   halve cartridge, dus in print draait het hele blad om.
+
+   Wat er niet bij hoort verdwijnt met `print:hidden` op het component zelf:
+   header, footer, cursor, de inhoudsopgave en het rode CTA-blok.
+   ========================================================================== */
+@media print {
+  body {
+    background: #fff !important;
+  }
+
+  /* De tekstkleuren zijn gekozen tegen een donkere ondergrond en vallen op wit
+     weg. Pseudo-elementen blijven buiten deze selector, zodat de rode streepjes
+     voor de opsommingen hun accentkleur houden. */
+  main,
+  main * {
+    background-color: transparent !important;
+    color: #16161a !important;
+    border-color: #d4d4d8 !important;
+    box-shadow: none !important;
+  }
+
+  /* Een artikel hoort in zijn geheel op één blad, en een kop nooit onderaan
+     een pagina zonder de tekst die erbij hoort. */
+  main section {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  @page {
+    margin: 18mm;
+  }
+}
+
+/* ==========================================================================
    UTILITIES
    ========================================================================== */
 @utility text-eyebrow {

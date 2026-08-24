@@ -9,7 +9,7 @@ export function ContactCta() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-linear-135 from-brand-deep from-0% via-brand via-55% to-brand-dark to-100%"
+      className="relative overflow-hidden bg-linear-135 from-brand-deep from-0% via-brand via-55% to-brand-dark to-100% print:hidden"
     >
       <div
         aria-hidden

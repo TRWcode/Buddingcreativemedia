@@ -1,5 +1,5 @@
 import type { NavLink } from "./types";
-import { portfolioHref } from "./site";
+import { contactHref, portfolioHref, privacyHref, termsHref } from "./site";
 
 export type SocialPlatform = "instagram" | "facebook" | "youtube";
 
@@ -27,6 +27,16 @@ export const footerNav: readonly NavLink[] = [
   { label: "Diensten", href: "#diensten" },
   { label: "Cases", href: "#cases" },
   { label: "Over Ons", href: "#werkwijze" },
+  { label: "Contact", href: contactHref },
+];
+
+/**
+ * De juridische pagina's, in de onderste balk. Ze horen niet in de gewone
+ * navigatie: je zoekt ze pas als je ze nodig hebt, en dan kijk je onderaan.
+ */
+export const legalLinks: readonly NavLink[] = [
+  { label: "Algemene voorwaarden", href: termsHref },
+  { label: "Privacyverklaring", href: privacyHref },
 ];
 
 export const copyright = `© ${new Date().getFullYear()} Budding Creative Media`;

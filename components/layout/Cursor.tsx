@@ -63,7 +63,7 @@ export function Cursor() {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-1020 size-[2.125rem] rounded-full border-[1.5px] border-brand"
+      className="pointer-events-none fixed left-0 top-0 z-1020 size-[2.125rem] rounded-full border-[1.5px] border-brand print:hidden"
       style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
       animate={{
         scale: hovering ? HOVER_SCALE : 1,

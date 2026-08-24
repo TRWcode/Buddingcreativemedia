@@ -1,10 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from "@/components/ui/icons";
-import { copyright, credit, footerColumns, footerNav, socialLinks } from "@/lib/content/footer";
+import {
+  copyright,
+  credit,
+  footerColumns,
+  footerNav,
+  legalLinks,
+  socialLinks,
+} from "@/lib/content/footer";
 import type { SocialPlatform } from "@/lib/content/footer";
-import { site, siteLogo } from "@/lib/content/site";
+import { mailHref, phoneHref, site, siteLogo } from "@/lib/content/site";
 
 const socialIcons: Record<SocialPlatform, typeof InstagramIcon> = {
   instagram: InstagramIcon,
@@ -14,7 +22,7 @@ const socialIcons: Record<SocialPlatform, typeof InstagramIcon> = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-hairline bg-ink">
+    <footer className="border-t border-hairline bg-ink print:hidden">
       <Container className="pb-10 pt-[clamp(3.75rem,9vh,6rem)]">
         <div className="grid gap-11 stack:grid-cols-[1.4fr_1fr_1fr]">
           <div>
@@ -51,15 +59,15 @@ export function Footer() {
               {footerColumns.contact.heading}
             </p>
             <div className="flex flex-col gap-3 text-muted">
-              <a href={`mailto:${site.email}`} className="w-fit transition-colors duration-fast hover:text-brand">
+              <a href={mailHref} className="w-fit transition-colors duration-fast hover:text-brand">
                 {site.email}
               </a>
-              <a
-                href={`tel:${site.phone.replace(/\s/g, "")}`}
-                className="w-fit transition-colors duration-fast hover:text-brand"
-              >
-                {site.phone}
-              </a>
+              {/* Alleen tonen als er een echt nummer in `site.ts` staat. */}
+              {phoneHref && site.phone ? (
+                <a href={phoneHref} className="w-fit transition-colors duration-fast hover:text-brand">
+                  {site.phone}
+                </a>
+              ) : null}
               <span>Almere, Nederland</span>
             </div>
 
@@ -82,10 +90,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-[clamp(2.75rem,6vh,4.25rem)] flex flex-wrap items-center justify-between gap-x-6 gap-y-3.5 border-t border-hairline pt-6.5 text-[0.86rem] text-muted">
+        <div className="mt-[clamp(2.75rem,6vh,4.25rem)] flex flex-wrap items-center gap-x-6 gap-y-3.5 border-t border-hairline pt-6.5 text-[0.86rem] text-muted">
           <span>{copyright}</span>
           <span>{site.location}</span>
-          <span className="group/credit inline-flex items-center gap-1.5">
+
+          <nav aria-label="Juridisch" className="flex flex-wrap gap-x-5 gap-y-2">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors duration-fast hover:text-brand"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <span className="group/credit inline-flex items-center gap-1.5 stack:ml-auto">
             {credit.prefix}
             <a
               href={credit.href}

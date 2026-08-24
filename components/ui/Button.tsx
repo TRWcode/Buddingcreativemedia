@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type ButtonVariant = "primary" | "ghost" | "solid";
-type ButtonSize = "sm" | "md" | "lg";
+export type ButtonVariant = "primary" | "ghost" | "solid";
+export type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
   href: string;
@@ -41,6 +41,22 @@ const sizes: Record<ButtonSize, string> = {
   lg: "gap-3 px-[2.625rem] py-[1.1875rem] text-[1.05rem]",
 };
 
+/**
+ * De klassen van een knop, los van het component.
+ *
+ * `Button` rendert een `next/link` en is dus alleen bruikbaar voor navigatie.
+ * Een verzendknop in een formulier moet een echte `<button type="submit">`
+ * zijn. Die haalt zijn opmaak hier op in plaats van de klassenlijst over te
+ * schrijven, want twee kopieën van dezelfde knop lopen vroeg of laat uiteen.
+ */
+export function buttonClasses(
+  variant: ButtonVariant = "primary",
+  size: ButtonSize = "md",
+  className?: string,
+): string {
+  return cn(base, variants[variant], sizes[size], className);
+}
+
 export function Button({
   href,
   children,
@@ -50,7 +66,7 @@ export function Button({
   className,
 }: ButtonProps) {
   return (
-    <Link href={href} className={cn(base, variants[variant], sizes[size], className)}>
+    <Link href={href} className={buttonClasses(variant, size, className)}>
       {/* Losse gloedlaag met een vaste schaduw. Bij hover animeert alleen de
           opacity — dat is compositor-werk, terwijl het animeren van box-shadow
           zelf de knop elke frame opnieuw laat tekenen. */}

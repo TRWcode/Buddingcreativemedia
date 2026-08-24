@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Cursor } from "@/components/layout/Cursor";
@@ -79,6 +80,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
           <Cursor />
         </MotionProvider>
+
+        {/* Bezoekersstatistieken zonder cookies en zonder herkenning van
+            individuele bezoekers. Daarom staat er geen cookiebanner op deze
+            site en belooft de privacyverklaring dat er niets te weigeren valt.
+            Ruil dit niet in voor een meting die dat wel doet zonder ook
+            `lib/content/privacy.ts` aan te passen. */}
+        <Analytics />
       </body>
     </html>
   );

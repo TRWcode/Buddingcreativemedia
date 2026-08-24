@@ -18,13 +18,19 @@ app/
   page.tsx          stelt de secties van de homepage samen
   not-found.tsx     404
   cases/[slug]/     detailpagina per case, statisch voorgebouwd
-  globals.css       design tokens (@theme) + base + utilities
+  contact/          contactpagina, server action en de staat van het formulier
+  algemene-voorwaarden/, privacyverklaring/
+  sitemap.ts        sitemap.xml, uit de routeconstanten
+  robots.ts         robots.txt
+  globals.css       design tokens (@theme) + base + print + utilities
   fonts.ts          next/font/local
   fonts/            self-hosted variable woff2
 components/
   layout/           header, mobiel menu, logo, footer, cursor, smooth scroll
   sections/         één component per sectie van de homepage
   case/             de blokken van een casepagina
+  contact/          formulier en directe contactkanalen
+  legal/            de opmaak die beide juridische pagina's delen
   ui/               herbruikbare bouwstenen en animatie-primitives
 lib/
   motion.ts         alle easings, durations en variants
@@ -39,9 +45,20 @@ _originals/         onbewerkte foto's, buiten git
 | Route | Bron |
 | --- | --- |
 | `/` | [`app/page.tsx`](app/page.tsx) |
+| `/portfolio` | [`app/portfolio/page.tsx`](app/portfolio/page.tsx) — alle beelden met filters |
 | `/cases` | [`app/cases/page.tsx`](app/cases/page.tsx) — overzicht van alle cases |
 | `/cases/[slug]` | [`app/cases/[slug]/page.tsx`](app/cases/%5Bslug%5D/page.tsx) — `generateStaticParams` bouwt elke case uit `caseStudies` voor |
+| `/contact` | [`app/contact/page.tsx`](app/contact/page.tsx) — formulier plus directe kanalen |
+| `/algemene-voorwaarden` | [`app/algemene-voorwaarden/page.tsx`](app/algemene-voorwaarden/page.tsx) |
+| `/privacyverklaring` | [`app/privacyverklaring/page.tsx`](app/privacyverklaring/page.tsx) |
 | 404 | [`app/not-found.tsx`](app/not-found.tsx) |
+| `/sitemap.xml` | [`app/sitemap.ts`](app/sitemap.ts) — opgebouwd uit dezelfde constanten als de navigatie |
+| `/robots.txt` | [`app/robots.ts`](app/robots.ts) |
+
+De routes staan als constante in [`site.ts`](lib/content/site.ts) (`portfolioHref`,
+`contactHref`, `termsHref`, `privacyHref`). Link daarnaar in plaats van het pad
+over te typen, anders lopen navigatie, footer en knoppen uit elkaar zodra er een
+verandert.
 
 `dynamicParams = false`: een slug die niet in de content staat geeft een 404 in
 plaats van een render on-demand.
@@ -52,6 +69,8 @@ De homepage is opgebouwd in [`app/page.tsx`](app/page.tsx):
 Hero → Marquee → Diensten → Klanten → Cases → Werkwijze → Events → CTA, met header
 en footer in de layout. Elke sectie heeft een anker-id (`#diensten`, `#cases`,
 `#werkwijze`, `#events`, `#contact`) waar de navigatie via Lenis naartoe scrollt.
+De knop `Let's Talk` is daarop de uitzondering: die gaat sinds er een
+contactpagina is naar `/contact` en niet meer naar het anker `#contact`.
 
 Een casepagina is opgebouwd uit [`components/case/`](components/case/):
 hero → gegevensbalk → filmstrip → verhaal → mozaïek → volgende case → CTA.
@@ -218,6 +237,90 @@ hero, één als card en vier in de mozaïek.
 Ook de casetekst is grotendeels een eerste opzet: alleen de JijbenM-copy komt van
 de bestaande site. Loop `lead`, `chapters` en `deliverables` van de andere drie na
 voordat de site live gaat.
+
+## Contactformulier
+
+`/contact` heeft een formulier dat via een server action een mail verstuurt.
+Er komt geen database aan te pas: [`submitContactForm`](app/contact/actions.ts)
+zet de aanvraag om in platte tekst en post die naar de REST-API van Resend. Na
+het versturen is er op de server niets van over. Dat is precies wat de
+privacyverklaring belooft, dus als hier ooit opslag bijkomt, moet
+[`privacy.ts`](lib/content/privacy.ts) mee.
+
+**De velden staan op één plek.** [`contactFields`](lib/content/contact.ts) is de
+bron voor zowel het formulier als de mail. Een veld toevoegen doe je daar; het
+verschijnt dan vanzelf in beide. Vergeet niet ook een grens in `MAX_LENGTH` te
+zetten, anders is het veld ongelimiteerd.
+
+Alleen naam, e-mail en bericht zijn verplicht. Soort opdracht, datum en locatie
+zijn optioneel, want dat is precies het soort informatie dat je anders per mail
+alsnog moet uitvragen — en een verplicht veld dat iemand nog niet weet, kost een
+aanvraag. De datum is bewust een tekstveld: "ergens in het najaar" is een echt
+antwoord, en een datumkiezer dwingt tot een dag die er nog niet is.
+
+**Wat het formulier nodig heeft om te werken.** Drie environment variables, zie
+[`.env.example`](.env.example): `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (op een in
+Resend geverifieerd domein, anders weigeren SPF en DMARC de bezorging) en
+optioneel `CONTACT_TO_EMAIL`. Ontbreken ze, dan crasht er niets: de bezoeker
+krijgt een melding met het e-mailadres erin en de rest van de site draait door.
+Zet ze op Vercel, niet in de repo.
+
+Het `reply_to` van de mail is het adres van de aanvrager, dus je kunt vanuit je
+mailbox rechtstreeks antwoorden zonder het adres over te typen.
+
+**Spam.** Er zit een honeypot in: een verborgen veld dat bezoekers niet zien en
+bots wel invullen. Een gevulde honeypot krijgt een succesmelding en gaat de
+prullenbak in — een bot die een foutmelding krijgt, probeert het opnieuw.
+Bewust geen captcha: die legt van elke bezoeker meer vast dan het probleem
+rechtvaardigt, en de privacyverklaring zou er een derde partij bij krijgen.
+Loopt het toch vol, dan is rate limiting op IP-niveau de volgende stap.
+
+**Zonder JavaScript werkt het ook.** Het formulier draait op `useActionState`, en
+een server action valt zonder JS terug op een gewone form-post met dezelfde
+server-gerenderde uitkomst. Voor het enige formulier waarlangs een opdracht
+binnenkomt is dat het verschil tussen een gemiste en een binnengekomen aanvraag.
+
+## Juridische pagina's
+
+De algemene voorwaarden en de privacyverklaring delen één component,
+[`LegalPage.tsx`](components/legal/LegalPage.tsx), en één datavorm uit
+[`legal.ts`](lib/content/legal.ts). Zo kunnen ze niet uit elkaar gaan lopen.
+
+De tekst staat als data en niet als JSX. Bij juridische tekst weegt dat zwaarder
+dan elders: wie een artikel aanpast moet dat kunnen doen zonder een `<p>` te
+kunnen breken, en de diff van een tekstwijziging moet leesbaar blijven. Een
+artikel bestaat uit blokken (`clause`, `text`, `list`, `definitions`), en het
+artikelnummer staat los van de titel zodat het als eigen label kan renderen.
+
+[`terms.ts`](lib/content/terms.ts) is woordelijk het aangeleverde document.
+Alleen de opmaak is van ons. Verander daar geen woord zonder dat de bron
+meeverandert — dat is wat de opdrachtgever bij het aangaan van de overeenkomst
+aanvaardt.
+
+[`privacy.ts`](lib/content/privacy.ts) is wél door ons geschreven en beschrijft
+wat deze site feitelijk doet. Wat er staat klopt met de code: er is geen
+database, het formulier mailt alleen door, de lettertypen staan in `app/fonts/`
+in plaats van bij Google en de video's staan in `public/media/video/` in plaats
+van in een YouTube-embed. Verander je een van die dingen, pas dan dat bestand aan.
+
+Bezoekersstatistieken lopen via Vercel Analytics in
+[`app/layout.tsx`](app/layout.tsx): cookieloos en zonder herkenning van
+individuele bezoekers. Daarom staat er geen cookiebanner op de site. Ruil dat
+niet in voor een meting die wél cookies zet zonder de privacyverklaring en de
+banner-situatie opnieuw te bekijken.
+
+Nog in te vullen in [`legal.ts`](lib/content/legal.ts): `kvk` en `vat` in
+`company`. Zolang die leeg zijn, laat de pagina die regels weg in plaats van een
+lege regel te tonen. Een privacyverklaring hoort de verwerkingsverantwoordelijke
+identificeerbaar te maken, dus vul ze in.
+
+**Printen.** Algemene voorwaarden worden bewaard, uitgeprint en als pdf
+doorgestuurd — bij een offerte is dat de normale gang van zaken, geen randgeval.
+Het `@media print`-blok in [`globals.css`](app/globals.css) draait het blad om:
+zwarte tekst op wit, geen schaduwen, en een artikel breekt niet over twee
+pagina's. Wat er niet bij hoort draagt `print:hidden` op het component zelf —
+header, footer, cursor, de inhoudsopgave en het rode CTA-blok. Zet dat ook op
+nieuwe schermelementen die op papier niets te zoeken hebben.
 
 ## Smoothness
 
