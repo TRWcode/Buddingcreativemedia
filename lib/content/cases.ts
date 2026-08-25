@@ -399,19 +399,25 @@ const allCaseStudies: readonly CaseStudy[] = [
   /* =========================================================================
      NOG NIET LIVE — alles hieronder staat op `draft`.
 
-     Van deze twee is de video er wel, maar de tekst en het fotomateriaal nog
-     niet. Elk veld dat nog moet komen begint met "INVULLEN", dus zoek daarop
-     en je hebt de hele lijst. Zijn ze weg, haal dan `draft` weg: de case
-     verschijnt dan vanzelf in de overzichten, in de "volgende case" en op zijn
-     eigen adres.
+     LET OP: de tekst van deze twee cases is VERZONNEN. Hij staat er om te
+     kunnen zien hoe de pagina eruitkomt, niet omdat het klopt. Er is niet met
+     Jij Bent M of Aeres gesproken over wat de vraag was, hoe het is aangepakt
+     of wat het heeft opgeleverd; dat is ingevuld op wat aannemelijk klinkt.
 
-     Per case is nodig:
-     - jaartal en locatie van de opdracht
-     - de vraag, de aanpak en het resultaat, elk een alinea
-     - wat er is opgeleverd (de `deliverables`)
+     Daarom staan ze op `draft` en houdt `showDrafts` ze van de productiesite
+     af. Haal dat pas weg als iemand die erbij was de tekst heeft nagelopen.
+     Een verzonnen briefing onder de naam van een echte klant is geen
+     placeholder meer zodra hij online staat.
+
+     Wat er per case nog echt moet worden:
+     - jaartal en locatie controleren
+     - `summary`, `lead` en de drie hoofdstukken herschrijven naar wat er is
+       gebeurd
+     - `deliverables` vervangen door wat er daadwerkelijk is opgeleverd
      - stills uit de opdracht voor `hero`, `card` en de mozaïek. Nu staat overal
-       de videoposter, en die is uit de YouTube-thumbnail getrokken. Drie tot
-       vijf eigen beelden maken hier het verschil.
+       dezelfde videoposter uit de YouTube-thumbnail, en dat is meteen het
+       zwakste van het geheel: de andere cases hebben drie tot vijf eigen
+       beelden en dat verschil zie je.
      ========================================================================= */
 
   /* Tweede opdracht voor Jij Bent M, los van de promo reels hierboven. */
@@ -422,37 +428,38 @@ const allCaseStudies: readonly CaseStudy[] = [
     titleLines: ["Breach", "Festival"],
     client: "Jij Bent M",
     disciplines: ["Videografie", "Event"],
-    year: "INVULLEN: jaartal van de opdracht",
-    location: "INVULLEN: locatie",
-    summary: "INVULLEN: één zin, komt in de kaart, de meta-description en de social preview.",
-    lead: "INVULLEN: twee zinnen die de opdracht neerzetten, in dezelfde toon als de andere cases.",
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Een festivaldag vastgelegd zoals hij aanvoelde: druk, kort op de huid en van begin tot eind in beweging.",
+    lead: "Jij Bent M stond met een eigen programma op Breach Festival en wilde daar meer aan overhouden dan losse telefoonbeelden. Wij liepen de hele dag mee en maakten er één aftermovie van die de sfeer terugbrengt bij wie er was, en oproept bij wie er niet bij was.",
     chapters: [
       {
         id: "vraag",
         heading: "De vraag",
-        body: "INVULLEN: wat wilde Jij Bent M met deze registratie bereiken, en voor wie was hij bedoeld?",
+        body: "Een aftermovie die het festivalgevoel vasthoudt en het hele jaar bruikbaar blijft: als terugblik vlak na afloop, en als aankondiging zodra de volgende editie in beeld komt. Kort genoeg voor social, compleet genoeg om het programma recht te doen.",
       },
       {
         id: "aanpak",
         heading: "Onze aanpak",
-        body: "INVULLEN: hoe hebben jullie het festival gefilmd, en welke keuze maakte het verschil?",
+        body: "We filmden zonder draaiboek en volgden de dag zoals hij liep, met een lichte set die overal langs kon. Door dicht op de bezoekers te blijven en de opbouw net zo goed te filmen als de piek, ontstond er een verhaal met een begin in plaats van een reeks hoogtepunten achter elkaar.",
       },
       {
         id: "resultaat",
         heading: "Het resultaat",
-        body: "INVULLEN: wat leverde het op, en waar is de video ingezet?",
+        body: "Eén aftermovie met de opbouw van de dag erin, plus kortere versies voor social. De montage staat op YouTube en is daarnaast ingezet in de aanloop naar de volgende editie.",
       },
     ],
-    deliverables: ["INVULLEN", "INVULLEN", "INVULLEN"],
+    deliverables: ["Registratie op locatie", "Aftermovie", "Social cutdowns", "Stills uit de montage"],
     hero: {
       src: "/media/video/jijbenm-breach-festival-poster.jpg",
-      alt: "INVULLEN: beschrijving van het herobeeld",
+      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
       width: 1280,
       height: 720,
     },
     card: {
       src: "/media/video/jijbenm-breach-festival-poster.jpg",
-      alt: "INVULLEN: beschrijving van het kaartbeeld",
+      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
       width: 1280,
       height: 720,
     },
@@ -472,7 +479,7 @@ const allCaseStudies: readonly CaseStudy[] = [
       {
         span: "full",
         src: "/media/video/jijbenm-breach-festival-poster.jpg",
-        alt: "INVULLEN: beschrijving van het mozaïekbeeld",
+        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
         width: 1280,
         height: 720,
       },
@@ -486,37 +493,38 @@ const allCaseStudies: readonly CaseStudy[] = [
     titleLines: ["Vakmanschaps", "route"],
     client: "Aeres VMBO",
     disciplines: ["Videografie", "Onderwijs"],
-    year: "INVULLEN: jaartal van de opdracht",
-    location: "INVULLEN: locatie",
-    summary: "INVULLEN: één zin, komt in de kaart, de meta-description en de social preview.",
-    lead: "INVULLEN: twee zinnen die de opdracht neerzetten, in dezelfde toon als de andere cases.",
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Een voorlichtingsvideo die laat zien wat de Vakmanschapsroute is door leerlingen aan het werk te tonen, niet door het uit te leggen.",
+    lead: "Aeres VMBO wilde de Vakmanschapsroute begrijpelijk maken voor leerlingen uit groep 8 en hun ouders. Wij draaiden op school, in de praktijklokalen, en lieten het verhaal vertellen door de leerlingen die de route al doen.",
     chapters: [
       {
         id: "vraag",
         heading: "De vraag",
-        body: "INVULLEN: wat wilde Aeres bereiken met deze video, en voor wie was hij bedoeld?",
+        body: "Een video voor open dagen, de website en de voorlichting op basisscholen. Het moest duidelijk worden wat de route inhoudt en voor wie hij bedoeld is, zonder dat het als een folder gaat klinken.",
       },
       {
         id: "aanpak",
         heading: "Onze aanpak",
-        body: "INVULLEN: hoe hebben jullie het aangepakt, en welke keuze maakte het verschil?",
+        body: "We filmden in de praktijklokalen tijdens gewone lesdagen en gaven leerlingen zelf het woord. Door handen en gereedschap groot in beeld te brengen en het commentaar kort te houden, laat de video zien wat het vak is in plaats van erover te vertellen.",
       },
       {
         id: "resultaat",
         heading: "Het resultaat",
-        body: "INVULLEN: wat leverde het op, en waar wordt de video ingezet?",
+        body: "Een video die zowel in een aula als op een telefoon werkt en waarin toekomstige leerlingen zichzelf herkennen. Ingezet bij de open dagen en op de site van de school.",
       },
     ],
-    deliverables: ["INVULLEN", "INVULLEN", "INVULLEN"],
+    deliverables: ["Draaidagen op locatie", "Voorlichtingsvideo", "Korte versie voor social"],
     hero: {
       src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-      alt: "INVULLEN: beschrijving van het herobeeld",
+      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
       width: 1280,
       height: 720,
     },
     card: {
       src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-      alt: "INVULLEN: beschrijving van het kaartbeeld",
+      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
       width: 1280,
       height: 720,
     },
@@ -536,7 +544,7 @@ const allCaseStudies: readonly CaseStudy[] = [
       {
         span: "full",
         src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-        alt: "INVULLEN: beschrijving van het mozaïekbeeld",
+        alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
         width: 1280,
         height: 720,
       },
@@ -545,11 +553,27 @@ const allCaseStudies: readonly CaseStudy[] = [
 ];
 
 /**
- * De cases die op de site staan. Elk overzicht, `generateStaticParams` en de
- * afgeleide vormen voor de homepage lezen hieruit, dus een case op `draft`
+ * Drafts zijn te zien tijdens het werken eraan, maar niet op de live site: in
+ * `npm run dev` en op een Vercel-preview staan ze er gewoon tussen, daarbuiten
+ * verdwijnen ze. Zo kun je een case beoordelen zoals hij eruit gaat zien
+ * zonder dat een bezoeker hem al tegenkomt.
+ *
+ * Let op de richting van deze test. Hij zegt wanneer een draft *wel* mag, niet
+ * wanneer hij niet mag. Dat is met opzet: valt `VERCEL_ENV` ooit weg, dan
+ * blijft een draft verborgen in plaats van dat hij publiek wordt. Bij tekst
+ * die nog niet is nagelopen is dat de enige kant die je kunt verantwoorden.
+ */
+const showDrafts =
+  process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development";
+
+/**
+ * De cases die getoond worden. Elk overzicht, `generateStaticParams` en de
+ * afgeleide vormen voor de homepage lezen hieruit, dus een case verschijnt of
  * verdwijnt overal tegelijk en kan nergens half opduiken.
  */
-export const caseStudies: readonly CaseStudy[] = allCaseStudies.filter((study) => !study.draft);
+export const caseStudies: readonly CaseStudy[] = allCaseStudies.filter(
+  (study) => showDrafts || !study.draft,
+);
 
 /** Het pad van een casepagina. Eén plek, zodat links nooit uit de pas lopen. */
 export function caseHref(slug: string): string {

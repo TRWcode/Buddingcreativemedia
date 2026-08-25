@@ -177,24 +177,36 @@ vrijbrief om de melding onder de poster weg te halen.
 
 ### Een case die nog niet af is
 
-`draft: true` op een case houdt hem in de repo maar van de site af: hij valt weg
-uit de overzichten, uit de "volgende case" en uit `generateStaticParams`,
-waardoor het adres een 404 geeft. Alles buiten `cases.ts` leest uit
-`caseStudies`, en die is al gefilterd — er is dus geen plek waar een draft
-alsnog half kan opduiken.
+`draft: true` op een case houdt hem van de live site af, maar niet uit beeld
+tijdens het werken eraan:
+
+| Waar | Draft zichtbaar? |
+| --- | --- |
+| `npm run dev` | ja |
+| Vercel-preview (branch push) | ja |
+| productiesite | nee, het adres geeft een 404 |
+| `npm run build` lokaal | nee |
+
+Alles buiten `cases.ts` leest uit `caseStudies`, en die lijst is al gefilterd —
+er is dus geen plek waar een draft half kan opduiken: niet in de overzichten,
+niet in de "volgende case", niet in `generateStaticParams` en niet in de
+sitemap.
+
+Let bij `showDrafts` op de richting van de test: hij zegt wanneer een draft
+*wel* mag, niet wanneer hij niet mag. Valt `VERCEL_ENV` ooit weg, dan blijft
+een draft verborgen in plaats van dat hij publiek wordt. Draai dat niet om.
 
 Zo staan de twee nieuwe cases er nu in — Breach Festival voor Jij Bent M en de
-Vakmanschapsroute voor Aeres VMBO. Allebei hebben ze hun video al; de tekst en
-het fotomateriaal nog niet. Elk veld dat nog moet komen begint met `INVULLEN`,
-dus grep daarop en je hebt de lijst. Zijn ze weg, haal dan `draft` weg en de
-case staat live.
+Vakmanschapsroute voor Aeres VMBO. Hun video zit erin, en de tekst is
+**verzonnen**: die staat er om te kunnen zien hoe de pagina eruitkomt, niet
+omdat het klopt. Er is met geen van beide klanten gesproken over wat de vraag
+was of wat het heeft opgeleverd. Haal `draft` er pas af als iemand die erbij
+was de tekst heeft nagelopen — een verzonnen briefing onder de naam van een
+echte klant is geen placeholder meer zodra hij online staat.
 
 Breach Festival is een tweede opdracht voor Jij Bent M en staat los van de
 promo-reelscase die er al was. Die eerste houdt zijn eigen voorbeeldclip; daar
 is nog geen echte montage voor aangeleverd.
-
-Halve copy live zetten is erger dan een case die nog even ontbreekt, en werk in
-een zijtak laten hangen is hoe het vergeten wordt. Dit is het midden.
 
 Golazo en JijbenM staan nu op de derde stand. De clips in `public/media/video/`
 zijn met ffmpeg gemaakt uit de foto's van diezelfde case: stilstaande beelden
