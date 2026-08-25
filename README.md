@@ -215,6 +215,16 @@ is nog geen echte montage voor aangeleverd.
 
 ### Hoeveel cases waar
 
+De volgorde van `allCaseStudies` in `cases.ts` is de volgorde overal: op
+`/cases`, in de kaarten op de homepage, in de sitemap en in de "volgende case"
+onderaan een detailpagina, die aan het eind terugloopt naar de eerste. Nieuwste
+werk bovenaan. Wil je iets hoger of lager, verplaats dan het blok — er is geen
+tweede lijst die dit bepaalt.
+
+De spotlight staat daar los van: die wijst met `SPOTLIGHT_SLUG` een vaste case
+aan, ongeacht waar hij in de lijst staat, en die case verschijnt niet nog eens
+als kaart eronder.
+
 De homepage toont de spotlight plus precies één volle rij kaarten
 (`HOMEPAGE_CARDS` in `cases.ts`, drie stuks). Het raster daar is drie kolommen
 breed, dus vier of vijf kaarten laten onderaan een gat staan naast een halve

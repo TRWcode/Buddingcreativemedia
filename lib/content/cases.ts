@@ -90,13 +90,101 @@ export const casesIntro: SectionIntro = {
 };
 
 /**
- * Alle cases, in de volgorde waarin ze ook naar elkaar doorlinken — onderaan
- * elke detailpagina staat de volgende uit deze lijst.
+ * Alle cases. Deze volgorde is de volgorde overal: op `/cases`, in de kaarten
+ * op de homepage, in de sitemap en in de "volgende case" onderaan elke
+ * detailpagina. Het nieuwste werk staat bovenaan. Wil je iets hoger of lager,
+ * verplaats dan het blok — er is geen tweede lijst die de volgorde bepaalt.
  *
  * Deze lijst bevat ook wat nog niet af is. Exporteer hem niet: alles buiten dit
  * bestand hoort met `caseStudies` te werken, en die laat de drafts weg.
+ *
+ * ⚠️ VERZONNEN TEKST STAAT LIVE — `aeres-vakmanschapsroute` en
+ * `jijbenm-breach-festival`.
+ *
+ * Bij die twee is met de klant niet gesproken over wat de vraag was, hoe het is
+ * aangepakt of wat het heeft opgeleverd. Dat is ingevuld op wat aannemelijk
+ * klinkt, zodat te zien was hoe de pagina eruitkomt, en daarna op verzoek
+ * opengezet. Alleen de video's, de klantnamen en de titels zijn echt.
+ *
+ * Er staan dus claims over twee bestaande organisaties op de site die niemand
+ * daar heeft bevestigd. Dat is een openstaande taak, geen afgeronde content.
+ * Per case moet nog:
+ *
+ * - jaartal en locatie controleren
+ * - `summary`, `lead` en de drie hoofdstukken herschrijven naar wat er gebeurd is
+ * - `deliverables` vervangen door wat er daadwerkelijk is opgeleverd
+ * - eigen stills voor `hero`, `card` en de mozaïek. Nu staat overal dezelfde
+ *   videoposter uit de YouTube-thumbnail; de andere cases hebben er drie tot
+ *   vijf en dat verschil zie je meteen.
+ *
+ * Moet het van de site af voordat de tekst klopt: `draft: true` bovenin de case
+ * en hij verdwijnt overal tegelijk.
  */
 const allCaseStudies: readonly CaseStudy[] = [
+  {
+    slug: "aeres-vakmanschapsroute",
+    title: "Vakmanschapsroute",
+    titleLines: ["Vakmanschaps", "route"],
+    client: "Aeres VMBO",
+    disciplines: ["Videografie", "Onderwijs"],
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Een voorlichtingsvideo die laat zien wat de Vakmanschapsroute is door leerlingen aan het werk te tonen, niet door het uit te leggen.",
+    lead: "Aeres VMBO wilde de Vakmanschapsroute begrijpelijk maken voor leerlingen uit groep 8 en hun ouders. Wij draaiden op school, in de praktijklokalen, en lieten het verhaal vertellen door de leerlingen die de route al doen.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "Een video voor open dagen, de website en de voorlichting op basisscholen. Het moest duidelijk worden wat de route inhoudt en voor wie hij bedoeld is, zonder dat het als een folder gaat klinken.",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "We filmden in de praktijklokalen tijdens gewone lesdagen en gaven leerlingen zelf het woord. Door handen en gereedschap groot in beeld te brengen en het commentaar kort te houden, laat de video zien wat het vak is in plaats van erover te vertellen.",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "Een video die zowel in een aula als op een telefoon werkt en waarin toekomstige leerlingen zichzelf herkennen. Ingezet bij de open dagen en op de site van de school.",
+      },
+    ],
+    deliverables: ["Draaidagen op locatie", "Voorlichtingsvideo", "Korte versie voor social"],
+    hero: {
+      src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
+      width: 1280,
+      height: 720,
+    },
+    card: {
+      src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
+      width: 1280,
+      height: 720,
+    },
+    video: {
+      youtubeId: "Oi4N3m7VuLc",
+      title: "Aeres VMBO, Vakmanschapsroute",
+      poster: {
+        src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+        alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
+        width: 1280,
+        height: 720,
+      },
+      label: "Videoproductie",
+      caption: "De video over de Vakmanschapsroute van Aeres VMBO.",
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+        alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
+
   {
     slug: "gemeente-almere",
     title: "Onderneming van het Jaar",
@@ -176,6 +264,72 @@ const allCaseStudies: readonly CaseStudy[] = [
       },
     ],
   },
+
+  /* Tweede opdracht voor Jij Bent M, los van de promo-reelscase verderop. */
+  {
+    slug: "jijbenm-breach-festival",
+    title: "Breach Festival",
+    titleLines: ["Breach", "Festival"],
+    client: "Jij Bent M",
+    disciplines: ["Videografie", "Event"],
+    year: "2025",
+    location: "Almere",
+    summary:
+      "Een festivaldag vastgelegd zoals hij aanvoelde: druk, kort op de huid en van begin tot eind in beweging.",
+    lead: "Jij Bent M stond met een eigen programma op Breach Festival en wilde daar meer aan overhouden dan losse telefoonbeelden. Wij liepen de hele dag mee en maakten er één aftermovie van die de sfeer terugbrengt bij wie er was, en oproept bij wie er niet bij was.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "Een aftermovie die het festivalgevoel vasthoudt en het hele jaar bruikbaar blijft: als terugblik vlak na afloop, en als aankondiging zodra de volgende editie in beeld komt. Kort genoeg voor social, compleet genoeg om het programma recht te doen.",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "We filmden zonder draaiboek en volgden de dag zoals hij liep, met een lichte set die overal langs kon. Door dicht op de bezoekers te blijven en de opbouw net zo goed te filmen als de piek, ontstond er een verhaal met een begin in plaats van een reeks hoogtepunten achter elkaar.",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "Eén aftermovie met de opbouw van de dag erin, plus kortere versies voor social. De montage staat op YouTube en is daarnaast ingezet in de aanloop naar de volgende editie.",
+      },
+    ],
+    deliverables: ["Registratie op locatie", "Aftermovie", "Social cutdowns", "Stills uit de montage"],
+    hero: {
+      src: "/media/video/jijbenm-breach-festival-poster.jpg",
+      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+      width: 1280,
+      height: 720,
+    },
+    card: {
+      src: "/media/video/jijbenm-breach-festival-poster.jpg",
+      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+      width: 1280,
+      height: 720,
+    },
+    video: {
+      youtubeId: "1XLlRFJ9PJc",
+      title: "Jij Bent M op Breach Festival",
+      poster: {
+        src: "/media/video/jijbenm-breach-festival-poster.jpg",
+        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+        width: 1280,
+        height: 720,
+      },
+      label: "Aftermovie",
+      caption: "De registratie van Jij Bent M op Breach Festival.",
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/video/jijbenm-breach-festival-poster.jpg",
+        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
+
   {
     slug: "jijbenm",
     title: "Campagne & Promo Reels",
@@ -260,57 +414,7 @@ const allCaseStudies: readonly CaseStudy[] = [
       },
     ],
   },
-  {
-    slug: "althio",
-    title: "Studio Portretsessie",
-    titleLines: ["Studio", "Portretsessie"],
-    client: "Althio",
-    disciplines: ["Fotografie", "Studio"],
-    year: "2024",
-    location: "Almere",
-    summary:
-      "Een portretserie met karakter: strak licht, een duidelijke lijn en ruimte voor eigenheid.",
-    lead: "Zakelijke portretten die niet als zakelijke portretten aanvoelen. Althio wilde beeld waarin de mensen achter het merk herkenbaar blijven, met lef in het licht en rust in de compositie.",
-    chapters: [
-      {
-        id: "vraag",
-        heading: "De vraag",
-        body: "Een portretserie die op de site, op social en in presentaties naast elkaar kan staan zonder uit de toon te vallen. Eén visuele lijn, maar met genoeg variatie om niet als pasfoto's te lezen.",
-      },
-      {
-        id: "aanpak",
-        heading: "Onze aanpak",
-        body: "We bouwden een setup met sterk gericht licht en werkten per persoon een paar houdingen af, van neutraal tot uitgesproken. Door de achtergrond en het licht gelijk te houden en alleen de pose te variëren, blijft de serie samenhangend.",
-      },
-      {
-        id: "resultaat",
-        heading: "Het resultaat",
-        body: "Een set portretten die als serie werkt en los van elkaar net zo goed staat. Direct inzetbaar voor de website, social en presentaties, en makkelijk aan te vullen zodra er nieuwe gezichten bijkomen.",
-      },
-    ],
-    deliverables: ["Studio-setup", "Portretserie", "Retouche", "Social-varianten"],
-    hero: {
-      src: "/media/cases/studio-portretsessie.jpg",
-      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
-      width: 1600,
-      height: 1068,
-    },
-    card: {
-      src: "/media/cases/studio-portretsessie.jpg",
-      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
-      width: 1600,
-      height: 1068,
-    },
-    gallery: [
-      {
-        span: "full",
-        src: "/media/diensten/fotografie.jpg",
-        alt: "Man in gouden jasje leest bladmuziek op een chesterfield terwijl vellen om hem heen vliegen",
-        width: 1600,
-        height: 1066,
-      },
-    ],
-  },
+
   {
     slug: "golazo",
     title: "Marathon Aftermovie",
@@ -396,157 +500,54 @@ const allCaseStudies: readonly CaseStudy[] = [
     ],
   },
 
-  /* =========================================================================
-     LET OP — de tekst van deze twee cases is VERZONNEN en staat wél live.
-
-     Er is met Jij Bent M noch met Aeres gesproken over wat de vraag was, hoe
-     het is aangepakt of wat het heeft opgeleverd. Dat is ingevuld op wat
-     aannemelijk klinkt, zodat te zien was hoe de pagina eruitkomt, en daarna
-     op verzoek opengezet. Alleen de video's, de klantnamen en de titels zijn
-     echt.
-
-     Zolang dit er staat, staan er dus claims over twee bestaande organisaties
-     op de site die niemand bij die organisaties heeft bevestigd. Behandel het
-     als een openstaande taak en niet als afgeronde content:
-
-     - jaartal en locatie controleren
-     - `summary`, `lead` en de drie hoofdstukken herschrijven naar wat er is
-       gebeurd
-     - `deliverables` vervangen door wat er daadwerkelijk is opgeleverd
-     - stills uit de opdracht voor `hero`, `card` en de mozaïek. Nu staat overal
-       dezelfde videoposter uit de YouTube-thumbnail, en dat is meteen het
-       zwakste van het geheel: de andere cases hebben drie tot vijf eigen
-       beelden en dat verschil zie je.
-
-     Moet het weer van de site af voordat de tekst klopt: zet `draft: true`
-     terug bovenin de case en hij verdwijnt overal tegelijk.
-     ========================================================================= */
-
-  /* Tweede opdracht voor Jij Bent M, los van de promo reels hierboven. */
   {
-    slug: "jijbenm-breach-festival",
-    title: "Breach Festival",
-    titleLines: ["Breach", "Festival"],
-    client: "Jij Bent M",
-    disciplines: ["Videografie", "Event"],
-    year: "2025",
+    slug: "althio",
+    title: "Studio Portretsessie",
+    titleLines: ["Studio", "Portretsessie"],
+    client: "Althio",
+    disciplines: ["Fotografie", "Studio"],
+    year: "2024",
     location: "Almere",
     summary:
-      "Een festivaldag vastgelegd zoals hij aanvoelde: druk, kort op de huid en van begin tot eind in beweging.",
-    lead: "Jij Bent M stond met een eigen programma op Breach Festival en wilde daar meer aan overhouden dan losse telefoonbeelden. Wij liepen de hele dag mee en maakten er één aftermovie van die de sfeer terugbrengt bij wie er was, en oproept bij wie er niet bij was.",
+      "Een portretserie met karakter: strak licht, een duidelijke lijn en ruimte voor eigenheid.",
+    lead: "Zakelijke portretten die niet als zakelijke portretten aanvoelen. Althio wilde beeld waarin de mensen achter het merk herkenbaar blijven, met lef in het licht en rust in de compositie.",
     chapters: [
       {
         id: "vraag",
         heading: "De vraag",
-        body: "Een aftermovie die het festivalgevoel vasthoudt en het hele jaar bruikbaar blijft: als terugblik vlak na afloop, en als aankondiging zodra de volgende editie in beeld komt. Kort genoeg voor social, compleet genoeg om het programma recht te doen.",
+        body: "Een portretserie die op de site, op social en in presentaties naast elkaar kan staan zonder uit de toon te vallen. Eén visuele lijn, maar met genoeg variatie om niet als pasfoto's te lezen.",
       },
       {
         id: "aanpak",
         heading: "Onze aanpak",
-        body: "We filmden zonder draaiboek en volgden de dag zoals hij liep, met een lichte set die overal langs kon. Door dicht op de bezoekers te blijven en de opbouw net zo goed te filmen als de piek, ontstond er een verhaal met een begin in plaats van een reeks hoogtepunten achter elkaar.",
+        body: "We bouwden een setup met sterk gericht licht en werkten per persoon een paar houdingen af, van neutraal tot uitgesproken. Door de achtergrond en het licht gelijk te houden en alleen de pose te variëren, blijft de serie samenhangend.",
       },
       {
         id: "resultaat",
         heading: "Het resultaat",
-        body: "Eén aftermovie met de opbouw van de dag erin, plus kortere versies voor social. De montage staat op YouTube en is daarnaast ingezet in de aanloop naar de volgende editie.",
+        body: "Een set portretten die als serie werkt en los van elkaar net zo goed staat. Direct inzetbaar voor de website, social en presentaties, en makkelijk aan te vullen zodra er nieuwe gezichten bijkomen.",
       },
     ],
-    deliverables: ["Registratie op locatie", "Aftermovie", "Social cutdowns", "Stills uit de montage"],
+    deliverables: ["Studio-setup", "Portretserie", "Retouche", "Social-varianten"],
     hero: {
-      src: "/media/video/jijbenm-breach-festival-poster.jpg",
-      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
-      width: 1280,
-      height: 720,
+      src: "/media/cases/studio-portretsessie.jpg",
+      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
+      width: 1600,
+      height: 1068,
     },
     card: {
-      src: "/media/video/jijbenm-breach-festival-poster.jpg",
-      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
-      width: 1280,
-      height: 720,
-    },
-    video: {
-      youtubeId: "1XLlRFJ9PJc",
-      title: "Jij Bent M op Breach Festival",
-      poster: {
-        src: "/media/video/jijbenm-breach-festival-poster.jpg",
-        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
-        width: 1280,
-        height: 720,
-      },
-      label: "Aftermovie",
-      caption: "De registratie van Jij Bent M op Breach Festival.",
+      src: "/media/cases/studio-portretsessie.jpg",
+      alt: "Portret van een springende man in een gang met warm goudkleurig licht",
+      width: 1600,
+      height: 1068,
     },
     gallery: [
       {
         span: "full",
-        src: "/media/video/jijbenm-breach-festival-poster.jpg",
-        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
-        width: 1280,
-        height: 720,
-      },
-    ],
-  },
-
-  {
-    slug: "aeres-vakmanschapsroute",
-    title: "Vakmanschapsroute",
-    titleLines: ["Vakmanschaps", "route"],
-    client: "Aeres VMBO",
-    disciplines: ["Videografie", "Onderwijs"],
-    year: "2025",
-    location: "Almere",
-    summary:
-      "Een voorlichtingsvideo die laat zien wat de Vakmanschapsroute is door leerlingen aan het werk te tonen, niet door het uit te leggen.",
-    lead: "Aeres VMBO wilde de Vakmanschapsroute begrijpelijk maken voor leerlingen uit groep 8 en hun ouders. Wij draaiden op school, in de praktijklokalen, en lieten het verhaal vertellen door de leerlingen die de route al doen.",
-    chapters: [
-      {
-        id: "vraag",
-        heading: "De vraag",
-        body: "Een video voor open dagen, de website en de voorlichting op basisscholen. Het moest duidelijk worden wat de route inhoudt en voor wie hij bedoeld is, zonder dat het als een folder gaat klinken.",
-      },
-      {
-        id: "aanpak",
-        heading: "Onze aanpak",
-        body: "We filmden in de praktijklokalen tijdens gewone lesdagen en gaven leerlingen zelf het woord. Door handen en gereedschap groot in beeld te brengen en het commentaar kort te houden, laat de video zien wat het vak is in plaats van erover te vertellen.",
-      },
-      {
-        id: "resultaat",
-        heading: "Het resultaat",
-        body: "Een video die zowel in een aula als op een telefoon werkt en waarin toekomstige leerlingen zichzelf herkennen. Ingezet bij de open dagen en op de site van de school.",
-      },
-    ],
-    deliverables: ["Draaidagen op locatie", "Voorlichtingsvideo", "Korte versie voor social"],
-    hero: {
-      src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
-      width: 1280,
-      height: 720,
-    },
-    card: {
-      src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
-      width: 1280,
-      height: 720,
-    },
-    video: {
-      youtubeId: "Oi4N3m7VuLc",
-      title: "Aeres VMBO, Vakmanschapsroute",
-      poster: {
-        src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-        alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
-        width: 1280,
-        height: 720,
-      },
-      label: "Videoproductie",
-      caption: "De video over de Vakmanschapsroute van Aeres VMBO.",
-    },
-    gallery: [
-      {
-        span: "full",
-        src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-        alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
-        width: 1280,
-        height: 720,
+        src: "/media/diensten/fotografie.jpg",
+        alt: "Man in gouden jasje leest bladmuziek op een chesterfield terwijl vellen om hem heen vliegen",
+        width: 1600,
+        height: 1066,
       },
     ],
   },
