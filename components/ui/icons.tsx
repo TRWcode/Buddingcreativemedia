@@ -95,6 +95,17 @@ export function FacebookIcon(props: IconProps) {
   );
 }
 
+export function LinkedInIcon(props: IconProps) {
+  return (
+    <svg {...strokeProps} aria-hidden {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M7.5 10.5v6" />
+      <circle cx="7.5" cy="7.4" r="1.05" fill="currentColor" stroke="none" />
+      <path d="M11.5 16.5v-6m0 1.6a2.6 2.6 0 015 1v3.4" />
+    </svg>
+  );
+}
+
 export function YouTubeIcon(props: IconProps) {
   return (
     <svg {...strokeProps} aria-hidden {...props}>

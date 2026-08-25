@@ -1,7 +1,7 @@
 import type { NavLink } from "./types";
 import { contactHref, portfolioHref, privacyHref, termsHref } from "./site";
 
-export type SocialPlatform = "instagram" | "facebook" | "youtube";
+export type SocialPlatform = "instagram" | "youtube" | "linkedin";
 
 export interface SocialLink {
   readonly platform: SocialPlatform;
@@ -14,11 +14,23 @@ export const footerColumns = {
   contact: { heading: "Contact" },
 } as const;
 
-/** Vervang de `#` zodra de kanalen bekend zijn. */
+/**
+ * De kanalen die daadwerkelijk bestaan. Geen Facebook: dat is er niet, en een
+ * icoon dat naar een lege of niet-bestaande pagina wijst kost meer vertrouwen
+ * dan het oplevert.
+ *
+ * LinkedIn is het persoonlijke profiel van Erwin en geen bedrijfspagina. Dat is
+ * voor een eenmanszaak in beeld ook het eerlijkere adres — daar zit het gezicht
+ * achter het werk. Het `label` zegt daarom "LinkedIn" en niet de bedrijfsnaam.
+ */
 export const socialLinks: readonly SocialLink[] = [
-  { platform: "instagram", label: "Instagram", href: "#" },
-  { platform: "facebook", label: "Facebook", href: "#" },
-  { platform: "youtube", label: "YouTube", href: "#" },
+  {
+    platform: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/budding_creative_media/",
+  },
+  { platform: "youtube", label: "YouTube", href: "https://www.youtube.com/@BuddingCreativeMedia" },
+  { platform: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/erwinbudding/" },
 ];
 
 export const footerNav: readonly NavLink[] = [

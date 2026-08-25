@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
-import { FacebookIcon, InstagramIcon, YouTubeIcon } from "@/components/ui/icons";
+import { InstagramIcon, LinkedInIcon, YouTubeIcon } from "@/components/ui/icons";
 import {
   copyright,
   credit,
@@ -16,8 +16,8 @@ import { mailHref, phoneHref, site, siteLogo } from "@/lib/content/site";
 
 const socialIcons: Record<SocialPlatform, typeof InstagramIcon> = {
   instagram: InstagramIcon,
-  facebook: FacebookIcon,
   youtube: YouTubeIcon,
+  linkedin: LinkedInIcon,
 };
 
 export function Footer() {
@@ -79,6 +79,10 @@ export function Footer() {
                     <a
                       href={social.href}
                       aria-label={social.label}
+                      // Een social-kanaal is een andere site; de bezoeker die
+                      // net je werk aan het bekijken was raakt hem anders kwijt.
+                      target="_blank"
+                      rel="noreferrer"
                       className="flex size-10 items-center justify-center rounded-[0.625rem] border border-hairline-strong text-bone transition-colors duration-fast hover:border-brand hover:text-brand"
                     >
                       <Icon className="size-[1.125rem]" />
