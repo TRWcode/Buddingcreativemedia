@@ -25,6 +25,17 @@ export interface CaseVideo {
   /** Pad naar het mp4-bestand in `public/`. Leeg zolang er niets te tonen is. */
   readonly src?: string;
   /**
+   * De id van een YouTube-video, als de montage daar staat en niet als bestand
+   * op onze eigen server. De speler wordt pas geladen nadat de bezoeker op play
+   * drukt; zie [`YouTubeFacade`](../../components/case/YouTubeFacade.tsx) voor
+   * waarom dat niet optioneel is.
+   *
+   * Staat er zowel een `src` als een `youtubeId`, dan wint het eigen bestand.
+   */
+  readonly youtubeId?: string;
+  /** Naam van de video, voor de knop en de titel van de speler. */
+  readonly title?: string;
+  /**
    * Waar in `src` nog niet de echte montage staat. Het blok toont dan een
    * duidelijk label, zodat een voorbeeld nooit voor oplevering doorgaat.
    */
@@ -38,6 +49,16 @@ export interface CaseVideo {
 }
 
 export interface CaseStudy {
+  /**
+   * Zolang dit aanstaat blijft de case in de repo maar niet op de site: hij
+   * verdwijnt uit de overzichten, uit de "volgende case" en uit
+   * `generateStaticParams`, waardoor het adres een 404 geeft.
+   *
+   * Bedoeld voor een case waarvan het beeld er al is maar de tekst nog niet.
+   * Halve copy live zetten is erger dan een case die nog even ontbreekt, en
+   * een case in een zijtak laten hangen is hoe hij vergeten wordt.
+   */
+  readonly draft?: boolean;
   readonly slug: string;
   readonly title: string;
   /** De titel opgebroken in regels; elke regel krijgt een eigen masked reveal. */
@@ -71,8 +92,11 @@ export const casesIntro: SectionIntro = {
 /**
  * Alle cases, in de volgorde waarin ze ook naar elkaar doorlinken — onderaan
  * elke detailpagina staat de volgende uit deze lijst.
+ *
+ * Deze lijst bevat ook wat nog niet af is. Exporteer hem niet: alles buiten dit
+ * bestand hoort met `caseStudies` te werken, en die laat de drafts weg.
  */
-export const caseStudies: readonly CaseStudy[] = [
+const allCaseStudies: readonly CaseStudy[] = [
   {
     slug: "gemeente-almere",
     title: "Onderneming van het Jaar",
@@ -194,16 +218,16 @@ export const caseStudies: readonly CaseStudy[] = [
       height: 1067,
     },
     video: {
-      src: "/media/video/jijbenm-reel-voorbeeld.mp4",
-      isPlaceholder: true,
+      youtubeId: "1XLlRFJ9PJc",
+      title: "Jij Bent M op Breach Festival",
       poster: {
-        src: "/media/video/jijbenm-reel-poster.jpg",
-        alt: "Dronefoto van het park met het kunstwerk en de skyline van Almere",
-        width: 1152,
-        height: 648,
+        src: "/media/video/jijbenm-breach-festival-poster.jpg",
+        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+        width: 1280,
+        height: 720,
       },
-      label: "Promo reel",
-      caption: "Dronebeeld en montage uit de reeks reels rond de exposities.",
+      label: "Aftermovie",
+      caption: "De registratie van Jij Bent M op Breach Festival.",
     },
     gallery: [
       {
@@ -371,7 +395,95 @@ export const caseStudies: readonly CaseStudy[] = [
       },
     ],
   },
+
+  /* -------------------------------------------------------------------------
+     AERES VMBO — nog niet live, zie `draft` hieronder.
+
+     De video staat er al in; de tekst en het fotomateriaal moeten van Erwin
+     komen. Elk veld dat nog niet klopt begint met "INVULLEN", dus zoek daarop
+     en je hebt de hele lijst. Zet `draft` weg zodra ze weg zijn, en de case
+     verschijnt vanzelf in de overzichten, in de "volgende case" en op
+     /cases/aeres-vakmanschapsroute.
+
+     Wat er nog nodig is:
+     - jaartal en locatie van de opdracht
+     - de vraag, de aanpak en het resultaat, elk een alinea
+     - wat er is opgeleverd (de `deliverables`)
+     - stills uit de opdracht voor `hero`, `card` en de mozaïek. Nu staat overal
+       de videoposter, en die is uit de YouTube-thumbnail getrokken. Drie tot
+       vijf eigen beelden maken hier het verschil.
+     ------------------------------------------------------------------------- */
+  {
+    draft: true,
+    slug: "aeres-vakmanschapsroute",
+    title: "Vakmanschapsroute",
+    titleLines: ["Vakmanschaps", "route"],
+    client: "Aeres VMBO",
+    disciplines: ["Videografie", "Onderwijs"],
+    year: "INVULLEN: jaartal van de opdracht",
+    location: "INVULLEN: locatie",
+    summary: "INVULLEN: één zin, komt in de kaart, de meta-description en de social preview.",
+    lead: "INVULLEN: twee zinnen die de opdracht neerzetten, in dezelfde toon als de andere cases.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "INVULLEN: wat wilde Aeres bereiken met deze video, en voor wie was hij bedoeld?",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "INVULLEN: hoe hebben jullie het aangepakt, en welke keuze maakte het verschil?",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "INVULLEN: wat leverde het op, en waar wordt de video ingezet?",
+      },
+    ],
+    deliverables: ["INVULLEN", "INVULLEN", "INVULLEN"],
+    hero: {
+      src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+      alt: "INVULLEN: beschrijving van het herobeeld",
+      width: 1280,
+      height: 720,
+    },
+    card: {
+      src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+      alt: "INVULLEN: beschrijving van het kaartbeeld",
+      width: 1280,
+      height: 720,
+    },
+    video: {
+      youtubeId: "Oi4N3m7VuLc",
+      title: "Aeres VMBO, Vakmanschapsroute",
+      poster: {
+        src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+        alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
+        width: 1280,
+        height: 720,
+      },
+      label: "Videoproductie",
+      caption: "De video over de Vakmanschapsroute van Aeres VMBO.",
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+        alt: "INVULLEN: beschrijving van het mozaïekbeeld",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
 ];
+
+/**
+ * De cases die op de site staan. Elk overzicht, `generateStaticParams` en de
+ * afgeleide vormen voor de homepage lezen hieruit, dus een case op `draft`
+ * verdwijnt overal tegelijk en kan nergens half opduiken.
+ */
+export const caseStudies: readonly CaseStudy[] = allCaseStudies.filter((study) => !study.draft);
 
 /** Het pad van een casepagina. Eén plek, zodat links nooit uit de pas lopen. */
 export function caseHref(slug: string): string {

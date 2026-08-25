@@ -111,8 +111,9 @@ bij met `object-cover`, dus een afwijkende ratio verliest randen.
 | `video/showreel-poster.jpg` | Poster onder de play-knop | 3:2 liggend | ✅ eigen foto |
 | `video/showreel.mp4` | Showreel achter de play-knop | 16:9, H.264 | ⬜ **nog aanleveren** |
 | `video/golazo-aftermovie-voorbeeld.mp4` | Videoblok case Golazo | 16:9, H.264 | 🟡 voorbeeldclip |
-| `video/jijbenm-reel-voorbeeld.mp4` | Videoblok case JijbenM | 16:9, H.264 | 🟡 voorbeeldclip |
-| `video/*-poster.jpg` | Poster onder de case-spelers | 16:9 liggend | 🟡 frame uit de voorbeeldclip |
+| `video/golazo-aftermovie-poster.jpg` | Poster onder de Golazo-speler | 16:9 liggend | 🟡 frame uit de voorbeeldclip |
+| `video/jijbenm-breach-festival-poster.jpg` | Poster van de YouTube-video bij JijbenM | 16:9, 1280×720 | 🟡 YouTube-thumbnail |
+| `video/aeres-vakmanschapsroute-poster.jpg` | Poster van de YouTube-video bij Aeres | 16:9, 1280×720 | 🟡 YouTube-thumbnail |
 | `cases/spotlight-onderneming-van-het-jaar.jpg` | Polaroid in Cases | vierkant-ish | ✅ eigen foto |
 | `cases/studio-portretsessie.jpg` | Casekaart 2 | 4:3 liggend | ✅ eigen foto |
 | `cases/marathon-aftermovie.jpg` | Casekaart 3 | 4:3 liggend | ✅ eigen foto |
@@ -146,12 +147,52 @@ verhaal en de mozaïek. Het blok heeft vier standen:
 | Content | Wat de bezoeker ziet |
 | --- | --- |
 | geen `video` | niets, geen leeg kader |
-| `video` zonder `src` | de poster met "Hier komt de video" eroverheen |
+| `video` zonder `src` en zonder `youtubeId` | de poster met "Hier komt de video" eroverheen |
 | `video` met `src` + `isPlaceholder` | een werkende speler met het label **Voorbeeld** |
 | `video` met alleen `src` | de speler, zonder label |
+| `video` met `youtubeId` | de poster met een play-knop; YouTube laadt pas na een klik |
 
-Golazo en JijbenM staan nu op de derde stand. De clips in `public/media/video/`
-zijn met ffmpeg gemaakt uit de foto's van diezelfde case: stilstaande beelden
+### YouTube pas na een klik
+
+Staat de montage op YouTube in plaats van als bestand op onze server, dan zet je
+een `youtubeId` in de case en rendert
+[`YouTubeFacade.tsx`](components/case/YouTubeFacade.tsx) een poster met een
+play-knop. De speler komt er pas in nadat de bezoeker klikt.
+
+Dat is geen snelheidstruc. Een gewone embed legt al bij het openen van de pagina
+verbinding met Google en zet cookies, ook bij iemand die de video nooit
+afspeelt — en dan klopt artikel 5.1 van de privacyverklaring niet meer en is er
+een toestemmingsbanner nodig op élke pagina van de site, voor een videoblok dat
+op twee cases staat. Om dezelfde reden staat de poster lokaal in
+`public/media/video/` en niet als `i.ytimg.com`-adres: dat laatste zou alsnog
+een verzoek naar Google zijn zodra de pagina laadt.
+
+De posters zijn nu uit de YouTube-thumbnail getrokken (1280×720). Vervang ze
+door een eigen frame als je een mooier beeld hebt; hetzelfde pad, klaar.
+
+`youtube-nocookie.com` doet minder dan de naam belooft — zodra de speler laadt,
+worden er alsnog cookies gezet. Het is de betere van de twee domeinen, geen
+vrijbrief om de melding onder de poster weg te halen.
+
+### Een case die nog niet af is
+
+`draft: true` op een case houdt hem in de repo maar van de site af: hij valt weg
+uit de overzichten, uit de "volgende case" en uit `generateStaticParams`,
+waardoor het adres een 404 geeft. Alles buiten `cases.ts` leest uit
+`caseStudies`, en die is al gefilterd — er is dus geen plek waar een draft
+alsnog half kan opduiken.
+
+Zo staat de Aeres-case er nu in: de video zit erin, de tekst en het
+fotomateriaal nog niet. Elk veld dat nog moet komen begint met `INVULLEN`, dus
+grep daarop en je hebt de lijst. Zijn ze weg, haal dan `draft` weg en de case
+staat live.
+
+Halve copy live zetten is erger dan een case die nog even ontbreekt, en werk in
+een zijtak laten hangen is hoe het vergeten wordt. Dit is het midden.
+
+Alleen Golazo staat nu nog op de derde stand; JijbenM is doorgeschoven naar de
+YouTube-variant en zijn voorbeeldclip is weg. De clip in `public/media/video/`
+is met ffmpeg gemaakt uit de foto's van diezelfde case: stilstaande beelden
 die in en uit elkaar overvloeien, 13s, geen geluid. Bewust geen zoom of pan.
 Een still die per frame herschaald wordt trilt zichtbaar, en zodra je ziet dat
 het een foto is leest de beweging als een fout in plaats van als montage.

@@ -29,9 +29,11 @@ const registration = [
  * feitelijk doen. Verandert dat, dan verandert deze tekst mee.
  *
  * Wat hier staat klopt met de code: er is geen database, het contactformulier
- * mailt alleen door, de lettertypen staan in `app/fonts/` in plaats van bij
- * Google, en de video's staan in `public/media/video/` in plaats van in een
- * YouTube-embed. Zet je een van die dingen om, pas dan ook dit bestand aan.
+ * mailt alleen door, en de lettertypen staan in `app/fonts/` in plaats van bij
+ * Google. De YouTube-video's op de casepagina's laden pas na een klik, en de
+ * posters daarvan staan lokaal — precies daarom kan artikel 5.1 nog steeds
+ * zeggen dat er geen banner nodig is. Zet je een van die dingen om, dan is dit
+ * bestand niet meer waar en moet het mee.
  */
 export const privacy: LegalDocument = {
   eyebrow: "Juridisch",
@@ -41,7 +43,7 @@ export const privacy: LegalDocument = {
     "Hoe Budding Creative Media omgaat met persoonsgegevens: wat we vastleggen via het contactformulier, hoe lang we het bewaren en welke rechten je hebt.",
   intro:
     "Wij verwerken zo min mogelijk persoonsgegevens en verkopen niets door. Deze verklaring beschrijft precies welke gegevens wij vastleggen, waarom dat gebeurt, hoe lang we ze bewaren en wat je daaraan kunt veranderen.",
-  updated: "2026-08-25",
+  updated: "2026-08-26",
   articles: [
     {
       id: "wie-wij-zijn",
@@ -151,7 +153,7 @@ export const privacy: LegalDocument = {
         {
           kind: "clause",
           number: "5.1",
-          text: "Deze website plaatst geen tracking-, advertentie- of profileringscookies. Daarom zie je hier ook geen cookiebanner: er valt niets te weigeren.",
+          text: "Deze website plaatst zelf geen cookies, en dus ook geen tracking-, advertentie- of profileringscookies. Daarom zie je hier geen cookiebanner: zolang je gewoon rondkijkt valt er niets te weigeren. De enige uitzondering staat in artikel 5.5 en gaat pas spelen als je zelf een video aanzet.",
         },
         {
           kind: "clause",
@@ -166,11 +168,21 @@ export const privacy: LegalDocument = {
         {
           kind: "clause",
           number: "5.4",
-          text: "De lettertypen op deze site staan op onze eigen server en worden niet bij Google opgehaald. De video's staan eveneens op onze eigen server; er zijn geen YouTube- of Vimeo-embeds. Je browser legt daardoor tijdens het bezoek geen verbinding met partijen die jou zouden kunnen volgen.",
+          text: "De lettertypen op deze site staan op onze eigen server en worden niet bij Google opgehaald. Je browser legt tijdens een gewoon bezoek dus geen verbinding met partijen die jou zouden kunnen volgen.",
         },
         {
           kind: "clause",
           number: "5.5",
+          text: "Op sommige casepagina's staat een video die bij YouTube gehost wordt. Die speler wordt niet meegeladen met de pagina: je ziet eerst een stilstaand beeld dat van onze eigen server komt, met de melding erbij. Pas als je zelf op afspelen klikt, wordt YouTube geladen en kan Google cookies plaatsen en gegevens over je kijkgedrag verwerken. Klik je niet, dan gebeurt er niets en legt je browser ook geen verbinding met Google.",
+        },
+        {
+          kind: "clause",
+          number: "5.6",
+          text: "Wij gebruiken daarvoor het domein youtube-nocookie.com, dat minder vastlegt dan de gewone speler. Zodra de video draait geldt het privacybeleid van Google, waar wij geen invloed op hebben.",
+        },
+        {
+          kind: "clause",
+          number: "5.7",
           text: "Klik je op een link naar een social-mediakanaal, dan verlaat je deze website en gelden vanaf dat moment de voorwaarden en het privacybeleid van dat platform.",
         },
       ],

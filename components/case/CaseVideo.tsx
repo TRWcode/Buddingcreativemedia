@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { PlayIcon } from "@/components/ui/icons";
+import { YouTubeFacade } from "./YouTubeFacade";
 import type { CaseVideo as CaseVideoContent } from "@/lib/content/cases";
 import type { ImageAsset } from "@/lib/content/types";
 
@@ -15,8 +16,10 @@ const SIZES = "(max-width: 720px) 100vw, 87.5rem";
  * - `src` gezet: gewoon de speler.
  * - `src` gezet met `isPlaceholder`: de speler met een label erbij, zodat een
  *   voorbeeldclip nooit voor de echte oplevering doorgaat.
- * - geen `src`: de poster met de melding dat de montage nog volgt, in plaats
- *   van een lege speler of een gat in de pagina.
+ * - `youtubeId` gezet: de poster met een play-knop, die YouTube pas laadt na
+ *   een klik. Zie `YouTubeFacade` voor waarom dat zo moet.
+ * - geen van beide: de poster met de melding dat de montage nog volgt, in
+ *   plaats van een lege speler of een gat in de pagina.
  *
  * Geen autoplay en geen loop: de rest van de pagina is stil en een aftermovie
  * heeft geluid. `preload="metadata"` haalt alleen de header op, dus het kader
@@ -45,6 +48,12 @@ export function CaseVideo({ video }: { video: CaseVideoContent }) {
                 playsInline
                 preload="metadata"
                 className="size-full object-cover"
+              />
+            ) : video.youtubeId ? (
+              <YouTubeFacade
+                videoId={video.youtubeId}
+                poster={video.poster}
+                title={video.title ?? video.label}
               />
             ) : (
               <PendingVideo poster={video.poster} />
