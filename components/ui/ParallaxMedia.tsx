@@ -64,6 +64,7 @@ export function ParallaxMedia({ image, priority = false, sizes = "100vw" }: Para
             sizes={sizes}
             quality={82}
             className="object-cover"
+            style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
           />
         </motion.div>
       </motion.div>

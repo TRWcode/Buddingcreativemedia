@@ -30,7 +30,7 @@ export function EventHighlight({ event }: { event: EventItem }) {
     <article className="group grid overflow-hidden rounded-panel border border-brand/30 bg-surface shadow-glow nav:grid-cols-[1.15fr_1fr]">
       <div className="order-2 p-[clamp(1.625rem,3vw,2.75rem)] nav:order-1">
         <div className="mb-5 flex flex-wrap items-center gap-3">
-          <span className="rounded-pill bg-brand px-4 py-1.5 text-[0.7rem] font-bold uppercase tracking-label text-white">
+          <span className="rounded-pill bg-brand px-4 py-1.5 text-[0.72rem] font-bold uppercase tracking-label text-white">
             Inschrijving open
           </span>
           <span className="text-eyebrow">{event.kind}</span>

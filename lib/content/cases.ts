@@ -150,11 +150,16 @@ const allCaseStudies: readonly CaseStudy[] = [
       },
     ],
     deliverables: ["Draaidagen op locatie", "Voorlichtingsvideo", "Korte versie voor social"],
+    // De poster is een YouTube-titelkaart met de titel erin gebrand aan de
+    // linkerkant. Als full-bleed hero snijdt een telefoon daar precies een
+    // stuk uit ('CHAPS-'), wat als een fout leest. Rechts staat de leerling en
+    // geen tekst, dus daar wordt op bijgesneden.
     hero: {
       src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
-      alt: "Beeld uit de video over de Vakmanschapsroute van Aeres VMBO",
+      alt: "Leerling van Aeres VMBO aan het werk in het praktijklokaal",
       width: 1280,
       height: 720,
+      objectPosition: "right",
     },
     card: {
       src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
@@ -295,11 +300,15 @@ const allCaseStudies: readonly CaseStudy[] = [
       },
     ],
     deliverables: ["Registratie op locatie", "Aftermovie", "Social cutdowns", "Stills uit de montage"],
+    // Zelfde verhaal als bij Aeres: de titelkaart draagt 'BREACH' in het midden
+    // en 'JIJ BENT M' eronder. Links staat alleen de bomenrand boven het water,
+    // en dat is het enige stuk zonder tekst.
     hero: {
       src: "/media/video/jijbenm-breach-festival-poster.jpg",
-      alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+      alt: "Avondbeeld van het water bij Breach Festival in Almere",
       width: 1280,
       height: 720,
+      objectPosition: "left",
     },
     card: {
       src: "/media/video/jijbenm-breach-festival-poster.jpg",

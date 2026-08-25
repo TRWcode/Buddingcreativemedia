@@ -45,7 +45,7 @@ export default function ContactPage() {
       </header>
 
       <div className="grid gap-x-16 gap-y-section-sm nav:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-        <section aria-labelledby="formulier">
+        <section aria-labelledby="formulier" className="min-w-0">
           <h2
             id="formulier"
             className="mb-3 font-display text-[1.75rem] font-bold uppercase leading-[1.1] tracking-title"
@@ -56,7 +56,7 @@ export default function ContactPage() {
           <ContactForm />
         </section>
 
-        <aside className="space-y-section-sm">
+        <aside className="min-w-0 space-y-section-sm">
           <section aria-labelledby="direct">
             <h2
               id="direct"

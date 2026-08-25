@@ -33,20 +33,20 @@ function Blocks({ blocks }: { blocks: readonly LegalBlock[] }) {
                 <span className="w-10 shrink-0 font-medium tabular-nums text-bone nav:w-11">
                   {block.number}
                 </span>
-                <span>{block.text}</span>
+                <span className="min-w-0 break-words">{block.text}</span>
               </p>
             );
 
           case "text":
             return (
-              <p key={key} className={`leading-[1.75] text-muted ${indent}`}>
+              <p key={key} className={`break-words leading-[1.75] text-muted ${indent}`}>
                 {block.text}
               </p>
             );
 
           case "list":
             return (
-              <ul key={key} className={`space-y-2 leading-[1.75] text-muted ${indent}`}>
+              <ul key={key} className={`space-y-2 break-words leading-[1.75] text-muted ${indent}`}>
                 {block.items.map((item) => (
                   <li
                     key={item}
@@ -60,7 +60,7 @@ function Blocks({ blocks }: { blocks: readonly LegalBlock[] }) {
 
           case "definitions":
             return (
-              <dl key={key} className={`space-y-3 leading-[1.75] text-muted ${indent}`}>
+              <dl key={key} className={`space-y-3 break-words leading-[1.75] text-muted ${indent}`}>
                 {block.items.map((item) => (
                   <div key={item.term}>
                     <dt className="inline font-medium text-bone">{item.term}: </dt>
@@ -78,7 +78,11 @@ function Blocks({ blocks }: { blocks: readonly LegalBlock[] }) {
 function Article({ article }: { article: LegalArticle }) {
   return (
     <section id={article.id} className="scroll-mt-28 border-t border-hairline pt-9">
-      <h2 className="mb-6 font-display text-[1.75rem] font-bold uppercase leading-[1.1] tracking-title">
+      {/* Juridisch Nederlands zit vol lange samenstellingen. Op 28px liep
+          "Aansprakelijkheid" 32px buiten de kolom op een scherm van 320px, en
+          een kop breekt niet uit zichzelf af. Vandaar dat de maat meeschaalt en
+          `break-words` als vangnet meeloopt. */}
+      <h2 className="mb-6 break-words font-display text-[clamp(1.35rem,5.5vw,1.75rem)] font-bold uppercase leading-[1.1] tracking-title">
         <span className="mb-3 block text-eyebrow text-brand">Artikel {article.number}</span>
         {article.title}
       </h2>
@@ -106,7 +110,10 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
           <Eyebrow>{doc.eyebrow}</Eyebrow>
         </Reveal>
 
-        <h1 className="font-display text-[clamp(2.5rem,9vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-headline">
+        {/* De regels zitten in een masker met `overflow: hidden` en kunnen dus
+            niet afbreken; wat niet past wordt afgekapt. "voorwaarden" liep op
+            320px 37px buiten het kader, vandaar de lagere ondergrens. */}
+        <h1 className="font-display text-[clamp(1.9rem,8.5vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-headline">
           <MaskedLines
             lines={[{ text: doc.heading[0] }, { text: doc.heading[1], accent: true }]}
             delay={0.15}
@@ -151,7 +158,7 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
           </nav>
         </aside>
 
-        <div className="max-w-[46rem] space-y-11">
+        <div className="min-w-0 max-w-[46rem] space-y-11">
           {doc.articles.map((article) => (
             <Article key={article.id} article={article} />
           ))}

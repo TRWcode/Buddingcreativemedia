@@ -29,7 +29,7 @@ export function ServiceCard({ service }: { service: Service }) {
 
         <Link
           href={service.link.href}
-          className="mt-[1.625rem] inline-flex items-center gap-2 font-bold text-brand transition-colors duration-fast hover:text-bone"
+          className="mt-[1.625rem] inline-flex items-center gap-2 py-2 font-bold text-brand transition-colors duration-fast hover:text-bone"
         >
           {service.link.label}
           <span aria-hidden className="leading-none">

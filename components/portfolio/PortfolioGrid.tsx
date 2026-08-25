@@ -165,7 +165,9 @@ function FilterButton({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "text-[0.95rem] font-medium transition-colors duration-fast ease-interact",
+        // py met negatieve marge: het tikdoel wordt ruim 40px hoog terwijl de rij
+        // even hoog blijft. Op een telefoon was dit 25px en dus lastig te raken.
+        "-mx-2 -my-2.5 px-2 py-2.5 text-[0.95rem] font-medium transition-colors duration-fast ease-interact",
         active ? "text-brand" : "text-muted hover:text-bone focus-visible:text-bone",
       )}
     >

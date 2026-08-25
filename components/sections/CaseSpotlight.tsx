@@ -53,7 +53,7 @@ export function CaseSpotlight() {
           </div>
           <Link
             href={spotlight.link.href}
-            className="inline-flex items-center gap-2 font-bold text-bone transition-colors duration-fast hover:text-brand"
+            className="inline-flex items-center gap-2 py-2 font-bold text-bone transition-colors duration-fast hover:text-brand"
           >
             {spotlight.link.label}
             <span aria-hidden className="leading-none text-brand">

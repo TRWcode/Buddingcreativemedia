@@ -441,6 +441,45 @@ pagina's. Wat er niet bij hoort draagt `print:hidden` op het component zelf —
 header, footer, cursor, de inhoudsopgave en het rode CTA-blok. Zet dat ook op
 nieuwe schermelementen die op papier niets te zoeken hebben.
 
+## Mobiel
+
+De site is nagemeten op 320, 360 en 768px met echte device-emulatie. Geen enkele
+pagina heeft horizontale overflow. Wat daarbij naar boven kwam, en waar je bij
+nieuw werk op moet letten:
+
+**Meet met device-emulatie, niet met een smal venster.** Chrome met alleen
+`--window-size=360,…` legt de pagina bréder uit dan het venster en snijdt daar
+een screenshot uit. Dat lijkt sprekend op overflow terwijl er niets aan de hand
+is. Alleen `Emulation.setDeviceMetricsOverride` zet de layoutviewport echt.
+
+**`getBoundingClientRect` ziet niet alles.** Tekst die buiten zijn eigen alinea
+valt zit niet in de rect van dat element. Vergelijk `scrollWidth` met
+`clientWidth` per element; zo kwamen de artikelkoppen van de juridische pagina's
+boven water, die met `getBoundingClientRect` onzichtbaar bleven.
+
+**Drie terugkerende oorzaken op smal scherm:**
+
+| Oorzaak | Waar het misging | Wat het oplost |
+| --- | --- | --- |
+| Grid- en flexkolommen krimpen niet onder hun inhoud | het `select`-veld ("Fotografie en video") duwde het contactformulier 20px buiten beeld op 320px | `min-w-0` op het veld én op de kolom |
+| Lange Nederlandse samenstellingen breken niet | "Aansprakelijkheid" liep 32px buiten de kolom | maat laten meeschalen plus `break-words` |
+| Een gemaskeerde kop kan niet afbreken | `clip-line` heeft `overflow: hidden`, dus wat niet past wordt afgekapt — "voorwaarden" en "Vakmanschaps" verdwenen deels | lagere ondergrens in de `clamp()` |
+
+Let bij een nieuwe display-kop dus op die laatste: hij breekt niet, hij kapt af.
+Controleer de langste regel die er ooit in komt te staan op 320px.
+
+**Tikdoelen.** Links en knoppen zijn minstens ongeveer 40px hoog. Waar dat de
+opmaak zou opblazen is het opgelost met padding plus een negatieve marge, zodat
+het doel groeit en de layout gelijk blijft. Alleen links midden in een lopende
+zin zijn kleiner; die kun je niet vergroten zonder de regel te breken, en daar
+maakt de richtlijn ook een uitzondering voor.
+
+**Beeld met tekst erin.** De YouTube-posters van de twee nieuwste cases zijn
+titelkaarten met de titel erin gebrand. Als full-bleed hero snijdt een telefoon
+daar een fragment uit, en dan staat er "CHAPS-" over de foto. Daarvoor bestaat
+`objectPosition` op een `ImageAsset`: die stuurt welk deel overeind blijft.
+Beter is een eigen foto zonder tekst.
+
 ## Smoothness
 
 Twee dingen bepalen hoe vloeiend de site aanvoelt.

@@ -41,12 +41,14 @@ export function Footer() {
             <p className="mb-5 text-[0.74rem] uppercase tracking-label text-muted">
               {footerColumns.navigation.heading}
             </p>
-            <div className="flex flex-col gap-3 font-medium">
+            {/* Weinig tussenruimte, wel padding op de link zelf: zo is het tikdoel op
+                een telefoon ruim 40px hoog zonder dat de kolom uit elkaar valt. */}
+            <div className="flex flex-col gap-0.5 font-medium">
               {footerNav.map((link) => (
                 <AnchorLink
                   key={link.label}
                   href={link.href}
-                  className="w-fit transition-colors duration-fast hover:text-brand"
+                  className="w-fit py-2 transition-colors duration-fast hover:text-brand"
                 >
                   {link.label}
                 </AnchorLink>
@@ -58,17 +60,17 @@ export function Footer() {
             <p className="mb-5 text-[0.74rem] uppercase tracking-label text-muted">
               {footerColumns.contact.heading}
             </p>
-            <div className="flex flex-col gap-3 text-muted">
-              <a href={mailHref} className="w-fit transition-colors duration-fast hover:text-brand">
+            <div className="flex flex-col gap-0.5 text-muted">
+              <a href={mailHref} className="w-fit py-2 transition-colors duration-fast hover:text-brand">
                 {site.email}
               </a>
               {/* Alleen tonen als er een echt nummer in `site.ts` staat. */}
               {phoneHref && site.phone ? (
-                <a href={phoneHref} className="w-fit transition-colors duration-fast hover:text-brand">
+                <a href={phoneHref} className="w-fit py-2 transition-colors duration-fast hover:text-brand">
                   {site.phone}
                 </a>
               ) : null}
-              <span>Almere, Nederland</span>
+              <span className="py-2">Almere, Nederland</span>
             </div>
 
             <ul className="mt-5.5 flex gap-3">
@@ -103,7 +105,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition-colors duration-fast hover:text-brand"
+                className="py-2 transition-colors duration-fast hover:text-brand"
               >
                 {link.label}
               </Link>
@@ -116,7 +118,7 @@ export function Footer() {
               href={credit.href}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 font-medium text-bone transition-colors duration-fast hover:text-brand"
+              className="-my-2 inline-flex items-center gap-1 py-2 font-medium text-bone transition-colors duration-fast hover:text-brand"
             >
               {credit.label}
               <span

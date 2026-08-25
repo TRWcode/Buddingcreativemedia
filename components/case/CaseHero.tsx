@@ -39,7 +39,7 @@ export function CaseHero({ study }: { study: CaseStudy }) {
         <Reveal trigger="mount" variants={fadeIn} className="mb-7">
           <Link
             href={casesIndexHref}
-            className="group/back inline-flex items-center gap-2 text-[0.86rem] font-medium text-muted transition-colors duration-fast hover:text-bone"
+            className="group/back -my-2 inline-flex items-center gap-2 py-2 text-[0.86rem] font-medium text-muted transition-colors duration-fast hover:text-bone"
           >
             <span
               aria-hidden
@@ -55,7 +55,12 @@ export function CaseHero({ study }: { study: CaseStudy }) {
           <Eyebrow>{study.client}</Eyebrow>
         </Reveal>
 
-        <h1 className="font-display text-[clamp(2.4rem,11vw,5rem)] font-bold uppercase leading-[0.92] tracking-headline stack:text-[clamp(3rem,8vw,7rem)]">
+        {/* De regels van deze kop zitten in een masker met `overflow: hidden`,
+            dus een regel die niet past wordt afgekapt in plaats van afgebroken.
+            Op 360px liep "Vakmanschaps" 14px buiten het kader. De maat schaalt
+            hieronder daarom wat sterker mee, zodat ook de langste caseregel
+            past. */}
+        <h1 className="font-display text-[clamp(2rem,9.5vw,5rem)] font-bold uppercase leading-[0.92] tracking-headline stack:text-[clamp(3rem,8vw,7rem)]">
           <MaskedLines
             lines={study.titleLines.map((text) => ({ text }))}
             trigger="mount"

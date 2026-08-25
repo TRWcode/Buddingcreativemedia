@@ -6,12 +6,15 @@ const VISIBLE = 3;
 
 function ArchiveRow({ event }: { event: EventItem }) {
   return (
-    <li className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-hairline py-3.5 text-[0.92rem]">
-      <time dateTime={event.date} className="w-28 shrink-0 tabular-nums text-muted">
+    // Op een telefoon onder elkaar: datum, titel, soort. Naast elkaar met een
+    // rechts uitgelijnde derde kolom werd het op 360px een rafelige trap, omdat
+    // de titel dan toch over twee regels brak.
+    <li className="border-t border-hairline py-3.5 text-[0.92rem] stack:flex stack:flex-wrap stack:items-baseline stack:gap-x-4">
+      <time dateTime={event.date} className="block tabular-nums text-muted stack:w-28 stack:shrink-0">
         {formatEventDateShort(event.date)}
       </time>
-      <span className="text-bone">{event.title}</span>
-      <span className="ml-auto text-muted">
+      <span className="mt-0.5 block text-bone stack:mt-0">{event.title}</span>
+      <span className="mt-0.5 block text-muted stack:ml-auto stack:mt-0">
         {event.kind} · {event.location}
       </span>
     </li>

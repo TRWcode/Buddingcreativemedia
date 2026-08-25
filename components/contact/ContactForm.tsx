@@ -15,8 +15,12 @@ import {
 import type { ContactField } from "@/lib/content/contact";
 import { privacyHref } from "@/lib/content/site";
 
+// `min-w-0` hoort op het veld zelf en niet alleen op de kolom eromheen: een
+// `select` is van zichzelf zo breed als zijn langste optie en krimpt daar niet
+// onder, ook niet met `w-full`. Zonder dit duwt "Fotografie en video" het hele
+// formulier buiten beeld op een scherm van 320px.
 const fieldBase =
-  "w-full rounded-mark border bg-surface px-4 py-3.5 text-bone " +
+  "w-full min-w-0 rounded-mark border bg-surface px-4 py-3.5 text-bone " +
   "placeholder:text-muted/70 transition-colors duration-fast";
 
 function fieldClasses(invalid: boolean): string {
@@ -50,7 +54,11 @@ function Field({
   };
 
   return (
-    <div className={field.half ? undefined : "stack:col-span-2"}>
+    // `min-w-0` is hier niet cosmetisch. Een grid-kolom krimpt standaard niet
+    // onder de breedte van zijn inhoud, en een `select` is zo breed als zijn
+    // langste optie ("Fotografie en video"). Op een scherm van 320px duwde dat
+    // het hele formulier 20px buiten beeld.
+    <div className={cn("min-w-0", !field.half && "stack:col-span-2")}>
       <label htmlFor={id} className="mb-2 block text-[0.9rem] font-medium text-bone">
         {field.label}
         {field.required ? <span className="ml-1 text-brand">*</span> : null}

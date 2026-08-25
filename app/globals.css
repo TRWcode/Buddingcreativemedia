@@ -246,7 +246,11 @@
    UTILITIES
    ========================================================================== */
 @utility text-eyebrow {
-  font-size: clamp(0.66rem, 0.55rem + 0.5vw, 0.76rem);
+  /* De ondergrens kwam op een telefoon uit op 10,6px. Dat is voor hoofdletters
+     met deze letterafstand op een donkere ondergrond te klein om nog prettig te
+     lezen; vandaar dat de kleinste stap omhoog is en de bovengrens vrijwel
+     gelijk blijft. */
+  font-size: clamp(0.72rem, 0.62rem + 0.5vw, 0.78rem);
   font-weight: 500;
   letter-spacing: clamp(0.18em, 0.1em + 0.35vw, var(--tracking-eyebrow));
   text-transform: uppercase;

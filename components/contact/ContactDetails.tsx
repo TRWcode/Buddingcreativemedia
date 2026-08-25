@@ -12,6 +12,27 @@ interface ContactChannel {
 }
 
 /**
+ * Zet een breekpunt na de apenstaart.
+ *
+ * Een e-mailadres is één woord en breekt uit zichzelf nergens. Met alleen
+ * `break-words` knipt de browser waar hij toevallig uitkomt, en dan lees je
+ * "info@buddingcreativemedia.n" met een losse "l" eronder. Na de @ is de plek
+ * waar een lezer de breuk verwacht.
+ */
+function Breakable({ value }: { value: string }) {
+  const at = value.indexOf("@");
+  if (at === -1) return <>{value}</>;
+
+  return (
+    <>
+      {value.slice(0, at + 1)}
+      <wbr />
+      {value.slice(at + 1)}
+    </>
+  );
+}
+
+/**
  * De directe kanalen naast het formulier.
  *
  * Telefoon en WhatsApp verschijnen alleen als er een nummer in `site.ts` staat.
@@ -64,11 +85,17 @@ export function ContactDetails() {
             <span className="flex size-12 shrink-0 items-center justify-center rounded-icon border border-brand/30 bg-brand/12 text-brand">
               {channel.icon}
             </span>
-            <span>
+            {/* `min-w-0` laat de tekstkolom krimpen naast het icoon, `break-words`
+                laat het e-mailadres afbreken. Zonder allebei loopt
+                info@buddingcreativemedia.nl op een smal scherm buiten de kaart:
+                het is één woord en breekt uit zichzelf nergens. */}
+            <span className="min-w-0">
               <span className="block text-[0.74rem] uppercase tracking-label text-muted">
                 {channel.label}
               </span>
-              <span className="mt-1 block font-medium leading-[1.4]">{channel.value}</span>
+              <span className="mt-1 block break-words font-medium leading-[1.4]">
+                <Breakable value={channel.value} />
+              </span>
             </span>
           </>
         );

@@ -33,6 +33,7 @@ export function MediaZoom({
         height={image.height}
         sizes={sizes}
         className="size-full object-cover transition-transform duration-zoom ease-interact group-hover:scale-107 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
       />
       {children}
       {withAccentLine ? (
