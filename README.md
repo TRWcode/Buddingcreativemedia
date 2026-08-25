@@ -19,6 +19,7 @@ app/
   not-found.tsx     404
   cases/[slug]/     detailpagina per case, statisch voorgebouwd
   contact/          contactpagina, server action en de staat van het formulier
+  events/           agenda, aanmeldpagina per event en de server action
   algemene-voorwaarden/, privacyverklaring/
   sitemap.ts        sitemap.xml, uit de routeconstanten
   robots.ts         robots.txt
@@ -30,6 +31,7 @@ components/
   sections/         één component per sectie van de homepage
   case/             de blokken van een casepagina
   contact/          formulier en directe contactkanalen
+  events/           uitgelicht event, aangekondigd, archief en aanmeldformulier
   legal/            de opmaak die beide juridische pagina's delen
   ui/               herbruikbare bouwstenen en animatie-primitives
 lib/
@@ -49,6 +51,7 @@ _originals/         onbewerkte foto's, buiten git
 | `/cases` | [`app/cases/page.tsx`](app/cases/page.tsx) — overzicht van alle cases |
 | `/cases/[slug]` | [`app/cases/[slug]/page.tsx`](app/cases/%5Bslug%5D/page.tsx) — `generateStaticParams` bouwt elke case uit `caseStudies` voor |
 | `/events` | [`app/events/page.tsx`](app/events/page.tsx) — de agenda in drie lagen |
+| `/events/[id]/aanmelden` | [aanmeldformulier](app/events/%5Bid%5D/aanmelden/page.tsx) — alleen voor events met een open inschrijving |
 | `/contact` | [`app/contact/page.tsx`](app/contact/page.tsx) — formulier plus directe kanalen |
 | `/algemene-voorwaarden` | [`app/algemene-voorwaarden/page.tsx`](app/algemene-voorwaarden/page.tsx) |
 | `/privacyverklaring` | [`app/privacyverklaring/page.tsx`](app/privacyverklaring/page.tsx) |
@@ -57,7 +60,7 @@ _originals/         onbewerkte foto's, buiten git
 | `/robots.txt` | [`app/robots.ts`](app/robots.ts) |
 
 De routes staan als constante in [`site.ts`](lib/content/site.ts) (`portfolioHref`,
-`contactHref`, `termsHref`, `privacyHref`). Link daarnaar in plaats van het pad
+`eventsHref`, `contactHref`, `termsHref`, `privacyHref`). Link daarnaar in plaats van het pad
 over te typen, anders lopen navigatie, footer en knoppen uit elkaar zodra er een
 verandert.
 
@@ -350,6 +353,45 @@ Daarvoor moet de pagina wel opnieuw renderen, anders is de peildatum die van de
 build: `/events` en de homepage staan daarom op `revalidate = 3600`. Verander je
 dat op de een, doe het dan ook op de ander — de homepage toont het eerstvolgende
 event uit dezelfde lijst.
+
+### Aanmelden
+
+Een event waarvan de inschrijving openstaat krijgt een eigen aanmeldpagina op
+`/events/[id]/aanmelden`. Alleen die events staan in `generateStaticParams`; de
+rest geeft een 404. De datum blijft daarbuiten, want die verschuift met de tijd
+terwijl `generateStaticParams` bij de build draait — of het event intussen
+geweest is, controleert de pagina zelf met `canSignUp`.
+
+Het formulier draait op dezelfde onderdelen als het contactformulier: een
+server action, `useActionState`, en de velden uit
+[`FormField.tsx`](components/ui/FormField.tsx). Die veldweergave is bewust
+gedeeld: twee formulieren op één site die er verschillend uitzien is precies wat
+er gebeurt als je de opmaak kopieert.
+
+Het event zit als verborgen veld in het formulier. Dat is geen beveiliging — een
+verborgen veld is net zo goed te veranderen als een zichtbaar veld. De action
+zoekt het event zelf op en controleert opnieuw of de inschrijving openstaat.
+
+De deelnemer krijgt een bevestigingsmail, maar pas nadat de melding naar ons
+gelukt is, en een mislukte bevestiging houdt het scherm op geslaagd. Anders
+meldt iemand zich twee keer aan voor iets dat allang binnen is.
+
+### Later: betalen via Stapit
+
+Er is nu geen online betaling. De aanmelding zegt eerlijk dat je plek vaststaat
+zodra de betaling binnen is, en die regel je er nu buitenom.
+
+Als dat verandert, hoort de betaling **niet** in deze site te komen. Het
+Stapit-dashboard heeft het meeste al staan — klanten, boekingen, facturen, en
+een `payment_id` in `documents` die daarop wacht — en Mollie/iDEAL staat daar
+als openstaand roadmap-punt, met een publieke betaalpagina en een webhook. Deze
+site hoort de aanmelding alleen door te geven; het dashboard maakt de factuur en
+de betaallink en bevestigt de plek zodra de webhook binnen is.
+
+Daarmee blijven bedragen, btw en administratie op één plek en hoeft deze site
+nooit een betaalstatus te kennen. In
+[`app/events/actions.ts`](app/events/actions.ts) staat één `TODO Stapit` op de
+plek waar dat doorzetten hoort te gebeuren: ná de validatie, náást de mail.
 
 ⚠️ **De events zijn verzonnen**, op de mini-shoot na die er al stond. Ze staan er
 om te laten zien hoe de agenda werkt. Zolang dit zo is, kondigt de site cursussen

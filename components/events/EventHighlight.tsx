@@ -59,7 +59,7 @@ export function EventHighlight({ event }: { event: EventItem }) {
             knop en niet ergens in een rij iconen. */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
           <Magnetic>
-            <Button href={eventSignupHref}>{eventsPage.signupLabel}</Button>
+            <Button href={eventSignupHref(event.id)}>{eventsPage.signupLabel}</Button>
           </Magnetic>
           <p className="text-[0.92rem] text-muted">
             {event.price ? <span className="text-bone">{event.price}</span> : null}

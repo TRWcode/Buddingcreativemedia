@@ -10,7 +10,7 @@ import { Magnetic } from "@/components/ui/Magnetic";
 import { MaskedLines } from "@/components/ui/MaskedLines";
 import { Reveal } from "@/components/ui/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
-import { eventSignupHref, eventsHref, eventsPage, splitEvents } from "@/lib/content/events";
+import { eventNotifyHref, eventsHref, eventsPage, splitEvents } from "@/lib/content/events";
 import { fadeIn } from "@/lib/motion";
 
 export const metadata: Metadata = {
@@ -92,7 +92,7 @@ export default function EventsPage() {
                 {eventsPage.openEmpty}
               </p>
               <Magnetic>
-                <Button href={eventSignupHref}>Houd me op de hoogte</Button>
+                <Button href={eventNotifyHref}>Houd me op de hoogte</Button>
               </Magnetic>
             </Reveal>
           )}

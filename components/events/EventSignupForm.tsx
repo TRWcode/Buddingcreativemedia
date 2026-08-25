@@ -1,33 +1,32 @@
 "use client";
 
 import { useActionState, useEffect, useId, useRef } from "react";
-import { submitContactForm } from "@/app/contact/actions";
-import { emptyContactState } from "@/app/contact/state";
+import { submitEventSignup } from "@/app/events/actions";
 import { buttonClasses } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
 import { CheckIcon } from "@/components/ui/icons";
-import { contactFields, contactPage, honeypotField } from "@/lib/content/contact";
-import { privacyHref } from "@/lib/content/site";
+import { eventSignupFields, eventSignupPage } from "@/lib/content/events";
+import type { EventItem } from "@/lib/content/events";
+import { emptyFormState, honeypotField } from "@/lib/content/forms";
+import { privacyHref, termsHref } from "@/lib/content/site";
 
 /**
- * Het contactformulier.
+ * Het aanmeldformulier van één event.
  *
- * Draait op een server action met `useActionState`, zodat het ook zonder
- * JavaScript werkt: de browser post het formulier dan gewoon en krijgt dezelfde
- * server-gerenderde uitkomst terug. Dat is voor een formulier dat de enige
- * ingang tot een opdracht is het verschil tussen een gemiste aanvraag en een
- * binnengekomen aanvraag.
+ * Zelfde opbouw als het contactformulier — server action, `useActionState`,
+ * werkt zonder JavaScript — en dezelfde veldweergave, zodat de twee er niet
+ * verschillend uit gaan zien.
+ *
+ * Het event zit als verborgen veld in het formulier. Dat is geen beveiliging:
+ * de action zoekt het event zelf op en controleert of de inschrijving open is,
+ * want een verborgen veld is net zo goed te veranderen als een zichtbaar veld.
  */
-export function ContactForm() {
-  const [state, formAction, pending] = useActionState(submitContactForm, emptyContactState);
+export function EventSignupForm({ event }: { event: EventItem }) {
+  const [state, formAction, pending] = useActionState(submitEventSignup, emptyFormState);
   const idPrefix = useId();
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
 
-  // Na het versturen springt de focus naar de uitkomst. Zonder dit blijft de
-  // focus op de verzendknop staan en merkt iemand die met een schermlezer of
-  // met het toetsenbord werkt niet dat er iets veranderd is: de melding staat
-  // dan boven de plek waar hij zich bevindt.
   useEffect(() => {
     if (state.status === "success") successRef.current?.focus();
     if (state.status === "error") errorRef.current?.focus();
@@ -43,21 +42,19 @@ export function ContactForm() {
         <span className="mb-5 flex size-12 items-center justify-center rounded-icon bg-brand text-white">
           <CheckIcon className="size-6" />
         </span>
-        <h3 className="mb-3 font-display text-[1.6rem] font-bold uppercase leading-[1.1] tracking-title">
-          Aanvraag verstuurd
-        </h3>
-        <p className="leading-[1.7] text-muted">{state.message}</p>
+        <h2 className="mb-3 font-display text-[1.6rem] font-bold uppercase leading-[1.1] tracking-title">
+          {eventSignupPage.successHeading}
+        </h2>
+        <p className="leading-[1.7] text-muted">{eventSignupPage.successBody}</p>
       </div>
     );
   }
 
   return (
-    // Browservalidatie bewust aan: die meldt een leeg verplicht veld direct,
-    // zonder rondje langs de server. De controle in de action blijft de
-    // uiteindelijke: die geldt ook als er geen JavaScript draait.
     <form action={formAction} className="grid gap-5 stack:grid-cols-2">
-      {/* Onzichtbaar voor bezoekers, onweerstaanbaar voor bots. Niet met
-          `hidden` of `display:none`: veel invulsoftware slaat die juist over. */}
+      <input type="hidden" name="eventId" value={event.id} />
+
+      {/* Onzichtbaar voor bezoekers, onweerstaanbaar voor bots. */}
       <div className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
         <label htmlFor={`${idPrefix}-${honeypotField}`}>Website</label>
         <input
@@ -79,13 +76,13 @@ export function ContactForm() {
         </p>
       ) : null}
 
-      {contactFields.map((field) => (
+      {eventSignupFields.map((field) => (
         <FormField
           key={field.name}
           field={field}
           idPrefix={idPrefix}
           error={state.errors[field.name]}
-          value={state.values[field.name]}
+          value={state.values[field.name] ?? (field.name === "aantal" ? "1" : undefined)}
         />
       ))}
 
@@ -93,9 +90,13 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={pending}
-          className={buttonClasses("primary", "md", "disabled:cursor-not-allowed disabled:opacity-60")}
+          className={buttonClasses(
+            "primary",
+            "md",
+            "disabled:cursor-not-allowed disabled:opacity-60",
+          )}
         >
-          {pending ? contactPage.submitPendingLabel : contactPage.submitLabel}
+          {pending ? eventSignupPage.submitPendingLabel : eventSignupPage.submitLabel}
           <span
             aria-hidden
             className="leading-none transition-transform duration-base ease-interact group-hover/btn:translate-x-1"
@@ -104,8 +105,12 @@ export function ContactForm() {
           </span>
         </button>
 
-        <p className="max-w-[22rem] text-[0.82rem] leading-[1.5] text-muted">
-          We gebruiken je gegevens alleen om je aanvraag te beantwoorden. Zie de{" "}
+        <p className="max-w-[24rem] text-[0.82rem] leading-[1.5] text-muted">
+          Zie de{" "}
+          <a href={termsHref} className="text-bone underline underline-offset-2 hover:text-brand">
+            algemene voorwaarden
+          </a>{" "}
+          en de{" "}
           <a href={privacyHref} className="text-bone underline underline-offset-2 hover:text-brand">
             privacyverklaring
           </a>

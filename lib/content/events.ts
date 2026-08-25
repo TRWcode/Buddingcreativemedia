@@ -1,4 +1,5 @@
 import type { CtaLink, ImageAsset, SectionIntro } from "./types";
+import type { FormField } from "./forms";
 import { contactHref, eventsHref } from "./site";
 
 export type EventDetailIcon = "calendar" | "clock" | "pin";
@@ -216,6 +217,21 @@ export function formatEventDateShort(iso: string): string {
   return dutchDateShort.format(new Date(iso));
 }
 
+/** Eén event op id. */
+export function findEvent(id: string): EventItem | undefined {
+  return events.find((event) => event.id === id);
+}
+
+/**
+ * Of je je voor dit event nu kunt aanmelden: de inschrijving staat open en de
+ * datum is nog niet geweest. Het formulier en de pagina eromheen gebruiken
+ * allebei deze test, zodat een gesloten aanmelding nergens half open staat.
+ */
+export function canSignUp(event: EventItem, now: Date = new Date()): boolean {
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  return Boolean(event.signupOpen) && new Date(event.date).getTime() >= today;
+}
+
 /** Vertaalt een event naar de kaartvorm die de homepage al rendert. */
 export function toEventCard(event: EventItem, fallbackImage: ImageAsset): EventCard {
   const details: EventDetail[] = [
@@ -246,5 +262,108 @@ export { eventsHref };
 
 export const eventsCta: CtaLink = { label: eventsPage.moreLabel, href: eventsHref };
 
-/** De knop onder een open inschrijving. Er is geen boekingssysteem. */
-export const eventSignupHref = contactHref;
+/** Het aanmeldformulier van één event. */
+export function eventSignupHref(id: string): string {
+  return `${eventsHref}/${id}/aanmelden`;
+}
+
+/** Waar je heen gaat als er niets open staat: gewoon het contactformulier. */
+export const eventNotifyHref = contactHref;
+
+/**
+ * De velden van het aanmeldformulier.
+ *
+ * Bewust kort. Dit is een aanmelding en geen intake: alles wat je later ook nog
+ * kunt vragen, vraag je later. Wat hier staat is wat je nodig hebt om iemand
+ * een plek te geven en een factuur te sturen.
+ */
+export const eventSignupFields: readonly FormField[] = [
+  {
+    name: "naam",
+    label: "Naam",
+    type: "text",
+    required: true,
+    autoComplete: "name",
+    placeholder: "Voor- en achternaam",
+    half: true,
+  },
+  {
+    name: "email",
+    label: "E-mailadres",
+    type: "email",
+    required: true,
+    autoComplete: "email",
+    placeholder: "naam@bedrijf.nl",
+    half: true,
+  },
+  {
+    name: "telefoon",
+    label: "Telefoon",
+    type: "tel",
+    autoComplete: "tel",
+    placeholder: "Optioneel",
+    half: true,
+  },
+  {
+    name: "aantal",
+    label: "Aantal personen",
+    type: "number",
+    required: true,
+    min: 1,
+    max: 10,
+    half: true,
+  },
+  {
+    name: "bedrijf",
+    label: "Bedrijf",
+    type: "text",
+    autoComplete: "organization",
+    placeholder: "Optioneel, voor op de factuur",
+    half: true,
+  },
+  {
+    name: "ervaring",
+    label: "Hoeveel ervaring heb je?",
+    type: "select",
+    options: ["Ik begin net", "Ik doe het af en toe", "Ik werk er regelmatig mee"],
+    hint: "Handig om te weten, zodat we het tempo op de groep afstemmen.",
+    half: true,
+  },
+  {
+    name: "opmerking",
+    label: "Iets wat we moeten weten?",
+    type: "textarea",
+    placeholder:
+      "Waar wil je vooral mee aan de slag, of iets waar we rekening mee moeten houden.",
+  },
+  {
+    name: "akkoord",
+    label: "Ik ga akkoord met de algemene voorwaarden en de annuleringsregeling.",
+    type: "checkbox",
+    required: true,
+  },
+];
+
+export const eventSignupPage = {
+  eyebrow: "Aanmelden",
+  backLabel: "Terug naar de agenda",
+  formHeading: "Jouw gegevens",
+  submitLabel: "Aanmelding versturen",
+  submitPendingLabel: "Bezig met versturen",
+  /**
+   * Wat er na het versturen gebeurt. Er is nog geen online betaling, dus dit
+   * zegt eerlijk dat de plek pas vaststaat als wij bevestigen.
+   */
+  afterHeading: "Wat er daarna gebeurt",
+  afterSteps: [
+    "Je krijgt binnen een werkdag een bevestiging van ons.",
+    "Daarin staat of er plek is en hoe je betaalt.",
+    "Je plek staat vast zodra de betaling binnen is.",
+  ],
+  successHeading: "Aanmelding verstuurd",
+  successBody:
+    "Bedankt, we hebben je aanmelding binnen. Je krijgt binnen een werkdag bericht over je plek en de betaling.",
+  fullHeading: "Deze aanmelding is gesloten",
+  fullBody:
+    "Voor dit event kun je je niet meer aanmelden. Bekijk de agenda voor wat er nog aankomt.",
+} as const;

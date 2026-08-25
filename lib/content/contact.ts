@@ -1,5 +1,8 @@
 import type { CtaLink } from "./types";
+import type { FormField } from "./forms";
 import { contactHref } from "./site";
+
+export { emptyOptionLabel, honeypotField } from "./forms";
 
 /** Het afsluitende rode blok onderaan elke pagina. */
 export const contact = {
@@ -10,33 +13,7 @@ export const contact = {
   cta: { label: "Neem contact op", href: contactHref } satisfies CtaLink,
 } as const;
 
-export type ContactFieldType = "text" | "email" | "tel" | "select" | "textarea";
-
-export interface ContactField {
-  readonly name: string;
-  readonly label: string;
-  readonly type: ContactFieldType;
-  readonly required?: boolean;
-  readonly placeholder?: string;
-  /** Toelichting onder het label, voor een veld dat uitleg nodig heeft. */
-  readonly hint?: string;
-  readonly autoComplete?: string;
-  /** Alleen bij `select`. De eerste optie is altijd de lege keuze. */
-  readonly options?: readonly string[];
-  /** Halve kolom in het raster; anders volle breedte. */
-  readonly half?: boolean;
-}
-
-/**
- * De velden van het contactformulier, in volgorde. Deze lijst is de enige bron:
- * het formulier rendert eruit en de server action leest en mailt er dezelfde
- * velden uit. Een veld toevoegen doe je hier, en nergens anders.
- *
- * Alleen naam, e-mail en bericht zijn verplicht. De rest is precies wat je
- * anders per mail alsnog moet vragen; door het optioneel te laten kost het geen
- * aanvraag als iemand het nog niet weet.
- */
-export const contactFields: readonly ContactField[] = [
+export const contactFields: readonly FormField[] = [
   {
     name: "naam",
     label: "Naam",
@@ -96,15 +73,6 @@ export const contactFields: readonly ContactField[] = [
       "Vertel kort wat je voor ogen hebt: wat er te zien moet zijn, waar het beeld voor gebruikt wordt en met hoeveel mensen je bent.",
   },
 ];
-
-/**
- * Het verborgen veld dat bots wel invullen en bezoekers niet. De naam is
- * bewust gewoon en verleidelijk; een veld dat `honeypot` heet vult niemand in.
- */
-export const honeypotField = "website";
-
-/** De keuze in het select-veld die geldt als er nog niets is gekozen. */
-export const emptyOptionLabel = "Maak een keuze";
 
 export const contactPage = {
   eyebrow: "Contact",
