@@ -59,13 +59,14 @@ export const siteLogo: ImageAsset = {
 
 /** De vaste routes. Eén plek, zodat links niet uiteenlopen. */
 export const portfolioHref = "/portfolio";
+export const eventsHref = "/events";
 export const contactHref = "/contact";
 export const termsHref = "/algemene-voorwaarden";
 export const privacyHref = "/privacyverklaring";
 
 export const navLinks: readonly NavLink[] = [
   { label: "Portfolio", href: portfolioHref },
-  { label: "Events", href: "#events" },
+  { label: "Events", href: eventsHref },
   { label: "Diensten", href: "#diensten" },
   { label: "Cases", href: "#cases" },
   { label: "Over Ons", href: "#werkwijze" },

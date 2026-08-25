@@ -48,6 +48,7 @@ _originals/         onbewerkte foto's, buiten git
 | `/portfolio` | [`app/portfolio/page.tsx`](app/portfolio/page.tsx) — alle beelden met filters |
 | `/cases` | [`app/cases/page.tsx`](app/cases/page.tsx) — overzicht van alle cases |
 | `/cases/[slug]` | [`app/cases/[slug]/page.tsx`](app/cases/%5Bslug%5D/page.tsx) — `generateStaticParams` bouwt elke case uit `caseStudies` voor |
+| `/events` | [`app/events/page.tsx`](app/events/page.tsx) — de agenda in drie lagen |
 | `/contact` | [`app/contact/page.tsx`](app/contact/page.tsx) — formulier plus directe kanalen |
 | `/algemene-voorwaarden` | [`app/algemene-voorwaarden/page.tsx`](app/algemene-voorwaarden/page.tsx) |
 | `/privacyverklaring` | [`app/privacyverklaring/page.tsx`](app/privacyverklaring/page.tsx) |
@@ -318,6 +319,43 @@ hero, één als card en vier in de mozaïek.
 Ook de casetekst is grotendeels een eerste opzet: alleen de JijbenM-copy komt van
 de bestaande site. Loop `lead`, `chapters` en `deliverables` van de andere drie na
 voordat de site live gaat.
+
+## Events
+
+De agenda staat in [`events.ts`](lib/content/events.ts) als één lijst en wordt
+door [`splitEvents`](lib/content/events.ts) in drie lagen verdeeld. Die verdeling
+is de hele UX van [`/events`](app/events/page.tsx):
+
+| Laag | Wat het is | Hoe het eruitziet |
+| --- | --- | --- |
+| **Nu open** | toekomstig, `signupOpen: true` | groot, met beeld, rode gloed en een knop |
+| **Binnenkort** | toekomstig, nog geen inschrijving | kleine kaarten, geen beeld, geen knop |
+| **Geweest** | datum in het verleden | één regel per event, geen beeld, laatste drie zichtbaar |
+
+De redenering erachter: wie hier komt wil weten of er iets open staat, en dat
+moet je zien zonder te lezen. Dus krijgt precies dat het enige beeld, de enige
+knop en de enige accentkleur. Een aangekondigd event heeft nog geen knop nodig —
+een knop die niets doet leest als een fout, een kaart zonder knop leest als
+"later". En wat geweest is kun je niet meer boeken; dat mag dus laten zien dát
+er dingen gebeuren zonder te concurreren met wat er nog wel kan.
+
+**Het archief wordt relatief kleiner naarmate er meer is.** De laatste drie staan
+uitgeklapt, de rest achter een `<details>`. Dat is bewust geen state maar een
+`<details>`: werkt zonder JavaScript en heeft toetsenbord- en
+schermlezerafhandeling al ingebouwd.
+
+**"Geweest" volgt uit de datum, niet uit een veld.** Een event dat voorbij is
+verhuist vanzelf naar het archief, zonder dat iemand een vlag moet omzetten.
+Daarvoor moet de pagina wel opnieuw renderen, anders is de peildatum die van de
+build: `/events` en de homepage staan daarom op `revalidate = 3600`. Verander je
+dat op de een, doe het dan ook op de ander — de homepage toont het eerstvolgende
+event uit dezelfde lijst.
+
+⚠️ **De events zijn verzonnen**, op de mini-shoot na die er al stond. Ze staan er
+om te laten zien hoe de agenda werkt. Zolang dit zo is, kondigt de site cursussen
+aan die niet bestaan en kan iemand zich ervoor melden — dat is een ander soort
+probleem dan een verzonnen caseverhaal. Vervang ze door echte data of haal ze
+weg. Het beeld bij de twee cursussen komt uit `library/` en is een stand-in.
 
 ## Contactformulier
 

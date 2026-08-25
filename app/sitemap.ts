@@ -1,7 +1,14 @@
 import type { MetadataRoute } from "next";
 import { caseHref, caseStudies } from "@/lib/content/cases";
 import { privacy } from "@/lib/content/privacy";
-import { contactHref, portfolioHref, privacyHref, site, termsHref } from "@/lib/content/site";
+import {
+  contactHref,
+  eventsHref,
+  portfolioHref,
+  privacyHref,
+  site,
+  termsHref,
+} from "@/lib/content/site";
 import { terms } from "@/lib/content/terms";
 
 /**
@@ -27,6 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.7,
     })),
+    // De agenda verandert vaker dan de rest, en wat er staat is tijdgebonden.
+    { url: url(eventsHref), lastModified: built, changeFrequency: "weekly", priority: 0.8 },
     { url: url(contactHref), lastModified: built, changeFrequency: "yearly", priority: 0.9 },
     {
       url: url(termsHref),

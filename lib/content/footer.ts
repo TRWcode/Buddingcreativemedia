@@ -1,5 +1,5 @@
 import type { NavLink } from "./types";
-import { contactHref, portfolioHref, privacyHref, termsHref } from "./site";
+import { contactHref, eventsHref, portfolioHref, privacyHref, termsHref } from "./site";
 
 export type SocialPlatform = "instagram" | "youtube" | "linkedin";
 
@@ -35,7 +35,7 @@ export const socialLinks: readonly SocialLink[] = [
 
 export const footerNav: readonly NavLink[] = [
   { label: "Portfolio", href: portfolioHref },
-  { label: "Events", href: "#events" },
+  { label: "Events", href: eventsHref },
   { label: "Diensten", href: "#diensten" },
   { label: "Cases", href: "#cases" },
   { label: "Over Ons", href: "#werkwijze" },
