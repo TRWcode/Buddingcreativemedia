@@ -196,17 +196,30 @@ Let bij `showDrafts` op de richting van de test: hij zegt wanneer een draft
 *wel* mag, niet wanneer hij niet mag. Valt `VERCEL_ENV` ooit weg, dan blijft
 een draft verborgen in plaats van dat hij publiek wordt. Draai dat niet om.
 
-Zo staan de twee nieuwe cases er nu in — Breach Festival voor Jij Bent M en de
-Vakmanschapsroute voor Aeres VMBO. Hun video zit erin, en de tekst is
-**verzonnen**: die staat er om te kunnen zien hoe de pagina eruitkomt, niet
-omdat het klopt. Er is met geen van beide klanten gesproken over wat de vraag
-was of wat het heeft opgeleverd. Haal `draft` er pas af als iemand die erbij
-was de tekst heeft nagelopen — een verzonnen briefing onder de naam van een
-echte klant is geen placeholder meer zodra hij online staat.
+Op dit moment staat er niets op `draft`; het mechanisme staat klaar voor de
+volgende keer.
+
+⚠️ **De tekst van Breach Festival en de Vakmanschapsroute is verzonnen en staat
+live.** Die twee cases zijn op verzoek opengezet om te zien hoe ze eruitkomen,
+voordat iemand de inhoud had nagelopen. Er is met Jij Bent M noch met Aeres
+gesproken over wat de vraag was, hoe het is aangepakt of wat het opleverde;
+alleen de video's, de klantnamen en de titels zijn echt. Zolang dit zo staat,
+staan er claims over twee bestaande organisaties op de site die niemand daar
+heeft bevestigd. Behandel het als een openstaande taak. Moet het er weer af
+voordat de tekst klopt: `draft: true` bovenin de case en hij verdwijnt overal
+tegelijk.
 
 Breach Festival is een tweede opdracht voor Jij Bent M en staat los van de
 promo-reelscase die er al was. Die eerste houdt zijn eigen voorbeeldclip; daar
 is nog geen echte montage voor aangeleverd.
+
+### Hoeveel cases waar
+
+De homepage toont de spotlight plus precies één volle rij kaarten
+(`HOMEPAGE_CARDS` in `cases.ts`, drie stuks). Het raster daar is drie kolommen
+breed, dus vier of vijf kaarten laten onderaan een gat staan naast een halve
+rij. `/cases` toont ze allemaal en de knop "Meer Werk" brengt je daarheen.
+Komen er cases bij, dan hoeft daar dus niets voor te veranderen.
 
 Golazo en JijbenM staan nu op de derde stand. De clips in `public/media/video/`
 zijn met ffmpeg gemaakt uit de foto's van diezelfde case: stilstaande beelden

@@ -397,19 +397,18 @@ const allCaseStudies: readonly CaseStudy[] = [
   },
 
   /* =========================================================================
-     NOG NIET LIVE — alles hieronder staat op `draft`.
+     LET OP — de tekst van deze twee cases is VERZONNEN en staat wél live.
 
-     LET OP: de tekst van deze twee cases is VERZONNEN. Hij staat er om te
-     kunnen zien hoe de pagina eruitkomt, niet omdat het klopt. Er is niet met
-     Jij Bent M of Aeres gesproken over wat de vraag was, hoe het is aangepakt
-     of wat het heeft opgeleverd; dat is ingevuld op wat aannemelijk klinkt.
+     Er is met Jij Bent M noch met Aeres gesproken over wat de vraag was, hoe
+     het is aangepakt of wat het heeft opgeleverd. Dat is ingevuld op wat
+     aannemelijk klinkt, zodat te zien was hoe de pagina eruitkomt, en daarna
+     op verzoek opengezet. Alleen de video's, de klantnamen en de titels zijn
+     echt.
 
-     Daarom staan ze op `draft` en houdt `showDrafts` ze van de productiesite
-     af. Haal dat pas weg als iemand die erbij was de tekst heeft nagelopen.
-     Een verzonnen briefing onder de naam van een echte klant is geen
-     placeholder meer zodra hij online staat.
+     Zolang dit er staat, staan er dus claims over twee bestaande organisaties
+     op de site die niemand bij die organisaties heeft bevestigd. Behandel het
+     als een openstaande taak en niet als afgeronde content:
 
-     Wat er per case nog echt moet worden:
      - jaartal en locatie controleren
      - `summary`, `lead` en de drie hoofdstukken herschrijven naar wat er is
        gebeurd
@@ -418,11 +417,13 @@ const allCaseStudies: readonly CaseStudy[] = [
        dezelfde videoposter uit de YouTube-thumbnail, en dat is meteen het
        zwakste van het geheel: de andere cases hebben drie tot vijf eigen
        beelden en dat verschil zie je.
+
+     Moet het weer van de site af voordat de tekst klopt: zet `draft: true`
+     terug bovenin de case en hij verdwijnt overal tegelijk.
      ========================================================================= */
 
   /* Tweede opdracht voor Jij Bent M, los van de promo reels hierboven. */
   {
-    draft: true,
     slug: "jijbenm-breach-festival",
     title: "Breach Festival",
     titleLines: ["Breach", "Festival"],
@@ -487,7 +488,6 @@ const allCaseStudies: readonly CaseStudy[] = [
   },
 
   {
-    draft: true,
     slug: "aeres-vakmanschapsroute",
     title: "Vakmanschapsroute",
     titleLines: ["Vakmanschaps", "route"],
@@ -643,9 +643,20 @@ export function toCaseCard(study: CaseStudy): CaseCard {
   };
 }
 
-/** De kaarten onder de spotlight — die case zelf staat er niet nog eens bij. */
+/**
+ * De kaarten onder de spotlight — die case zelf staat er niet nog eens bij.
+ *
+ * Precies één volle rij. Het raster op de homepage is drie kolommen breed, dus
+ * bij vier of vijf kaarten blijft er onderaan een gat staan naast een halve
+ * rij. De homepage is de etalage en `/cases` het volledige overzicht; de knop
+ * "Meer Werk" eronder brengt je daarheen. Groeit het aantal cases, dan hoeft
+ * hier dus niets te veranderen.
+ */
+const HOMEPAGE_CARDS = 3;
+
 export const caseCards: readonly CaseCard[] = caseStudies
   .filter((item) => item.slug !== SPOTLIGHT_SLUG)
+  .slice(0, HOMEPAGE_CARDS)
   .map(toCaseCard);
 
 /** Het overzicht van alle cases. */
