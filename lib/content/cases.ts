@@ -218,16 +218,16 @@ const allCaseStudies: readonly CaseStudy[] = [
       height: 1067,
     },
     video: {
-      youtubeId: "1XLlRFJ9PJc",
-      title: "Jij Bent M op Breach Festival",
+      src: "/media/video/jijbenm-reel-voorbeeld.mp4",
+      isPlaceholder: true,
       poster: {
-        src: "/media/video/jijbenm-breach-festival-poster.jpg",
-        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
-        width: 1280,
-        height: 720,
+        src: "/media/video/jijbenm-reel-poster.jpg",
+        alt: "Dronefoto van het park met het kunstwerk en de skyline van Almere",
+        width: 1152,
+        height: 648,
       },
-      label: "Aftermovie",
-      caption: "De registratie van Jij Bent M op Breach Festival.",
+      label: "Promo reel",
+      caption: "Dronebeeld en montage uit de reeks reels rond de exposities.",
     },
     gallery: [
       {
@@ -396,23 +396,89 @@ const allCaseStudies: readonly CaseStudy[] = [
     ],
   },
 
-  /* -------------------------------------------------------------------------
-     AERES VMBO — nog niet live, zie `draft` hieronder.
+  /* =========================================================================
+     NOG NIET LIVE — alles hieronder staat op `draft`.
 
-     De video staat er al in; de tekst en het fotomateriaal moeten van Erwin
-     komen. Elk veld dat nog niet klopt begint met "INVULLEN", dus zoek daarop
-     en je hebt de hele lijst. Zet `draft` weg zodra ze weg zijn, en de case
-     verschijnt vanzelf in de overzichten, in de "volgende case" en op
-     /cases/aeres-vakmanschapsroute.
+     Van deze twee is de video er wel, maar de tekst en het fotomateriaal nog
+     niet. Elk veld dat nog moet komen begint met "INVULLEN", dus zoek daarop
+     en je hebt de hele lijst. Zijn ze weg, haal dan `draft` weg: de case
+     verschijnt dan vanzelf in de overzichten, in de "volgende case" en op zijn
+     eigen adres.
 
-     Wat er nog nodig is:
+     Per case is nodig:
      - jaartal en locatie van de opdracht
      - de vraag, de aanpak en het resultaat, elk een alinea
      - wat er is opgeleverd (de `deliverables`)
      - stills uit de opdracht voor `hero`, `card` en de mozaïek. Nu staat overal
        de videoposter, en die is uit de YouTube-thumbnail getrokken. Drie tot
        vijf eigen beelden maken hier het verschil.
-     ------------------------------------------------------------------------- */
+     ========================================================================= */
+
+  /* Tweede opdracht voor Jij Bent M, los van de promo reels hierboven. */
+  {
+    draft: true,
+    slug: "jijbenm-breach-festival",
+    title: "Breach Festival",
+    titleLines: ["Breach", "Festival"],
+    client: "Jij Bent M",
+    disciplines: ["Videografie", "Event"],
+    year: "INVULLEN: jaartal van de opdracht",
+    location: "INVULLEN: locatie",
+    summary: "INVULLEN: één zin, komt in de kaart, de meta-description en de social preview.",
+    lead: "INVULLEN: twee zinnen die de opdracht neerzetten, in dezelfde toon als de andere cases.",
+    chapters: [
+      {
+        id: "vraag",
+        heading: "De vraag",
+        body: "INVULLEN: wat wilde Jij Bent M met deze registratie bereiken, en voor wie was hij bedoeld?",
+      },
+      {
+        id: "aanpak",
+        heading: "Onze aanpak",
+        body: "INVULLEN: hoe hebben jullie het festival gefilmd, en welke keuze maakte het verschil?",
+      },
+      {
+        id: "resultaat",
+        heading: "Het resultaat",
+        body: "INVULLEN: wat leverde het op, en waar is de video ingezet?",
+      },
+    ],
+    deliverables: ["INVULLEN", "INVULLEN", "INVULLEN"],
+    hero: {
+      src: "/media/video/jijbenm-breach-festival-poster.jpg",
+      alt: "INVULLEN: beschrijving van het herobeeld",
+      width: 1280,
+      height: 720,
+    },
+    card: {
+      src: "/media/video/jijbenm-breach-festival-poster.jpg",
+      alt: "INVULLEN: beschrijving van het kaartbeeld",
+      width: 1280,
+      height: 720,
+    },
+    video: {
+      youtubeId: "1XLlRFJ9PJc",
+      title: "Jij Bent M op Breach Festival",
+      poster: {
+        src: "/media/video/jijbenm-breach-festival-poster.jpg",
+        alt: "Beeld uit de aftermovie van Jij Bent M op Breach Festival",
+        width: 1280,
+        height: 720,
+      },
+      label: "Aftermovie",
+      caption: "De registratie van Jij Bent M op Breach Festival.",
+    },
+    gallery: [
+      {
+        span: "full",
+        src: "/media/video/jijbenm-breach-festival-poster.jpg",
+        alt: "INVULLEN: beschrijving van het mozaïekbeeld",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
+
   {
     draft: true,
     slug: "aeres-vakmanschapsroute",
