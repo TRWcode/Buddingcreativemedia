@@ -1,5 +1,12 @@
 import type { NavLink } from "./types";
-import { contactHref, eventsHref, portfolioHref, privacyHref, termsHref } from "./site";
+import {
+  casesHref,
+  contactHref,
+  eventsHref,
+  portfolioHref,
+  privacyHref,
+  termsHref,
+} from "./site";
 
 export type SocialPlatform = "instagram" | "youtube" | "linkedin";
 
@@ -33,11 +40,12 @@ export const socialLinks: readonly SocialLink[] = [
   { platform: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/erwinbudding/" },
 ];
 
+/** Dezelfde volgorde en dezelfde bestemmingen als de hoofdnavigatie, plus Contact. */
 export const footerNav: readonly NavLink[] = [
   { label: "Portfolio", href: portfolioHref },
+  { label: "Cases", href: casesHref },
   { label: "Events", href: eventsHref },
   { label: "Diensten", href: "#diensten" },
-  { label: "Cases", href: "#cases" },
   { label: "Over Ons", href: "#werkwijze" },
   { label: "Contact", href: contactHref },
 ];

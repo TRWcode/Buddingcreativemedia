@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { MouseEvent } from "react";
 import { AnchorLink } from "@/components/ui/AnchorLink";
 import { siteLogo } from "@/lib/content/site";
 
@@ -9,9 +10,9 @@ import { siteLogo } from "@/lib/content/site";
  * `priority`: het logo staat boven de vouw op elke pagina en is klein genoeg
  * om de herofoto niet van bandbreedte te beroven.
  */
-export function Logo() {
+export function Logo({ onClick }: { onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   return (
-    <AnchorLink href="#top" className="block shrink-0">
+    <AnchorLink href="#top" onClick={onClick} className="block shrink-0">
       <Image
         src={siteLogo.src}
         alt={siteLogo.alt}

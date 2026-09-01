@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { caseHref, caseStudies } from "@/lib/content/cases";
 import { privacy } from "@/lib/content/privacy";
 import {
+  casesHref,
   contactHref,
   eventsHref,
   portfolioHref,
@@ -27,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: url("/"), lastModified: built, changeFrequency: "monthly", priority: 1 },
     { url: url(portfolioHref), lastModified: built, changeFrequency: "monthly", priority: 0.9 },
-    { url: url("/cases"), lastModified: built, changeFrequency: "monthly", priority: 0.8 },
+    { url: url(casesHref), lastModified: built, changeFrequency: "monthly", priority: 0.8 },
     ...caseStudies.map((study) => ({
       url: url(caseHref(study.slug)),
       lastModified: built,

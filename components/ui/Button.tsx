@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export type ButtonVariant = "primary" | "ghost" | "solid";
@@ -12,6 +12,8 @@ interface ButtonProps {
   size?: ButtonSize;
   /** Pijl rechts van het label. Uit voor knoppen zonder richting. */
   withArrow?: boolean;
+  /** Voor een knop in een overlay die zichzelf moet sluiten voordat hij navigeert. */
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   className?: string;
 }
 
@@ -63,10 +65,11 @@ export function Button({
   variant = "primary",
   size = "md",
   withArrow = true,
+  onClick,
   className,
 }: ButtonProps) {
   return (
-    <Link href={href} className={buttonClasses(variant, size, className)}>
+    <Link href={href} onClick={onClick} className={buttonClasses(variant, size, className)}>
       {/* Losse gloedlaag met een vaste schaduw. Bij hover animeert alleen de
           opacity — dat is compositor-werk, terwijl het animeren van box-shadow
           zelf de knop elke frame opnieuw laat tekenen. */}

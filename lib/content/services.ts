@@ -1,3 +1,4 @@
+import { casesHref, portfolioHref } from "./site";
 import type { CtaLink, ImageAsset, SectionIntro } from "./types";
 
 export type ServiceIcon = "camera" | "video";
@@ -27,7 +28,10 @@ export const services: readonly Service[] = [
     title: "Fotografie",
     description:
       "Zakelijke portretten, event-coverage en bedrijfsfotografie die jouw verhaal versterkt. Oog voor detail, heldere communicatie en beelden die professioneel én bruikbaar zijn.",
-    link: { label: "Bekijk aanpak", href: "#cases" },
+    // Naar het portfolio: daar staat het fotowerk per categorie, en dat is wat
+    // "de aanpak" van een fotograaf laat zien. Het anker naar het cases-blok
+    // stuurde beide diensten naar precies hetzelfde plekje op de homepage.
+    link: { label: "Bekijk fotowerk", href: portfolioHref },
     image: {
       src: "/media/diensten/fotografie.jpg",
       alt: "Portretshoot in de studio: model in gouden jasje met rondvliegende bladmuziek",
@@ -41,7 +45,8 @@ export const services: readonly Service[] = [
     title: "Videografie",
     description:
       "Aftermovies, bedrijfsvideo's en social content die je boodschap krachtig overbrengen. We denken mee, draaien efficiënt op locatie en leveren video's die passen bij je doel en doelgroep.",
-    link: { label: "Bekijk videostijl", href: "#cases" },
+    // Naar de cases: daar zit de montage bij het verhaal waar hij voor gemaakt is.
+    link: { label: "Bekijk videowerk", href: casesHref },
     image: {
       src: "/media/diensten/videografie.jpg",
       alt: "Presentatrice met microfoon wordt op locatie gefilmd",

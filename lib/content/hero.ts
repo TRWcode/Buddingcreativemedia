@@ -1,3 +1,4 @@
+import { casesHref, portfolioHref } from "./site";
 import type { CtaLink, ImageAsset } from "./types";
 
 interface HeroContent {
@@ -14,9 +15,12 @@ export const hero: HeroContent = {
   eyebrow: "Fotografie & Video · Almere",
   headline: [{ text: "Creatief" }, { text: "Betrokken" }, { text: "Impactvol", accent: true }],
   intro: "Krachtige fotografie en video voor bedrijven, events en organisaties.",
+  // Twee knoppen, twee bestemmingen. Ze wezen allebei naar het cases-blok op
+  // de homepage, waardoor de knop met "Portfolio" erop je nergens bracht waar
+  // portfolio stond.
   ctas: [
-    { label: "Portfolio", href: "#cases" },
-    { label: "Cases", href: "#cases" },
+    { label: "Portfolio", href: portfolioHref },
+    { label: "Cases", href: casesHref },
   ],
   scrollLabel: "Scroll",
   image: {

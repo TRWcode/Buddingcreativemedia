@@ -1,3 +1,4 @@
+import { casesHref } from "./site";
 import type { CtaLink, ImageAsset, SectionIntro } from "./types";
 
 /** Eén hoofdstuk uit het verhaal van een case: de vraag, de aanpak, het resultaat. */
@@ -669,7 +670,7 @@ export const caseCards: readonly CaseCard[] = caseStudies
   .slice(0, HOMEPAGE_CARDS)
   .map(toCaseCard);
 
-/** Het overzicht van alle cases. */
-export const casesIndexHref = "/cases";
+/** Het overzicht van alle cases. Het adres zelf staat bij de andere routes in `site.ts`. */
+export const casesIndexHref = casesHref;
 
 export const casesCta: CtaLink = { label: "Meer Werk", href: casesIndexHref };

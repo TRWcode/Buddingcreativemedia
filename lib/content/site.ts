@@ -59,16 +59,31 @@ export const siteLogo: ImageAsset = {
 
 /** De vaste routes. Eén plek, zodat links niet uiteenlopen. */
 export const portfolioHref = "/portfolio";
+export const casesHref = "/cases";
 export const eventsHref = "/events";
 export const contactHref = "/contact";
 export const termsHref = "/algemene-voorwaarden";
 export const privacyHref = "/privacyverklaring";
 
+/**
+ * De hoofdnavigatie. Eerst de drie eigen paginas, daarna de twee secties op
+ * de homepage.
+ *
+ * Cases wijst naar `/cases` en niet meer naar het blok `#cases` op de homepage.
+ * Dat blok toont drie kaarten als voorproefje; de pagina toont het volledige
+ * werk met een eigen kop en een eigen adres. Wie in het menu op "Cases" tikt
+ * bedoelt dat laatste, en op een telefoon is het verschil extra groot: daar
+ * kwam je na een halve seconde scrollen midden op de homepage uit.
+ *
+ * Diensten en Over Ons blijven ankers, want daar hoort geen aparte pagina bij.
+ * Ze landen wel netjes onder de balk, ook vanaf een andere pagina — zie
+ * `lib/scroll.ts`.
+ */
 export const navLinks: readonly NavLink[] = [
   { label: "Portfolio", href: portfolioHref },
+  { label: "Cases", href: casesHref },
   { label: "Events", href: eventsHref },
   { label: "Diensten", href: "#diensten" },
-  { label: "Cases", href: "#cases" },
   { label: "Over Ons", href: "#werkwijze" },
 ];
 
