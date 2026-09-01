@@ -34,12 +34,6 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 z-1 bg-[image:var(--hero-veil)]"
       />
-      {/* Vaste strook onder de balk, zodat de navigatie leesbaar blijft
-          ongeacht de schermhoogte. Zie `--hero-topcoat`. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-1 h-40 bg-[image:var(--hero-topcoat)]"
-      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-1 bg-[image:var(--hero-glow)]"
@@ -50,7 +44,10 @@ export function Hero() {
           <Eyebrow>{hero.eyebrow}</Eyebrow>
         </Reveal>
 
-        <h1 className="font-display text-[clamp(2.75rem,14.5vw,7rem)] font-bold uppercase leading-[0.9] tracking-headline stack:text-[clamp(3.4rem,10.5vw,10rem)]">
+        {/* Een maat kleiner dan eerst. De kop besloeg zoveel van het scherm dat
+            er van de foto eronder weinig overbleef; dit blijft groot genoeg om
+            als eerste te lezen, maar laat de straat en de ballonnen meedoen. */}
+        <h1 className="font-display text-[clamp(2.4rem,12.5vw,5.75rem)] font-bold uppercase leading-[0.92] tracking-headline stack:text-[clamp(3rem,9vw,8.25rem)]">
           <MaskedLines lines={hero.headline} trigger="mount" delay={0.2} />
         </h1>
 

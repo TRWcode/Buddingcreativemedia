@@ -107,50 +107,35 @@
 
 /* Hero-doeken.
 
-   Het oude doek lag als een waas over de hele foto en trok daarmee ook het
-   onderwerp dicht, terwijl de ballonnen nou juist zijn waar deze foto het van
-   moet hebben. Nu wordt er verduisterd waar tekst staat en verder zo min
-   mogelijk: de leesbaarheid komt uit een halo om de letters zelf, zie
-   `hero-legible` onderaan dit bestand.
+   Het doek is bewust weer bijna zo zwaar als in het oorspronkelijke ontwerp.
+   Een tussenversie liet de foto zo'n 45% lichter zien, en dat werd te veel: de
+   hero hoort donker en rustig te zijn, met het beeld als sfeer onder de tekst
+   in plaats van als hoofdrolspeler.
 
-   Nagemeten met de tekst eraf: het beeld is flink lichter geworden en de tekst
-   is tegelijk beter leesbaar dan met het oude doek. */
+   Wat er wel af is: elke stop is een paar punten lichter dan het origineel, en
+   de kop is een maat kleiner. Samen laat dat net genoeg van de ballonnen en de
+   straat zien zonder dat het beeld de tekst gaat beconcurreren.
+
+   De leesbaarheid komt daarnaast uit een halo om de letters zelf
+   (`hero-legible` onderaan dit bestand). Dat is wat het lichter maken betaalt:
+   verduisteren op de vierkante centimeters waar het nodig is in plaats van over
+   het hele beeld. */
 :root {
-  /* Verticaal: licht gedempt bovenin, open in het midden waar de foto zit,
+  /* Verticaal: donker onder de header, iets opener in het midden dan voorheen,
      dichtlopend naar de paginakleur toe. */
   --hero-overlay: linear-gradient(
     180deg,
-    rgb(11 11 13 / 0.3) 0%,
-    rgb(11 11 13 / 0.14) 24%,
-    rgb(11 11 13 / 0.18) 46%,
-    rgb(11 11 13 / 0.78) 80%,
+    rgb(11 11 13 / 0.68) 0%,
+    rgb(11 11 13 / 0.28) 26%,
+    rgb(11 11 13 / 0.34) 48%,
+    rgb(11 11 13 / 0.84) 80%,
     var(--color-ink) 100%
   );
 
-  /* Strook onder de balk, met een vaste hoogte in plaats van een percentage.
-     De balk is altijd even hoog, de hero niet: op een laptop is 12% van de
-     hoogte iets heel anders dan op een telefoon, en dan valt de bescherming
-     precies daar weg waar de navigatie staat.
-
-     Nodig omdat "Portfolio" en "Cases" in de balk precies boven de witte
-     gevelplaten vallen. Met alleen het lichtere doek zakte hun contrast naar
-     2,4; dit brengt het terug zonder de ballonnen eronder mee te dimmen. */
-  --hero-topcoat: linear-gradient(
-    180deg,
-    rgb(11 11 13 / 0.74) 0%,
-    rgb(11 11 13 / 0.34) 46%,
-    transparent 100%
-  );
-
-  /* Ovaal onder de tekstkolom linksonder, in plaats van een baan over de volle
-     hoogte. Zo houdt de kop ondergrond zonder dat de rechterhelft van de foto
-     meegetrokken wordt. */
-  --hero-veil: radial-gradient(
-    78% 72% at 20% 76%,
-    rgb(11 11 13 / 0.66) 0%,
-    rgb(11 11 13 / 0.3) 46%,
-    transparent 74%
-  );
+  /* Horizontaal: zachte vignet links, zodat linksuitgelijnde tekst altijd
+     ondergrond heeft ongeacht wat er op de foto staat. Iets korter en lichter
+     dan voorheen, zodat de ballonnen links niet helemaal dichtlopen. */
+  --hero-veil: linear-gradient(90deg, rgb(11 11 13 / 0.46) 0%, rgb(11 11 13 / 0) 56%);
 
   /* Rode gloed die vanaf de onderrand omhoog komt. */
   --hero-glow: radial-gradient(120% 90% at 50% 120%, rgb(227 6 19 / 0.16) 0%, transparent 55%);
@@ -347,11 +332,11 @@
 
 /* De balk zolang hij doorzichtig is en dus rechtstreeks op de herofoto ligt.
 
-   Nodig sinds het doek lichter werd: "Portfolio" en "Cases" staan precies boven
-   de witte gevelplaten en zakten daardoor naar een contrast van 2,9. Dezelfde
-   truc als bij de hero — een halo om de letters in plaats van een donkerder
-   doek over de foto. Het logo en de burgerknop zijn geen tekst en krijgen
-   daarom een `drop-shadow` op de vorm zelf.
+   "Portfolio" en "Cases" vallen precies boven de witte gevelplaten en zijn
+   daarmee de zwakste plek in de balk; hoe lichter het doek, hoe harder dat
+   telt. Dezelfde truc als bij de hero — een halo om de letters in plaats van
+   een donkerder doek over de foto. Het logo en de burgerknop zijn geen tekst en
+   krijgen daarom een `drop-shadow` op de vorm zelf.
 
    Zodra de balk zijn eigen ondergrond krijgt bij het scrollen valt deze klasse
    weg; op de andere paginas ligt hij op de paginakleur, waar de halo niets doet
