@@ -309,10 +309,22 @@
    laag komt na `components`. In een laag gezet zou de kleur hieronder het dus
    verliezen van het grijs uit die utility — precies wat we hier willen
    overschrijven. Ongelaagde CSS gaat voor op alles wat wel in een laag staat. */
+/* De kop gebruikt `filter` en niet `text-shadow`.
+
+   Een text-shadow met een grote radius wordt door de browser per letter apart
+   uitgerekend met een box-blur. Bij deze lettergrootte zie je daar twee dingen
+   van: de schaduwen van naburige letters stapelen op elkaar tot donkere vlekken,
+   en de blur zelf valt in zichtbare trappen af in plaats van vloeiend. Op een
+   egale ondergrond valt dat weg, maar tegen een foto leest het als vuil om de
+   letters.
+
+   `filter: drop-shadow` blurt de kop in één keer als geheel. Geen stapeling
+   tussen letters en een gelijkmatige afval. Twee lagen: een korte voor definitie
+   tegen de letterrand, een wijde voor de ondergrond. */
 .hero-legible h1 {
-  text-shadow:
-    0 1px 2px rgb(11 11 13 / 0.5),
-    0 2px 28px rgb(11 11 13 / 0.55);
+  filter:
+    drop-shadow(0 1px 3px rgb(11 11 13 / 0.45))
+    drop-shadow(0 3px 24px rgb(11 11 13 / 0.5));
 }
 
 .hero-legible p {
