@@ -105,24 +105,52 @@
   --breakpoint-stack: 45rem; /* 720px — grids vallen terug naar één kolom */
 }
 
-/* Hero-doeken. De gekozen foto is licht van boven, dus de bovenrand is
-   zwaarder dan een standaard verloop: header en eyebrow moeten leesbaar zijn
-   zonder dat het beeld dichtslaat. */
+/* Hero-doeken.
+
+   Het oude doek lag als een waas over de hele foto en trok daarmee ook het
+   onderwerp dicht, terwijl de ballonnen nou juist zijn waar deze foto het van
+   moet hebben. Nu wordt er verduisterd waar tekst staat en verder zo min
+   mogelijk: de leesbaarheid komt uit een halo om de letters zelf, zie
+   `hero-legible` onderaan dit bestand.
+
+   Nagemeten met de tekst eraf: het beeld is flink lichter geworden en de tekst
+   is tegelijk beter leesbaar dan met het oude doek. */
 :root {
-  /* Verticaal: donker onder de header, open in het midden, dichtlopend naar
-     de paginakleur toe. */
+  /* Verticaal: licht gedempt bovenin, open in het midden waar de foto zit,
+     dichtlopend naar de paginakleur toe. */
   --hero-overlay: linear-gradient(
     180deg,
-    rgb(11 11 13 / 0.72) 0%,
-    rgb(11 11 13 / 0.34) 26%,
-    rgb(11 11 13 / 0.42) 48%,
-    rgb(11 11 13 / 0.86) 80%,
+    rgb(11 11 13 / 0.3) 0%,
+    rgb(11 11 13 / 0.14) 24%,
+    rgb(11 11 13 / 0.18) 46%,
+    rgb(11 11 13 / 0.78) 80%,
     var(--color-ink) 100%
   );
 
-  /* Horizontaal: zachte vignet links, zodat linksuitgelijnde tekst altijd
-     ondergrond heeft ongeacht wat er op de foto staat. */
-  --hero-veil: linear-gradient(90deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 58%);
+  /* Strook onder de balk, met een vaste hoogte in plaats van een percentage.
+     De balk is altijd even hoog, de hero niet: op een laptop is 12% van de
+     hoogte iets heel anders dan op een telefoon, en dan valt de bescherming
+     precies daar weg waar de navigatie staat.
+
+     Nodig omdat "Portfolio" en "Cases" in de balk precies boven de witte
+     gevelplaten vallen. Met alleen het lichtere doek zakte hun contrast naar
+     2,4; dit brengt het terug zonder de ballonnen eronder mee te dimmen. */
+  --hero-topcoat: linear-gradient(
+    180deg,
+    rgb(11 11 13 / 0.74) 0%,
+    rgb(11 11 13 / 0.34) 46%,
+    transparent 100%
+  );
+
+  /* Ovaal onder de tekstkolom linksonder, in plaats van een baan over de volle
+     hoogte. Zo houdt de kop ondergrond zonder dat de rechterhelft van de foto
+     meegetrokken wordt. */
+  --hero-veil: radial-gradient(
+    78% 72% at 20% 76%,
+    rgb(11 11 13 / 0.66) 0%,
+    rgb(11 11 13 / 0.3) 46%,
+    transparent 74%
+  );
 
   /* Rode gloed die vanaf de onderrand omhoog komt. */
   --hero-glow: radial-gradient(120% 90% at 50% 120%, rgb(227 6 19 / 0.16) 0%, transparent 55%);
@@ -279,4 +307,63 @@
   overflow: hidden;
   padding-bottom: 0.08em;
   margin-bottom: -0.08em;
+}
+
+/* Tekst die rechtstreeks op een foto staat.
+
+   Elke regel krijgt een donkere halo die om de letters heen zit in plaats van
+   over het hele beeld. Dat is de ruil die de hero licht houdt: verduisteren op
+   de vierkante centimeters waar het nodig is, en de foto verder met rust laten.
+
+   De eyebrow is hier het kwetsbaarst — klein, met veel letterafstand, en hij
+   ligt precies over het lichtste deel van de foto. Die krijgt daarom een dichte
+   dubbele halo en de volle tekstkleur in plaats van het gedempte grijs; met
+   `--color-muted` viel hij tegen de ballonnen zo goed als weg.
+
+   Bewust buiten elke `@layer`: `text-eyebrow` hierboven is een `@utility` en die
+   laag komt na `components`. In een laag gezet zou de kleur hieronder het dus
+   verliezen van het grijs uit die utility — precies wat we hier willen
+   overschrijven. Ongelaagde CSS gaat voor op alles wat wel in een laag staat. */
+.hero-legible h1 {
+  text-shadow:
+    0 1px 2px rgb(11 11 13 / 0.5),
+    0 2px 28px rgb(11 11 13 / 0.55);
+}
+
+.hero-legible p {
+  text-shadow:
+    0 1px 2px rgb(11 11 13 / 0.6),
+    0 2px 20px rgb(11 11 13 / 0.5);
+}
+
+.hero-legible .text-eyebrow {
+  color: #fff;
+  text-shadow:
+    0 0 4px rgb(11 11 13 / 1),
+    0 0 9px rgb(11 11 13 / 0.95),
+    0 1px 3px rgb(11 11 13 / 0.95),
+    0 0 20px rgb(11 11 13 / 0.9);
+}
+
+/* De balk zolang hij doorzichtig is en dus rechtstreeks op de herofoto ligt.
+
+   Nodig sinds het doek lichter werd: "Portfolio" en "Cases" staan precies boven
+   de witte gevelplaten en zakten daardoor naar een contrast van 2,9. Dezelfde
+   truc als bij de hero — een halo om de letters in plaats van een donkerder
+   doek over de foto. Het logo en de burgerknop zijn geen tekst en krijgen
+   daarom een `drop-shadow` op de vorm zelf.
+
+   Zodra de balk zijn eigen ondergrond krijgt bij het scrollen valt deze klasse
+   weg; op de andere paginas ligt hij op de paginakleur, waar de halo niets doet
+   maar ook niets kost. */
+.header-on-media nav a {
+  text-shadow:
+    0 0 4px rgb(11 11 13 / 0.9),
+    0 1px 2px rgb(11 11 13 / 0.8),
+    0 0 14px rgb(11 11 13 / 0.6);
+}
+
+.header-on-media img,
+.header-on-media button {
+  filter: drop-shadow(0 1px 2px rgb(11 11 13 / 0.6)) drop-shadow(0 0 8px rgb(11 11 13 / 0.45));
 }

@@ -53,6 +53,9 @@ export function Header() {
           "fixed inset-x-0 top-0 z-1000 flex items-center justify-between px-gutter print:hidden",
           "border-b transition-[padding,background-color,border-color] duration-base ease-interact",
           scrolled ? "py-3.5" : "py-5.5",
+          // Doorzichtige balk ligt rechtstreeks op de herofoto; dan hebben de
+          // links een halo nodig om leesbaar te blijven. Zie `header-on-media`.
+          !scrolled && "header-on-media",
           // Met het menu open loopt de balk over de overlay heen: dan geen rand
           // en geen eigen vlak, zodat hij in het zwart van het menu opgaat. De
           // padding blijft wel staan — anders verspringt de burgerknop onder je

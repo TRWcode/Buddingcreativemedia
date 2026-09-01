@@ -34,12 +34,18 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 z-1 bg-[image:var(--hero-veil)]"
       />
+      {/* Vaste strook onder de balk, zodat de navigatie leesbaar blijft
+          ongeacht de schermhoogte. Zie `--hero-topcoat`. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-1 h-40 bg-[image:var(--hero-topcoat)]"
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-1 bg-[image:var(--hero-glow)]"
       />
 
-      <Container className="relative z-3 pb-[clamp(2.5rem,7vh,5.5rem)]">
+      <Container className="hero-legible relative z-3 pb-[clamp(2.5rem,7vh,5.5rem)]">
         <Reveal trigger="mount" variants={fadeIn} delay={1.15} className="mb-7">
           <Eyebrow>{hero.eyebrow}</Eyebrow>
         </Reveal>
