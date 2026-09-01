@@ -294,21 +294,31 @@
   margin-bottom: -0.08em;
 }
 
-/* Tekst die rechtstreeks op een foto staat.
+/* Tekst die rechtstreeks op de herofoto staat.
 
-   Elke regel krijgt een donkere halo die om de letters heen zit in plaats van
-   over het hele beeld. Dat is de ruil die de hero licht houdt: verduisteren op
-   de vierkante centimeters waar het nodig is, en de foto verder met rust laten.
+   Alleen de kop draagt nog een schaduw. Op de eyebrow, de intro en de links in
+   de balk stond er ook een, en die waren zichtbaar lelijk: een halo om kleine
+   letters leest als vuil op het beeld, niet als diepte.
 
-   De eyebrow is hier het kwetsbaarst — klein, met veel letterafstand, en hij
-   ligt precies over het lichtste deel van de foto. Die krijgt daarom een dichte
-   dubbele halo en de volle tekstkleur in plaats van het gedempte grijs; met
-   `--color-muted` viel hij tegen de ballonnen zo goed als weg.
+   Ze zijn er ook niet meer voor nodig. Toen ze erin kwamen was het doek een
+   stuk lichter; inmiddels is dat weer bijna zo zwaar als in het oorspronkelijke
+   ontwerp en is de kop een maat kleiner, waardoor de eyebrow lager uitkomt en
+   niet langer over de lichtste ballonnen valt. Zonder schaduw meet de eyebrow
+   7,6 op desktop en 3,3 op een telefoon, en de navigatie 4,8 — alle drie ruim
+   boven wat ze in het oorspronkelijke ontwerp haalden.
+
+   Wat blijft is de witte eyebrow. Die stond in `--color-muted` grijs en viel
+   tegen de foto zo goed als weg; dat is een kleur, geen schaduw, en kost het
+   beeld niets.
 
    Bewust buiten elke `@layer`: `text-eyebrow` hierboven is een `@utility` en die
    laag komt na `components`. In een laag gezet zou de kleur hieronder het dus
    verliezen van het grijs uit die utility — precies wat we hier willen
    overschrijven. Ongelaagde CSS gaat voor op alles wat wel in een laag staat. */
+.hero-legible .text-eyebrow {
+  color: #fff;
+}
+
 /* De kop gebruikt `filter` en niet `text-shadow`.
 
    Een text-shadow met een grote radius wordt door de browser per letter apart
@@ -325,42 +335,4 @@
   filter:
     drop-shadow(0 1px 3px rgb(11 11 13 / 0.45))
     drop-shadow(0 3px 24px rgb(11 11 13 / 0.5));
-}
-
-.hero-legible p {
-  text-shadow:
-    0 1px 2px rgb(11 11 13 / 0.6),
-    0 2px 20px rgb(11 11 13 / 0.5);
-}
-
-.hero-legible .text-eyebrow {
-  color: #fff;
-  text-shadow:
-    0 0 4px rgb(11 11 13 / 1),
-    0 0 9px rgb(11 11 13 / 0.95),
-    0 1px 3px rgb(11 11 13 / 0.95),
-    0 0 20px rgb(11 11 13 / 0.9);
-}
-
-/* De balk zolang hij doorzichtig is en dus rechtstreeks op de herofoto ligt.
-
-   "Portfolio" en "Cases" vallen precies boven de witte gevelplaten en zijn
-   daarmee de zwakste plek in de balk; hoe lichter het doek, hoe harder dat
-   telt. Dezelfde truc als bij de hero — een halo om de letters in plaats van
-   een donkerder doek over de foto. Het logo en de burgerknop zijn geen tekst en
-   krijgen daarom een `drop-shadow` op de vorm zelf.
-
-   Zodra de balk zijn eigen ondergrond krijgt bij het scrollen valt deze klasse
-   weg; op de andere paginas ligt hij op de paginakleur, waar de halo niets doet
-   maar ook niets kost. */
-.header-on-media nav a {
-  text-shadow:
-    0 0 4px rgb(11 11 13 / 0.9),
-    0 1px 2px rgb(11 11 13 / 0.8),
-    0 0 14px rgb(11 11 13 / 0.6);
-}
-
-.header-on-media img,
-.header-on-media button {
-  filter: drop-shadow(0 1px 2px rgb(11 11 13 / 0.6)) drop-shadow(0 0 8px rgb(11 11 13 / 0.45));
 }

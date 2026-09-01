@@ -110,9 +110,13 @@ export const events: readonly EventItem[] = [
     price: "€ 145,-",
     spots: "8 tijdsloten",
     signupOpen: true,
+    // Hier stond de flexwerkplek van Daily Workspace: geen portret, en met het
+    // logo van dat bedrijf groot op de muur. Op een kaart voor onze eigen
+    // portretdag leest dat alsof zij het organiseren. Dit is echt portretwerk,
+    // met de geportretteerde centraal, dus de uitsnede houdt hem in beeld.
     image: {
-      src: "/media/events/mini-shoot-almere.jpg",
-      alt: "Zakelijk portret op kantoor: vrouw met een kop koffie in een lichte werkruimte",
+      src: "/media/cases/studio-portretsessie.jpg",
+      alt: "Portret van een lachende man die springt in een gang met warm goudkleurig licht",
       width: 1600,
       height: 1068,
     },
