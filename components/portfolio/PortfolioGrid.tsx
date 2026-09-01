@@ -115,7 +115,7 @@ export function PortfolioGrid() {
           className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-3.5"
         >
           <FilterButton active={category === undefined} onClick={() => setCategory(undefined)}>
-            All
+            Alles
           </FilterButton>
           {categories.map((option) => (
             <FilterButton

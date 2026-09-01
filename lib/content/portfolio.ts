@@ -58,7 +58,11 @@ export const portfolioCategories: readonly PortfolioCategoryMeta[] = [
   },
   {
     id: "publicities",
-    label: "Publicities",
+    // Het label heette "Publicities", en dat is geen Nederlands en geen Engels.
+    // De omschrijving hieronder gaat over campagnebeeld, dus dat is het woord.
+    // De id blijft zoals hij is: die staat bij elk beeld hieronder ingevuld en
+    // is voor de bezoeker onzichtbaar.
+    label: "Campagnes",
     scope: "Campagnebeeld dat als advertentie of publieksactie is ingezet.",
   },
 ];
@@ -472,7 +476,7 @@ export function portfolioByMedium(medium: PortfolioMedium): readonly PortfolioIt
   return portfolioItems.filter((item) => item.medium === medium);
 }
 
-/** `undefined` staat voor het filter "All". */
+/** `undefined` staat voor het filter "Alles". */
 export function portfolioByCategory(
   medium: PortfolioMedium,
   category?: PortfolioCategory,
