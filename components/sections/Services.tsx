@@ -9,9 +9,12 @@ export function Services() {
     <Container as="section" id="diensten" className="py-section">
       <SectionHeading {...servicesIntro} />
 
-      <Stagger className="grid gap-[1.375rem] stack:grid-cols-2">
+      {/* `items-stretch` plus `h-full` op het item: de kaart met vier diensten
+          wordt even hoog als die met vijf, zodat de twee links onderin op
+          dezelfde lijn staan in plaats van een trapje te vormen. */}
+      <Stagger className="grid items-stretch gap-[1.375rem] stack:grid-cols-2">
         {services.map((service) => (
-          <StaggerItem key={service.id}>
+          <StaggerItem key={service.id} className="h-full">
             <ServiceCard service={service} />
           </StaggerItem>
         ))}
