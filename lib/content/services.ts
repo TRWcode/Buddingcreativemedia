@@ -28,6 +28,16 @@ export interface ServiceItem {
   readonly body: string;
   /** Waar deze dienst meestal voor wordt ingezet; los opgesomd op de detailpagina. */
   readonly examples: readonly string[];
+  /**
+   * Eén beeld uit echt werk in deze dienst, naast de tekst op `/diensten`.
+   *
+   * Bewust een bestaande foto uit het portfolio of uit een case, met de
+   * alt-tekst die daar ook al bij staat. Een dienstenpagina van een fotograaf
+   * die zijn diensten met tekst uitlegt en zijn foto's ergens anders bewaart
+   * bewijst zijn eigen verhaal niet; en het beeld dat erbij komt hoort dan wel
+   * werk te zijn dat we echt gemaakt hebben, geen sfeerplaatje.
+   */
+  readonly thumb: ImageAsset;
 }
 
 export interface Service {
@@ -76,30 +86,60 @@ export const services: readonly Service[] = [
         summary: "Je mensen, je pand, je werk in beeld",
         body: "Een dagdeel of een hele dag meelopen en vastleggen hoe het er bij jullie werkelijk aan toegaat: de mensen, de ruimte en het werk zelf. Je houdt er een beeldbank aan over in plaats van drie losse foto's.",
         examples: ["Kantoor en werkvloer", "Team aan het werk", "Horeca, retail en productie"],
+        thumb: {
+          src: "/media/events/mini-shoot-almere.jpg",
+          alt: "Vrouw met een kop koffie achter haar laptop in de flexwerkruimte van Daily Workspace",
+          width: 1600,
+          height: 1068,
+        },
       },
       {
         name: "Events",
         summary: "Congres, beurs, sport of podium",
         body: "Van de opbouw tot de laatste handdruk. We lopen mee met het programma en weten wanneer we vooraan moeten staan en wanneer juist niet, zodat de dag terug te zien is zoals hij was.",
         examples: ["Congres en beurs", "Podium en keynote", "Sport en publieksdagen"],
+        thumb: {
+          src: "/media/library/eventsummit-podium.jpg",
+          alt: "Twee presentatoren op het podium met een bord in hun handen",
+          width: 1224,
+          height: 816,
+        },
       },
       {
         name: "Zakelijk portret",
         summary: "Eén gezicht of het hele team",
         body: "Een portret waarop je jezelf herkent en dat naast dat van je collega's kan staan. In dezelfde opzet voor iedereen, zodat een teampagina één geheel blijft in plaats van een verzameling losse foto's.",
         examples: ["LinkedIn en website", "Teamserie in één stijl", "Op locatie of in de studio"],
+        thumb: {
+          src: "/media/cases/studio-portretsessie.jpg",
+          alt: "Portret van een springende man in een gang met warm goudkleurig licht",
+          width: 1600,
+          height: 1068,
+        },
       },
       {
         name: "Fashion & concept",
         summary: "Geregisseerd, met styling en licht",
         body: "Beeld dat we eerst bedenken en dan bouwen. Styling, set en licht zijn hier het middel en niet de omstandigheid — voor een lookbook, een campagne of een merkverhaal dat om iets eigens vraagt.",
         examples: ["Lookbook en collectie", "Geregisseerde set", "Merkverhaal"],
+        thumb: {
+          src: "/media/library/zomerbries-campagne.jpg",
+          alt: "Man in badjas met zonnebril tussen opblaasbanden, parasol en ventilatoren op het zand",
+          width: 1600,
+          height: 1068,
+        },
       },
       {
         name: "Campagnebeeld",
         summary: "Voor je advertentie of actie",
         body: "Eén beeld dat de hele boodschap moet dragen. We denken vooraf mee over waar het komt te hangen en houden daar de uitsnede op aan, want een abri vraagt iets anders dan een tijdlijn.",
         examples: ["Abri en print", "Advertentie en social", "Publieksactie"],
+        thumb: {
+          src: "/media/library/wit-pak-ballonnen.jpg",
+          alt: "Vrouw in wit pak met witte ballonnen lacht op een plein terwijl voorbijgangers passeren",
+          width: 1200,
+          height: 800,
+        },
       },
     ],
     // Naar het portfolio: daar staat het fotowerk per categorie, en dat is wat
@@ -126,24 +166,48 @@ export const services: readonly Service[] = [
         summary: "Je hele dag terug in twee minuten",
         body: "De sfeer van je dag terug in een minuut of twee. We draaien mee tijdens het programma en monteren op muziek, tot iets wat bezoekers uit zichzelf doorsturen en waarmee je de editie erna alvast aankondigt.",
         examples: ["Festival en evenement", "Congres en beurs", "Sportdag"],
+        thumb: {
+          src: "/media/video/golazo-aftermovie-poster.jpg",
+          alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
+          width: 1152,
+          height: 648,
+        },
       },
       {
         name: "Bedrijfsvideo",
         summary: "Uitleg, promotie of bedrijfsprofiel",
         body: "Uitleggen wat je doet, laten zien wie je bent of een dienst promoten. We denken mee over de opzet, draaien efficiënt op locatie en leveren in de lengtes die je nodig hebt.",
         examples: ["Bedrijfsprofiel", "Uitlegvideo", "Werken bij"],
+        thumb: {
+          src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
+          alt: "Leerling van Aeres VMBO aan het werk in het praktijklokaal",
+          width: 1280,
+          height: 720,
+        },
       },
       {
         name: "Reels & shorts",
         summary: "Verticaal en kort, klaar voor social",
         body: "Verticaal, kort en gemaakt om in een tijdlijn te blijven hangen. Vaak draaien we ze mee tijdens een grotere opdracht, zodat je naast de lange video meteen materiaal hebt voor de weken erna.",
         examples: ["Instagram en TikTok", "YouTube Shorts", "Naast een grotere opdracht"],
+        thumb: {
+          src: "/media/video/showreel-poster.jpg",
+          alt: "Cameraman filmt met een gimbal tussen de banners op een onderwijsevenement",
+          width: 1600,
+          height: 1028,
+        },
       },
       {
         name: "Dronebeeld",
         summary: "Locatie en schaal vanuit de lucht",
         body: "Laten zien hoe groot het terrein is, hoe vol het plein stond of waar het gebouw precies ligt. Meestal een laag binnen een grotere video, soms is het luchtbeeld het hele verhaal.",
         examples: ["Terrein en gebouw", "Overzicht van een event", "Landschap en locatie"],
+        thumb: {
+          src: "/media/cases/jijbenm-ring-van-boven.webp",
+          alt: "Dronefoto recht van boven op de ronde brug en het paviljoen in het water",
+          width: 1600,
+          height: 1200,
+        },
       },
     ],
     // Naar de cases: daar zit de montage bij het verhaal waar hij voor gemaakt is.

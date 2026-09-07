@@ -69,6 +69,29 @@ export function unlockScroll() {
 }
 
 /**
+ * Terug naar de bovenkant van de pagina.
+ *
+ * Apart van `scrollToHash("#top")`, ook al heeft elke pagina dat anker. Die weg
+ * hangt ervan af dat het element er staat en dat de kop van de pagina op nul
+ * begint; deze knop hoort te werken ongeacht wat er boven aan een pagina staat.
+ *
+ * De duur is langer dan bij een anker. Dit is bijna altijd de langste sprong op
+ * de pagina, en in hetzelfde tempo als een sprong van één sectie wordt dat een
+ * schietstoel — je verliest dan volledig waar je vandaan kwam.
+ */
+export function scrollToTop(options: { immediate?: boolean } = {}) {
+  if (lenis) {
+    lenis.resize();
+    lenis.scrollTo(0, { duration: 1.4, immediate: options.immediate, force: true });
+    return;
+  }
+
+  // Geen Lenis betekent dat de bezoeker beweging heeft afgezet. Dan hoort deze
+  // sprong ook niet geanimeerd te zijn, ongeacht wat de aanroeper meegeeft.
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+/**
  * Scrolt naar een sectie op de huidige pagina en geeft terug of dat gelukt is.
  *
  * Iedereen die naar een anker wil — de balk, het menu, de footer — gaat hier

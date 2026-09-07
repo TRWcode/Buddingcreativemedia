@@ -86,19 +86,32 @@ export function ServiceDetail({ service, withDivider }: { service: Service; with
             als blok wordt afgesloten in plaats van in het niets op te houden. */}
         <Stagger as="ul" className="mt-[clamp(3rem,7vh,4.5rem)] border-b border-hairline">
           {service.items.map((item, index) => (
+            /* Drie kolommen op de nav-breedte: naam, tekst, beeld. Het beeld
+               staat rechts omdat daar de ruimte al was — de tekstkolom loopt
+               niet door tot de rand, dus zonder beeld eindigde elke regel in
+               een leeg blok van een paar honderd pixels. Eronder valt alles
+               onder elkaar en komt het beeld als laatste, want daar is het de
+               bevestiging van wat je net gelezen hebt en niet de aankondiging. */
             <StaggerItem
               key={item.name}
               as="li"
-              className="grid gap-x-[clamp(2rem,5vw,4rem)] gap-y-4 border-t border-hairline py-[clamp(1.75rem,3vw,2.5rem)] nav:grid-cols-[minmax(0,17rem)_1fr]"
+              className="grid items-start gap-x-[clamp(1.75rem,3.5vw,3rem)] gap-y-5 border-t border-hairline py-[clamp(1.75rem,3vw,2.5rem)] nav:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_clamp(11rem,15vw,16rem)]"
             >
-              <div className="flex items-baseline gap-4">
+              {/* Het nummer staat boven de naam en niet ernaast. "Bedrijfs-
+                  reportage" is zeventien tekens in een display-letter die niet
+                  kan afbreken; naast een nummer plus tussenruimte blijft er van
+                  deze kolom te weinig over en loopt de kop de tekst ernaast in.
+                  `break-words` is het vangnet als een naam ooit toch langer
+                  wordt: dan breekt hij lelijk af in plaats van eroverheen te
+                  lopen. */}
+              <div>
                 <span
                   aria-hidden
-                  className="font-sans text-[0.8rem] font-medium tabular-nums tracking-[0.1em] text-brand"
+                  className="block font-sans text-[0.8rem] font-medium tabular-nums tracking-[0.1em] text-brand"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-[clamp(1.35rem,2.4vw,1.9rem)] font-semibold uppercase tracking-title">
+                <h3 className="mt-2.5 break-words font-display text-[clamp(1.25rem,1.85vw,1.5rem)] font-semibold uppercase tracking-title">
                   {item.name}
                 </h3>
               </div>
@@ -109,6 +122,17 @@ export function ServiceDetail({ service, withDivider }: { service: Service; with
                   <span className="text-bone/70">Denk aan </span>
                   {item.examples.join(" · ")}
                 </p>
+              </div>
+
+              <div className="group/beeld overflow-hidden rounded-media border border-hairline bg-surface">
+                <Image
+                  src={item.thumb.src}
+                  alt={item.thumb.alt}
+                  width={item.thumb.width}
+                  height={item.thumb.height}
+                  sizes="(max-width: 56.25rem) 100vw, 16rem"
+                  className="aspect-[3/2] w-full object-cover transition-transform duration-zoom ease-interact group-hover/beeld:scale-105 motion-reduce:transition-none motion-reduce:group-hover/beeld:scale-100"
+                />
               </div>
             </StaggerItem>
           ))}

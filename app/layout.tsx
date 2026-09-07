@@ -5,6 +5,7 @@ import { Cursor } from "@/components/layout/Cursor";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MotionProvider } from "@/components/layout/MotionProvider";
+import { ScrollTop } from "@/components/layout/ScrollTop";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { clashDisplay, satoshi } from "./fonts";
 import { site } from "@/lib/content/site";
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main>{children}</main>
           <Footer />
+          <ScrollTop />
           <Cursor />
         </MotionProvider>
 
