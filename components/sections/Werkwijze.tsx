@@ -1,8 +1,11 @@
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { MaskedLines } from "@/components/ui/MaskedLines";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProcessStep } from "./ProcessStep";
+import { overOnsHref } from "@/lib/content/site";
 import { processSteps, werkwijzeIntro } from "@/lib/content/werkwijze";
 
 export function Werkwijze() {
@@ -31,6 +34,16 @@ export function Werkwijze() {
 
           <Reveal as="p" delay={0.1} className="mt-7 max-w-[27.5rem] text-[1.08rem] leading-[1.6] text-muted">
             {werkwijzeIntro.description}
+          </Reveal>
+
+          {/* Onder de kolom die blijft staan, zodat de knop op een breed scherm
+              in beeld blijft terwijl je de stappen ernaast langs scrolt. */}
+          <Reveal delay={0.18} className="mt-9">
+            <Magnetic>
+              <Button href={overOnsHref} variant="ghost">
+                Meer over ons
+              </Button>
+            </Magnetic>
           </Reveal>
         </div>
 

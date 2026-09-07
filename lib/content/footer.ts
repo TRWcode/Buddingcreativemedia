@@ -2,7 +2,9 @@ import type { NavLink } from "./types";
 import {
   casesHref,
   contactHref,
+  dienstenHref,
   eventsHref,
+  overOnsHref,
   portfolioHref,
   privacyHref,
   termsHref,
@@ -42,11 +44,11 @@ export const socialLinks: readonly SocialLink[] = [
 
 /** Dezelfde volgorde en dezelfde bestemmingen als de hoofdnavigatie, plus Contact. */
 export const footerNav: readonly NavLink[] = [
+  { label: "Diensten", href: dienstenHref },
   { label: "Portfolio", href: portfolioHref },
   { label: "Cases", href: casesHref },
   { label: "Events", href: eventsHref },
-  { label: "Diensten", href: "#diensten" },
-  { label: "Over Ons", href: "#werkwijze" },
+  { label: "Over Ons", href: overOnsHref },
   { label: "Contact", href: contactHref },
 ];
 

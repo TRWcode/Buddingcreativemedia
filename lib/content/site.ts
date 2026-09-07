@@ -61,30 +61,32 @@ export const siteLogo: ImageAsset = {
 export const portfolioHref = "/portfolio";
 export const casesHref = "/cases";
 export const eventsHref = "/events";
+export const dienstenHref = "/diensten";
+export const overOnsHref = "/over-ons";
 export const contactHref = "/contact";
 export const termsHref = "/algemene-voorwaarden";
 export const privacyHref = "/privacyverklaring";
 
 /**
- * De hoofdnavigatie. Eerst de drie eigen paginas, daarna de twee secties op
- * de homepage.
+ * De hoofdnavigatie. Vijf eigen pagina's, geen ankers meer.
  *
- * Cases wijst naar `/cases` en niet meer naar het blok `#cases` op de homepage.
- * Dat blok toont drie kaarten als voorproefje; de pagina toont het volledige
- * werk met een eigen kop en een eigen adres. Wie in het menu op "Cases" tikt
- * bedoelt dat laatste, en op een telefoon is het verschil extra groot: daar
- * kwam je na een halve seconde scrollen midden op de homepage uit.
+ * Elk item wijst naar een echte pagina en niet naar een blok op de homepage.
+ * Zo'n blok is een voorproefje; de pagina is het volledige verhaal met een
+ * eigen kop en een eigen adres. Wie in het menu op "Cases" of "Diensten" tikt
+ * bedoelt dat laatste, en op een telefoon is het verschil extra groot: bij een
+ * anker kwam je na een halve seconde scrollen midden op de homepage uit.
  *
- * Diensten en Over Ons blijven ankers, want daar hoort geen aparte pagina bij.
- * Ze landen wel netjes onder de balk, ook vanaf een andere pagina — zie
- * `lib/scroll.ts`.
+ * Diensten staat vooraan. Iemand die hier komt om iets te laten maken zoekt
+ * eerst wat we doen; het werk zelf is het bewijs daarna. De ankers `#diensten`
+ * en `#werkwijze` bestaan nog wél op de homepage, zodat oude links en gedeelde
+ * adressen blijven werken.
  */
 export const navLinks: readonly NavLink[] = [
+  { label: "Diensten", href: dienstenHref },
   { label: "Portfolio", href: portfolioHref },
   { label: "Cases", href: casesHref },
   { label: "Events", href: eventsHref },
-  { label: "Diensten", href: "#diensten" },
-  { label: "Over Ons", href: "#werkwijze" },
+  { label: "Over Ons", href: overOnsHref },
 ];
 
 export const primaryCta: CtaLink = { label: "Let's Talk", href: contactHref };

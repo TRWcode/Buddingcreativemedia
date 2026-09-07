@@ -4,7 +4,9 @@ import { privacy } from "@/lib/content/privacy";
 import {
   casesHref,
   contactHref,
+  dienstenHref,
   eventsHref,
+  overOnsHref,
   portfolioHref,
   privacyHref,
   site,
@@ -27,7 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: url("/"), lastModified: built, changeFrequency: "monthly", priority: 1 },
+    // Diensten staat op 0.9: het is naast de homepage het adres waarop iemand
+    // binnenkomt die iets wil laten maken, en het is de pagina die de zoekwoorden
+    // draagt waarop deze site gevonden moet worden.
+    { url: url(dienstenHref), lastModified: built, changeFrequency: "monthly", priority: 0.9 },
     { url: url(portfolioHref), lastModified: built, changeFrequency: "monthly", priority: 0.9 },
+    { url: url(overOnsHref), lastModified: built, changeFrequency: "monthly", priority: 0.7 },
     { url: url(casesHref), lastModified: built, changeFrequency: "monthly", priority: 0.8 },
     ...caseStudies.map((study) => ({
       url: url(caseHref(study.slug)),

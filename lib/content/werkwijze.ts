@@ -7,11 +7,15 @@ export interface ProcessStep {
 }
 
 /**
- * Dit blok hangt onder "Over Ons" in de navigatie, dus dat is ook wat de
- * eyebrow zegt. Stond er "Onze werkwijze", en dan klikte je op Over Ons en
- * landde je op een kop die iets anders heet — de bezoeker denkt dan dat hij
- * verkeerd terecht is gekomen en scrollt door. Het anker blijft `#werkwijze`:
- * dat adres staat in de nav, de footer en in externe links.
+ * Deze tekst staat op twee plekken: als blok op de homepage en als hoofdstuk
+ * "Hoe we werken" op `/over-ons`. Vandaar één bron — bij twee kopieën staat er
+ * na de eerste tekstwijziging op de ene pagina iets anders dan op de andere.
+ *
+ * De eyebrow zegt "Over ons" en niet "Onze werkwijze". Op de homepage is dit
+ * het blok waar de bezoeker landt als hij naar het bedrijf zoekt, en een kop
+ * die anders heet dan waar je op klikte leest als verkeerd terechtgekomen. Op
+ * `/over-ons` staat er een eigen eyebrow boven, want dáár is dit wél alleen de
+ * werkwijze. Het anker `#werkwijze` blijft bestaan voor gedeelde oude links.
  */
 export const werkwijzeIntro: SectionIntro & { readonly titleLines: readonly string[] } = {
   eyebrow: "Over ons",
