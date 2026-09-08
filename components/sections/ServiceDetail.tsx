@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { MaskedLines } from "@/components/ui/MaskedLines";
 import { Reveal } from "@/components/ui/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import { CameraIcon, VideoIcon } from "@/components/ui/icons";
-import { cn } from "@/lib/cn";
+import { serviceItemId } from "@/lib/content/services";
 import type { Service } from "@/lib/content/services";
 
 const icons = {
@@ -15,48 +17,95 @@ const icons = {
 } as const;
 
 /**
- * Eén discipline op `/diensten`: een kop met beeld, en daaronder de diensten
- * als genummerde regels.
+ * Eén discipline op `/diensten`: een hoofdstukopening over de volle breedte,
+ * en daaronder de diensten als genummerde regels.
  *
- * Bewust regels en geen kaarten. Negen kaarten met elk drie zinnen erin worden
- * een muur waarin alles even zwaar weegt; als opsomming met een haarlijn ertussen
- * kun je op de namen scannen en alleen doorlezen bij wat je zoekt. Het genummerde
- * rijtje is bovendien al de taal van deze site — het mobiele menu en de
- * werkwijze-stappen doen hetzelfde.
+ * De opening is beeldvullend en niet langer een kolom naast een kader. Dit is
+ * de plek waar de pagina van discipline wisselt, en dat moet je zien voordat je
+ * het leest — bij een fotograaf hoort dat een foto te zijn die het scherm vult,
+ * niet een plaatje van 45% breed naast een alinea. Dezelfde doeken als de hero
+ * op de homepage en de kop van een case, zodat het als hetzelfde huis leest.
  *
- * Op de detailpagina staat er geen play-knop over het beeld, ook niet bij video.
- * Hier is het een stilstaande foto, en een play-knop die niets afspeelt is een
- * belofte die de pagina niet waarmaakt.
+ * De diensten eronder blijven regels en worden geen kaarten. Negen kaarten met
+ * elk drie zinnen worden een muur waarin alles even zwaar weegt; als opsomming
+ * met een haarlijn ertussen kun je op de namen scannen en alleen doorlezen bij
+ * wat je zoekt. Wat er wel bij is gekomen: de samenvatting onder de naam, zodat
+ * elke regel eerst in zeven woorden zegt waar hij over gaat, en een beeld dat
+ * groot genoeg is om iets te bewijzen.
+ *
+ * Er staat geen play-knop over de opening, ook niet bij video. Dit is een
+ * stilstaande foto, en een play-knop die niets afspeelt is een belofte die de
+ * pagina niet waarmaakt.
  */
-export function ServiceDetail({ service, withDivider }: { service: Service; withDivider: boolean }) {
+export function ServiceDetail({
+  service,
+  index,
+  total,
+}: {
+  service: Service;
+  index: number;
+  total: number;
+}) {
   const Icon = icons[service.icon];
+  const chapter = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
 
   return (
-    <section
-      id={service.id}
-      aria-labelledby={`${service.id}-titel`}
-      className={cn("py-section", withDivider && "border-t border-hairline")}
-    >
-      <Container>
-        <div className="grid items-center gap-[clamp(2.5rem,6vw,4.5rem)] nav:grid-cols-2">
-          <div>
-            <Reveal className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-3">
-              <IconBadge>
-                <Icon className="size-[1.625rem]" />
-              </IconBadge>
+    <section id={service.id} aria-labelledby={`${service.id}-titel`}>
+      {/* `hero-legible` doet hier één ding: het kleurt de eyebrow wit. Grijs op
+          een foto valt weg, en de kop eronder heeft aan het doek genoeg. */}
+      <div className="hero-legible relative isolate flex min-h-[clamp(20rem,52vh,31rem)] flex-col justify-end overflow-hidden border-y border-hairline">
+        <Image
+          src={service.image.src}
+          alt={service.image.alt}
+          fill
+          sizes="100vw"
+          quality={82}
+          className="-z-10 object-cover"
+          style={
+            service.image.objectPosition
+              ? { objectPosition: service.image.objectPosition }
+              : undefined
+          }
+        />
+
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-[image:var(--case-overlay)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-[image:var(--hero-veil)]"
+        />
+
+        <Container className="py-[clamp(2.5rem,6vh,4rem)] pt-[clamp(5rem,14vh,8rem)]">
+          <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-9">
+            <div>
+              <Reveal className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+                <IconBadge>
+                  <Icon className="size-[1.625rem]" />
+                </IconBadge>
+                <Eyebrow>{`Discipline ${chapter} · ${service.items.length} diensten`}</Eyebrow>
+              </Reveal>
+
               <h2
                 id={`${service.id}-titel`}
-                className="font-display text-[clamp(2.2rem,5vw,3.6rem)] font-bold uppercase leading-[0.95] tracking-headline"
+                className="font-display text-[clamp(2.5rem,8vw,5rem)] font-bold uppercase leading-[0.92] tracking-headline"
               >
-                {service.title}
+                <MaskedLines trigger="scroll" delay={0} lines={[{ text: service.title }]} />
               </h2>
-            </Reveal>
 
-            <Reveal as="p" delay={0.08} className="max-w-[34rem] text-[1.08rem] leading-[1.7] text-muted">
-              {service.lead}
-            </Reveal>
+              {/* Lichter dan het gebruikelijke grijs: deze alinea staat op een
+                  foto en niet op de paginakleur. */}
+              <Reveal
+                as="p"
+                delay={0.12}
+                className="mt-7 max-w-[38rem] text-[1.08rem] leading-[1.7] text-bone/85"
+              >
+                {service.lead}
+              </Reveal>
+            </div>
 
-            <Reveal delay={0.16} className="mt-9">
+            <Reveal delay={0.2}>
               <Magnetic>
                 <Button href={service.link.href} variant="ghost">
                   {service.link.label}
@@ -64,74 +113,88 @@ export function ServiceDetail({ service, withDivider }: { service: Service; with
               </Magnetic>
             </Reveal>
           </div>
+        </Container>
+      </div>
 
-          <Reveal className="overflow-hidden rounded-card border border-hairline bg-surface">
-            <Image
-              src={service.image.src}
-              alt={service.image.alt}
-              width={service.image.width}
-              height={service.image.height}
-              sizes="(max-width: 56.25rem) 100vw, 45vw"
-              className="aspect-[4/3] w-full object-cover"
-              style={
-                service.image.objectPosition
-                  ? { objectPosition: service.image.objectPosition }
-                  : undefined
-              }
-            />
-          </Reveal>
-        </div>
-
+      <Container className="py-[clamp(3.5rem,9vh,5.5rem)]">
         {/* De laatste regel krijgt ook een haarlijn onder zich, zodat de lijst
             als blok wordt afgesloten in plaats van in het niets op te houden. */}
-        <Stagger as="ul" className="mt-[clamp(3rem,7vh,4.5rem)] border-b border-hairline">
-          {service.items.map((item, index) => (
+        <Stagger as="ul" className="border-b border-hairline">
+          {service.items.map((item, itemIndex) => (
             /* Drie kolommen op de nav-breedte: naam, tekst, beeld. Het beeld
                staat rechts omdat daar de ruimte al was — de tekstkolom loopt
                niet door tot de rand, dus zonder beeld eindigde elke regel in
-               een leeg blok van een paar honderd pixels. Eronder valt alles
-               onder elkaar en komt het beeld als laatste, want daar is het de
-               bevestiging van wat je net gelezen hebt en niet de aankondiging. */
+               een leeg blok van een paar honderd pixels.
+
+               Eronder valt alles onder elkaar, maar niet in dezelfde volgorde:
+               daar komt het beeld tussen de naam en de uitleg te staan. Je weet
+               dan al welke dienst het is, ziet meteen hoe die eruitziet, en
+               leest de drie zinnen alleen als het beeld je iets zei — precies de
+               volgorde waarin iemand een fotograaf beoordeelt. */
             <StaggerItem
               key={item.name}
               as="li"
-              className="grid items-start gap-x-[clamp(1.75rem,3.5vw,3rem)] gap-y-5 border-t border-hairline py-[clamp(1.75rem,3vw,2.5rem)] nav:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_clamp(11rem,15vw,16rem)]"
+              className="group grid items-start gap-x-[clamp(1.75rem,3.5vw,3rem)] gap-y-6 border-t border-hairline py-[clamp(2rem,4vw,3rem)] nav:grid-cols-[minmax(0,17rem)_minmax(0,1fr)_clamp(15rem,22vw,22rem)]"
             >
-              {/* Het nummer staat boven de naam en niet ernaast. "Bedrijfs-
-                  reportage" is zeventien tekens in een display-letter die niet
-                  kan afbreken; naast een nummer plus tussenruimte blijft er van
-                  deze kolom te weinig over en loopt de kop de tekst ernaast in.
-                  `break-words` is het vangnet als een naam ooit toch langer
-                  wordt: dan breekt hij lelijk af in plaats van eroverheen te
-                  lopen. */}
-              <div>
+              {/* Het anker zit op deze kolom en niet op de regel zelf: de index
+                  bovenaan de pagina springt hiernaartoe, en dan hoort de naam
+                  boven aan het scherm te staan. */}
+              <div id={serviceItemId(item.name)}>
+                {/* Een omlijnd cijfer in plaats van een gevuld: het geeft de
+                    regel het formaat van een hoofdstuknummer zonder de naam
+                    ernaast te beconcurreren. `-webkit-text-stroke` staat hier
+                    inline omdat de eigenschap met een streepje begint, en
+                    Tailwind dat in een klassenaam als een negatieve waarde
+                    leest. */}
                 <span
                   aria-hidden
-                  className="block font-sans text-[0.8rem] font-medium tabular-nums tracking-[0.1em] text-brand"
+                  style={{
+                    WebkitTextStroke: "1px var(--color-hairline-loud)",
+                    color: "transparent",
+                  }}
+                  className="block font-display text-[clamp(2.5rem,4vw,3.25rem)] font-bold leading-none tabular-nums"
                 >
-                  {String(index + 1).padStart(2, "0")}
+                  {String(itemIndex + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-2.5 break-words font-display text-[clamp(1.25rem,1.85vw,1.5rem)] font-semibold uppercase tracking-title">
+
+                {/* `break-words` is het vangnet voor een lange naam: die breekt
+                    dan af in plaats van de kolom ernaast in te lopen. */}
+                <h3 className="mt-3.5 break-words font-display text-[clamp(1.3rem,2vw,1.6rem)] font-semibold uppercase tracking-title">
                   {item.name}
                 </h3>
+
+                <p className="mt-2.5 text-[0.95rem] leading-[1.5] text-muted">{item.summary}</p>
               </div>
 
-              <div>
-                <p className="max-w-[40rem] text-[1rem] leading-[1.65] text-muted">{item.body}</p>
-                <p className="mt-4 text-[0.88rem] leading-[1.6] text-muted">
-                  <span className="text-bone/70">Denk aan </span>
-                  {item.examples.join(" · ")}
+              <div className="order-3 nav:order-none">
+                <p className="max-w-[40rem] text-[1.02rem] leading-[1.7] text-muted">{item.body}</p>
+
+                <p className="mt-7 text-[0.7rem] font-medium uppercase tracking-label text-muted">
+                  Denk aan
                 </p>
+                {/* Losse pillen in plaats van een rij woorden met puntjes
+                    ertussen: zo zijn het drie dingen die je kunt aanwijzen in
+                    plaats van een grijze regel die je overslaat. */}
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {item.examples.map((example) => (
+                    <li
+                      key={example}
+                      className="rounded-pill border border-hairline-strong px-3.5 py-1.5 text-[0.82rem] text-bone/85"
+                    >
+                      {example}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="group/beeld overflow-hidden rounded-media border border-hairline bg-surface">
+              <div className="order-2 overflow-hidden rounded-media border border-hairline bg-surface nav:order-none">
                 <Image
                   src={item.thumb.src}
                   alt={item.thumb.alt}
                   width={item.thumb.width}
                   height={item.thumb.height}
-                  sizes="(max-width: 56.25rem) 100vw, 16rem"
-                  className="aspect-[3/2] w-full object-cover transition-transform duration-zoom ease-interact group-hover/beeld:scale-105 motion-reduce:transition-none motion-reduce:group-hover/beeld:scale-100"
+                  sizes="(max-width: 56.25rem) 100vw, 22rem"
+                  className="aspect-[3/2] w-full object-cover transition-transform duration-zoom ease-interact group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 nav:aspect-[4/3]"
                 />
               </div>
             </StaggerItem>

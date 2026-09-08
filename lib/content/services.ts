@@ -1,4 +1,4 @@
-import { casesHref, portfolioHref } from "./site";
+import { casesHref, contactHref, portfolioHref } from "./site";
 import type { CtaLink, ImageAsset, SectionIntro } from "./types";
 
 export type ServiceIcon = "camera" | "video";
@@ -70,6 +70,14 @@ export const servicesPage = {
     "Fotografie en videografie voor merken, bedrijven en events: bedrijfsreportage, eventfotografie, zakelijk portret, aftermovie, bedrijfsvideo, reels en dronebeeld.",
   intro:
     "Twee disciplines, en daarbinnen het werk waar we het vaakst voor gevraagd worden. Per dienst staat wat het inhoudt en waar hij meestal voor wordt ingezet, zodat je zelf kunt zien wat bij je vraag past.",
+  /**
+   * De twee knoppen onder de intro. De eerste is de reden dat deze pagina
+   * bestaat; de tweede is voor wie eerst bewijs wil zien voordat hij iets vraagt.
+   */
+  ctas: [
+    { label: "Bespreek je opdracht", href: contactHref },
+    { label: "Bekijk het werk", href: portfolioHref },
+  ] as const satisfies readonly CtaLink[],
 } as const;
 
 export const services: readonly Service[] = [
@@ -226,3 +234,94 @@ export const services: readonly Service[] = [
     showPlay: true,
   },
 ];
+
+/**
+ * Het anker van één dienst op `/diensten`, afgeleid van zijn naam.
+ *
+ * Afgeleid en niet los in de content gezet: de index bovenaan de pagina en de
+ * regel verderop moeten per definitie hetzelfde anker gebruiken, en twee velden
+ * die dat met de hand moeten volhouden lopen bij de eerste naamswijziging uit
+ * elkaar. Prijs daarvan is dat een hernoemde dienst een nieuw anker krijgt —
+ * dat is een gedeelde link die breekt, geen pagina die stukgaat.
+ */
+export function serviceItemId(name: string): string {
+  return name
+    .toLowerCase()
+    // NFD haalt een accent los van de letter waar het op staat; de regel
+    // hieronder veegt het daarna weg als "niet a-z0-9". Zo wordt "café"
+    // "cafe" en niet "caf-".
+    .normalize("NFD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Hoeveel concrete diensten er in totaal zijn — geteld, niet overgeschreven. */
+export const serviceItemCount = services.reduce((total, service) => total + service.items.length, 0);
+
+/**
+ * Eén beeld in de mozaïek naast de kop van `/diensten`, met het label van het
+ * werk waar het uit komt.
+ *
+ * Dat label doet hier het werk dat een play-knop zou doen en dan liegt: het
+ * zegt dat dit stilstaande beeld uit een aftermovie komt, in plaats van een
+ * knop te tonen die niets afspeelt. Het is bovendien wat de bezoeker hier moet
+ * weten — dat er zowel foto als video onder valt — nog voordat hij één regel
+ * gelezen heeft.
+ */
+export interface ShowcaseImage extends ImageAsset {
+  readonly caption: string;
+}
+
+/**
+ * De vier beelden bovenaan `/diensten`.
+ *
+ * Bewust twee foto- en twee videostills, en alle vier uit echt werk dat elders
+ * op de site ook staat. De pagina belooft in de eerste zin twee disciplines; dit
+ * is de eerste plek waar dat te zien is in plaats van te lezen.
+ */
+export const servicesShowcase: readonly ShowcaseImage[] = [
+  {
+    caption: "Zakelijk portret",
+    src: "/media/cases/studio-portretsessie.jpg",
+    alt: "Portret van een springende man in een gang met warm goudkleurig licht",
+    width: 1600,
+    height: 1068,
+  },
+  {
+    caption: "Eventfotografie",
+    src: "/media/library/eventsummit-podium.jpg",
+    alt: "Twee presentatoren op het podium met een bord in hun handen",
+    width: 1224,
+    height: 816,
+  },
+  {
+    caption: "Aftermovie",
+    src: "/media/video/golazo-aftermovie-poster.jpg",
+    alt: "BMX-rider springt voor een juichend publiek tijdens een sportevenement",
+    width: 1152,
+    height: 648,
+  },
+  {
+    caption: "Dronebeeld",
+    src: "/media/cases/jijbenm-ring-van-boven.webp",
+    alt: "Dronefoto recht van boven op de ronde brug en het paviljoen in het water",
+    width: 1600,
+    height: 1200,
+  },
+];
+
+/**
+ * De kop boven de index: alle diensten op één scherm, voordat de pagina ze
+ * stuk voor stuk uitlegt.
+ *
+ * Die index is er omdat deze pagina lang is. Wie hier komt met een concrete
+ * vraag — "doen jullie ook drone?" — hoort dat binnen één blik te kunnen zien
+ * en er dan naartoe te springen, in plaats van negen blokken langs te scrollen
+ * om erachter te komen.
+ */
+export const servicesIndex: SectionIntro = {
+  eyebrow: "In één oogopslag",
+  title: "Waar we mee helpen",
+  description:
+    "Alles wat we maken, op één rij. Tik op de dienst die het dichtst bij je vraag ligt — je springt meteen naar de uitleg eronder.",
+};
