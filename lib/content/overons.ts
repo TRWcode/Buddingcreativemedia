@@ -31,26 +31,64 @@ export const story = {
 } as const;
 
 /**
- * Drie beelden uit het echte werk in plaats van een portret van onszelf. Dat
- * portret is er niet, en een gekochte stockfoto van een fotograaf in actie is
- * op de site van een fotograaf het slechtst denkbare beeld. Dit zijn drie
- * opdrachten uit drie hoeken van het vak; alt-teksten komen overeen met die in
- * `portfolio.ts`, want het zijn dezelfde bestanden.
+ * Eén beeld uit het werk, met het label van de opdracht waar het uit komt.
+ *
+ * Dat label staat er om dezelfde reden als op `/diensten`: een foto zonder
+ * bijschrift is een sfeerplaatje, en met de naam van de opdracht erbij is het
+ * bewijs. De labels komen woordelijk overeen met de `shoot` in `portfolio.ts`,
+ * want het zijn dezelfde bestanden en dezelfde opdrachten.
  */
-export const storyImages: readonly ImageAsset[] = [
+export interface StoryImage extends ImageAsset {
+  readonly caption: string;
+}
+
+/**
+ * Het beeld naast de kop van deze pagina.
+ *
+ * Bewust dit beeld en geen ander: het is met 2560 pixels het enige bestand op
+ * deze pagina dat groot genoeg is voor een kader van deze maat. De rest van de
+ * beelden hier is 1200 breed, en die worden in een hoog kader zichtbaar zacht.
+ *
+ * Er staat geen portret van onszelf. Dat portret is er niet, en een gekochte
+ * stockfoto van een fotograaf in actie is op de site van een fotograaf het
+ * slechtst denkbare beeld.
+ */
+export const storyHeroImage: StoryImage = {
+  caption: "ElasticON",
+  src: "/media/library/elastic-on-hoofdpodium.jpg",
+  alt: "Spreker met open armen op het hoofdpodium van ElasticON voor een blauw scherm",
+  width: 2560,
+  height: 1706,
+};
+
+/**
+ * Drie beelden uit drie hoeken van het vak, als cluster onder het verhaal.
+ *
+ * De volgorde is de opmaak: de eerste staat staand in een smalle kolom, de
+ * twee daarna liggend en breed. Wissel je ze om, wissel dan ook de kaders in
+ * `app/over-ons/page.tsx` — een liggende foto in een staand kader snijdt de
+ * helft van het onderwerp weg.
+ *
+ * Alt-teksten komen overeen met die in `portfolio.ts`, want het zijn dezelfde
+ * bestanden.
+ */
+export const storyImages: readonly StoryImage[] = [
   {
-    src: "/media/library/elastic-on-hoofdpodium.jpg",
-    alt: "Spreker met open armen op het hoofdpodium van ElasticON voor een blauw scherm",
-    width: 2560,
-    height: 1706,
-  },
-  {
+    caption: "De regio verdient cultuur",
     src: "/media/library/wit-pak-ballonnen.jpg",
     alt: "Vrouw in wit pak met witte ballonnen lacht op een plein terwijl voorbijgangers passeren",
     width: 1200,
     height: 800,
   },
   {
+    caption: "Onderneming van het Jaar",
+    src: "/media/library/zaal-publiek.jpg",
+    alt: "Volle zaal kijkt naar het podium tijdens de uitreiking",
+    width: 1200,
+    height: 800,
+  },
+  {
+    caption: "Foodtrucks",
     src: "/media/library/foodtruck-strandclub.jpg",
     alt: "Kok in de doorgeefluik van een foodtruck met een krijtbord vol gerechten",
     width: 1200,
