@@ -16,7 +16,7 @@ export interface ClientLogo {
 
 export const clientsIntro = {
   eyebrow: "Vertrouwd door",
-  description: "Organisaties die hun verhaal aan ons beeld toevertrouwen.",
+  description: "Een greep uit de organisaties waarvoor we werkten.",
 } as const;
 
 /**

@@ -26,7 +26,7 @@ export const site: Site = {
   name: "Budding Creative Media",
   tagline: "Fotografie & Video · Almere",
   description:
-    "Fotografie en video die merken, bedrijven en events visueel sterk in beeld brengt. Gevestigd in Almere.",
+    "Fotografie en video voor merken, bedrijven en events. Gevestigd in Almere, werkzaam door het hele land.",
   location: "Almere · Nederland",
   email: "info@buddingcreativemedia.nl",
   phone,

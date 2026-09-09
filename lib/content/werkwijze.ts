@@ -23,7 +23,7 @@ export const werkwijzeIntro: SectionIntro & { readonly titleLines: readonly stri
   /** Laatste regel krijgt de accentkleur. */
   titleLines: ["Beeld dat", "blijft", "hangen"],
   description:
-    "We maken foto's en video's voor merken, bedrijven en events — vanuit Almere, en overal waar het gebeurt. Eén aanspreekpunt, korte lijnen en beeld dat doet waar je het voor liet maken.",
+    "Hieronder staat hoe een opdracht loopt: van de eerste vraag tot het moment dat de beelden bij je binnenkomen.",
 };
 
 export const processSteps: readonly ProcessStep[] = [
@@ -44,8 +44,8 @@ export const processSteps: readonly ProcessStep[] = [
   },
   {
     id: "plezier",
-    title: "Betrokken & met plezier",
+    title: "Eén aanspreekpunt",
     description:
-      "Korte lijnen, één aanspreekpunt en geen jargon. We houden van het vak en werken naar een resultaat waar we allebei trots op zijn.",
+      "Je praat met dezelfde persoon als die op de dag achter de camera staat. Korte lijnen, geen jargon, en vooraf duidelijk wat je krijgt.",
   },
 ];

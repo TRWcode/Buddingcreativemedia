@@ -12,15 +12,21 @@ export const overOnsPage = {
   metaDescription:
     "Budding Creative Media maakt fotografie en video voor merken, bedrijven en events. Gevestigd in Almere, werkzaam door het hele land.",
   intro:
-    "We maken foto's en video's voor merken, bedrijven en organisaties. Hieronder staat wie we zijn, hoe we werken en wat de mensen zeggen die ons al eens inhuurden.",
+    "Wie we zijn, hoe we werken, en wat de mensen zeggen die ons al eens inhuurden.",
+  /**
+   * De kop boven het werkwijze-blok op deze pagina. Dat blok deelt zijn tekst
+   * met de homepage, maar niet zijn kop: daar staat "Beeld dat blijft hangen"
+   * boven, en dat is hier al de titel van de pagina zelf.
+   */
+  werkwijzeHeading: ["Van eerste", "vraag tot", "oplevering"],
 } as const;
 
 export const story = {
   heading: "Wie we zijn",
   paragraphs: [
     "Budding Creative Media zit in Almere en werkt door het hele land — overal waar iets gebeurt dat vastgelegd moet worden. Fotografie en video, voor merken, bedrijven en organisaties.",
-    "Het werk loopt uiteen. Een congres van de opbouw tot de borrel, een teamportret waar iedereen zich prettig bij voelt, een aftermovie waarmee je de volgende editie alvast aankondigt. Wat het bindt is dat we eerst vragen waar het beeld voor is: dat bepaalt wat we maken, en het scheelt je een tweede shoot.",
-    "Je hebt één aanspreekpunt, van de eerste mail tot de oplevering. Geen doorschakelen, geen jargon, en vooraf duidelijk wat je krijgt.",
+    "Het werk loopt uiteen. Een congres van de opbouw tot de borrel, een teamportret waar iedereen zich prettig bij voelt, een aftermovie waarmee je de volgende editie alvast aankondigt.",
+    "Daarnaast organiseren we een paar keer per jaar zelf iets: een workshop, een cursus of een portretdag. Wil je ons eerst aan het werk zien voordat je iets laat maken, dan is dat een goede plek om te beginnen.",
   ],
 } as const;
 

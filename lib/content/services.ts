@@ -58,7 +58,7 @@ export const servicesIntro: SectionIntro = {
   eyebrow: "Wat we doen",
   title: "Diensten",
   description:
-    "Twee disciplines, alles onder één dak. Hieronder staat precies wat we maken, zodat je in één blik ziet of we bij je klus passen.",
+    "Twee disciplines, alles onder één dak. Dit is wat we maken, zodat je in één blik ziet of we bij je klus passen.",
 };
 
 /** De kop van `/diensten`. Zelfde vorm als `eventsPage`, zodat paginakoppen op één plek staan. */
@@ -69,7 +69,7 @@ export const servicesPage = {
   metaDescription:
     "Fotografie en videografie voor merken, bedrijven en events: bedrijfsreportage, eventfotografie, zakelijk portret, aftermovie, bedrijfsvideo, reels en dronebeeld.",
   intro:
-    "Twee disciplines, en daarbinnen het werk waar we het vaakst voor gevraagd worden. Per dienst staat wat het inhoudt en waar hij meestal voor wordt ingezet, zodat je zelf kunt zien wat bij je vraag past.",
+    "Twee disciplines, en daarbinnen het werk waar we het vaakst voor gevraagd worden. Per dienst staat wat het inhoudt, waar hij meestal voor wordt ingezet en hoe dat eruitziet.",
   /**
    * De twee knoppen onder de intro. De eerste is de reden dat deze pagina
    * bestaat; de tweede is voor wie eerst bewijs wil zien voordat hij iets vraagt.
@@ -87,7 +87,7 @@ export const services: readonly Service[] = [
     title: "Fotografie",
     description:
       "Foto's waar je jaren mee vooruit kunt — op de werkvloer, op het podium en voor de camera.",
-    lead: "Foto's waar je jaren mee vooruit kunt. We werken snel op locatie, houden rekening met iedereen die ondertussen doorwerkt, en leveren een selectie die je meteen op je site, in je vacatures en op social kunt zetten.",
+    lead: "We werken snel op locatie, houden rekening met iedereen die ondertussen doorwerkt, en leveren een selectie die je meteen op je site, in je vacatures en op social kunt zetten.",
     items: [
       {
         name: "Bedrijfsreportage",
@@ -116,7 +116,7 @@ export const services: readonly Service[] = [
       {
         name: "Zakelijk portret",
         summary: "Eén gezicht of het hele team",
-        body: "Een portret waarop je jezelf herkent en dat naast dat van je collega's kan staan. In dezelfde opzet voor iedereen, zodat een teampagina één geheel blijft in plaats van een verzameling losse foto's.",
+        body: "Een portret waarop je jezelf herkent en dat naast dat van je collega's kan staan. Iedereen in dezelfde opzet, zodat een teampagina er als één geheel uitziet.",
         examples: ["LinkedIn en website", "Teamserie in één stijl", "Op locatie of in de studio"],
         thumb: {
           src: "/media/cases/studio-portretsessie.jpg",
@@ -166,8 +166,8 @@ export const services: readonly Service[] = [
     icon: "video",
     title: "Videografie",
     description:
-      "Video die blijft hangen: kort, helder en gemaakt voor het kanaal waar hij terechtkomt.",
-    lead: "Video die blijft hangen. We denken mee over de opzet voordat er iets draait, filmen efficiënt op locatie en monteren naar het kanaal waar het terechtkomt — een aftermovie kijkt nu eenmaal anders dan een reel.",
+      "Video die mensen uitkijken: kort, helder en gemaakt voor het kanaal waar hij terechtkomt.",
+    lead: "We bedenken de opzet voordat er iets draait, filmen efficiënt op locatie en monteren naar het kanaal waar het terechtkomt. Een aftermovie kijkt nu eenmaal anders dan een reel.",
     items: [
       {
         name: "Aftermovie",
@@ -184,7 +184,7 @@ export const services: readonly Service[] = [
       {
         name: "Bedrijfsvideo",
         summary: "Uitleg, promotie of bedrijfsprofiel",
-        body: "Uitleggen wat je doet, laten zien wie je bent of een dienst promoten. We denken mee over de opzet, draaien efficiënt op locatie en leveren in de lengtes die je nodig hebt.",
+        body: "Uitleggen wat je doet, laten zien wie je bent of een dienst promoten. Vooraf bepalen we samen wat er in beeld moet komen en wie er aan het woord is; op de dag zelf hoeft er dan niets meer bedacht te worden. Je krijgt hem terug in de lengtes die je nodig hebt.",
         examples: ["Bedrijfsprofiel", "Uitlegvideo", "Werken bij"],
         thumb: {
           src: "/media/video/aeres-vakmanschapsroute-poster.jpg",
@@ -320,5 +320,5 @@ export const servicesIndex: SectionIntro = {
   eyebrow: "In één oogopslag",
   title: "Waar we mee helpen",
   description:
-    "Alles wat we maken, op één rij. Tik op de dienst die het dichtst bij je vraag ligt — je springt meteen naar de uitleg eronder.",
+    "Alles wat we maken, op één rij. Tik op de dienst die het dichtst bij je vraag ligt. Je springt meteen naar de uitleg eronder.",
 };

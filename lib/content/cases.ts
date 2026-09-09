@@ -87,7 +87,7 @@ export interface CaseStudy {
 export const casesIntro: SectionIntro = {
   eyebrow: "Uitgelicht werk",
   title: "Onze Cases",
-  description: "Van idee tot impact. Zo brengen wij projecten tot leven.",
+  description: "Een paar opdrachten van dichtbij: wat er gevraagd werd, wat we maakten en wat het opleverde.",
 };
 
 /**
@@ -434,13 +434,13 @@ const allCaseStudies: readonly CaseStudy[] = [
     year: "2025",
     location: "Almere",
     summary:
-      "Een aftermovie die het tempo van de dag vasthoudt: start, publiek, finish en alles ertussenin.",
+      "Het tempo van de dag vastgehouden: start, publiek, finish en alles ertussenin.",
     lead: "Duizenden deelnemers, één dag, en een film die daarna het hele jaar moet blijven werken. Golazo wilde een aftermovie die niet alleen laat zien wat er gebeurde, maar ook hoe het voelde.",
     chapters: [
       {
         id: "vraag",
         heading: "De vraag",
-        body: "Een aftermovie voor social en voor de werving van de volgende editie. Kort genoeg om af te kijken, compleet genoeg om het hele evenement te vertegenwoordigen, van de jeugdstart tot de laatste finisher.",
+        body: "Een aftermovie voor social en voor de werving van de volgende editie, waarin de jeugdstart net zo goed moest zitten als de laatste finisher.",
       },
       {
         id: "aanpak",
@@ -450,7 +450,7 @@ const allCaseStudies: readonly CaseStudy[] = [
       {
         id: "resultaat",
         heading: "Het resultaat",
-        body: "Een aftermovie die het evenement in beeld samenvat, plus korte verticale edits voor social. Samen geven ze een compleet beeld van de dag, en een sterke aanleiding om je in te schrijven voor de volgende editie.",
+        body: "Het evenement samengevat in beeld, plus korte verticale edits voor social. Samen geven ze een compleet beeld van de dag, en een sterke aanleiding om je in te schrijven voor de volgende editie.",
       },
     ],
     deliverables: ["Aftermovie", "Verticale social-edits", "Event-coverage", "Stills"],

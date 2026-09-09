@@ -6,10 +6,10 @@ export { emptyOptionLabel, honeypotField } from "./forms";
 
 /** Het afsluitende rode blok onderaan elke pagina. */
 export const contact = {
-  eyebrow: "Klaar om te starten?",
+  eyebrow: "Loopt er iets aan te komen?",
   title: "Let's Talk",
   description:
-    "Vertel ons over je merk, event of project. We denken graag met je mee over het beeld dat jouw verhaal vertelt.",
+    "Vertel kort wat er speelt: een dag die vastgelegd moet worden, een team dat op de foto moet, of iets waar je nog geen vorm voor hebt.",
   cta: { label: "Neem contact op", href: contactHref } satisfies CtaLink,
 } as const;
 
@@ -81,7 +81,7 @@ export const contactPage = {
   metaDescription:
     "Neem contact op met Budding Creative Media voor fotografie en video in Almere en omstreken. Vertel kort over je project, we reageren meestal binnen een werkdag.",
   intro:
-    "Vertel ons over je merk, event of project. Hoe meer we vooraf weten, hoe scherper we je kunnen zeggen wat het kost en wat het oplevert. Weet je het nog niet precies? Stuur dan gewoon je vraag; we denken graag mee.",
+    "Hoe meer we vooraf weten, hoe scherper we kunnen zeggen wat het kost en wat het oplevert. Weet je het nog niet precies? Stuur dan gewoon je vraag; we denken graag mee.",
   formHeading: "Stuur een aanvraag",
   formIntro: "Alleen naam, e-mail en je bericht zijn verplicht. De rest scheelt ons een vraag terug.",
   submitLabel: "Verstuur aanvraag",

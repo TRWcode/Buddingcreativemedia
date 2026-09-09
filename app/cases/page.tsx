@@ -12,7 +12,7 @@ import { caseStudies, casesIntro, toCaseCard } from "@/lib/content/cases";
 export const metadata: Metadata = {
   title: "Cases",
   description:
-    "Van idee tot impact. Een overzicht van het werk dat we maakten voor merken, bedrijven en organisaties.",
+    "Het werk dat we maakten voor merken, bedrijven en organisaties, met per opdracht de vraag, de aanpak en het resultaat.",
   alternates: { canonical: "/cases" },
 };
 

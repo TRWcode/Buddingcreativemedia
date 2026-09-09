@@ -14,7 +14,8 @@ interface HeroContent {
 export const hero: HeroContent = {
   eyebrow: "Fotografie & Video · Almere",
   headline: [{ text: "Creatief" }, { text: "Betrokken" }, { text: "Impactvol", accent: true }],
-  intro: "Krachtige fotografie en video voor bedrijven, events en organisaties.",
+  intro:
+    "Voor bedrijven, merken en events. Van één zakelijk portret tot een hele dag meelopen op locatie.",
   // Twee knoppen, twee bestemmingen. Ze wezen allebei naar het cases-blok op
   // de homepage, waardoor de knop met "Portfolio" erop je nergens bracht waar
   // portfolio stond.

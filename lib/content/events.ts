@@ -45,7 +45,7 @@ export const eventsIntro: SectionIntro = {
   eyebrow: "Nieuwste event",
   title: "Events",
   description:
-    "We organiseren inspirerende workshops en portretdagen, op locatie of in onze portretstudio, waarop je jezelf of je team professioneel kunt laten vastleggen.",
+    "Workshops, cursussen en portretdagen die we zelf organiseren. Klein gehouden, en altijd met een camera in je handen of voor je neus.",
 };
 
 export const eventsPage = {

@@ -33,8 +33,8 @@ export default function PortfolioPage() {
           delay={0.8}
           className="mt-8 max-w-[32rem] text-[1.08rem] leading-[1.6] text-muted"
         >
-          Een dwarsdoorsnede van ons werk, van bedrijfsreportages en portretten tot creatieve
-          concepten en sfeervolle eventregistraties.
+          Werk uit alle hoeken van het vak: bedrijven, events, portretten, concepten en drone. Kies
+          eerst foto of video, daarna de categorie die je zoekt.
         </Reveal>
       </Container>
 

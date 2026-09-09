@@ -109,9 +109,9 @@ export default function OverOnsPage() {
               <MaskedLines
                 trigger="scroll"
                 delay={0}
-                lines={werkwijzeIntro.titleLines.map((text, index) => ({
+                lines={overOnsPage.werkwijzeHeading.map((text, index) => ({
                   text,
-                  accent: index === werkwijzeIntro.titleLines.length - 1,
+                  accent: index === overOnsPage.werkwijzeHeading.length - 1,
                 }))}
               />
             </h2>

@@ -108,35 +108,45 @@ export function ServiceDetail({ service }: { service: Service }) {
             als blok wordt afgesloten in plaats van in het niets op te houden. */}
         <Stagger as="ul" className="border-b border-hairline">
           {service.items.map((item) => (
-            /* Drie kolommen op de nav-breedte: naam, tekst, beeld. Het beeld
-               staat rechts omdat daar de ruimte al was — de tekstkolom loopt
-               niet door tot de rand, dus zonder beeld eindigde elke regel in
-               een leeg blok van een paar honderd pixels.
+            /* De regel bouwt zich in drie stappen op, en de plaatsing staat
+               daarom met de hand aangewezen in plaats van aan de bronvolgorde
+               overgelaten.
 
-               Eronder valt alles onder elkaar, maar niet in dezelfde volgorde:
-               daar komt het beeld tussen de naam en de uitleg te staan. Je weet
-               dan al welke dienst het is, ziet meteen hoe die eruitziet, en
-               leest de drie zinnen alleen als het beeld je iets zei — precies de
-               volgorde waarin iemand een fotograaf beoordeelt. */
+               Op een telefoon staat alles onder elkaar, met het beeld tussen de
+               naam en de uitleg: je weet dan al welke dienst het is, ziet hoe
+               die eruitziet, en leest de drie zinnen alleen als het beeld je
+               iets zei.
+
+               Vanaf de nav-breedte komt het beeld rechts te staan en houdt de
+               tekst de hele linkerkolom. Drie kolommen naast elkaar lijken hier
+               logisch, maar dan blijft er op 900px nog zo'n 250px over voor de
+               bodytekst — een kolom van vijf woorden breed.
+
+               Pas op 1280px is er ruimte voor die derde kolom, en dan pas
+               schuift de naam naar links naast de tekst. */
             <StaggerItem
               key={item.name}
               as="li"
-              className="group grid items-start gap-x-[clamp(1.75rem,3.5vw,3rem)] gap-y-6 border-t border-hairline py-[clamp(2rem,4vw,3rem)] nav:grid-cols-[minmax(0,17rem)_minmax(0,1fr)_clamp(15rem,22vw,22rem)]"
+              className="group grid items-start gap-x-[clamp(1.75rem,3.5vw,3rem)] gap-y-6 border-t border-hairline py-[clamp(2rem,4vw,3rem)] nav:grid-cols-[minmax(0,1fr)_clamp(15rem,26vw,20rem)] xl:grid-cols-[minmax(0,19rem)_minmax(0,1fr)_clamp(15rem,22vw,22rem)]"
             >
               {/* Het anker zit op deze kolom en niet op de regel zelf: de index
                   bovenaan de pagina springt hiernaartoe, en dan hoort de naam
                   boven aan het scherm te staan. */}
-              <div id={serviceItemId(item.name)}>
-                {/* `break-words` is het vangnet voor een lange naam: die breekt
-                    dan af in plaats van de kolom ernaast in te lopen. */}
-                <h3 className="break-words font-display text-[clamp(1.3rem,2vw,1.6rem)] font-semibold uppercase tracking-title">
+              <div id={serviceItemId(item.name)} className="nav:col-start-1 nav:row-start-1">
+                {/* De kolom is 19rem, en "Bedrijfsreportage" — de langste naam
+                    die we hebben — meet op zijn grootste maat 281px. Dat paste
+                    niet in de 17rem van hiervoor: de E viel op een eigen regel.
+                    Afbreken blijft als vangnet staan voor een naam die ooit nog
+                    langer wordt, maar met `hyphens` krijgt die tenminste een
+                    koppelteken mee in plaats van een knip midden in een woord. */}
+                <h3 className="hyphens-auto break-words font-display text-[clamp(1.3rem,2vw,1.6rem)] font-semibold uppercase tracking-title">
                   {item.name}
                 </h3>
 
                 <p className="mt-2.5 text-[0.95rem] leading-[1.5] text-muted">{item.summary}</p>
               </div>
 
-              <div className="order-3 nav:order-none">
+              <div className="order-3 nav:order-none nav:col-start-1 nav:row-start-2 xl:col-start-2 xl:row-start-1">
                 <p className="max-w-[40rem] text-[1.02rem] leading-[1.7] text-muted">{item.body}</p>
 
                 <p className="mt-7 text-[0.7rem] font-medium uppercase tracking-label text-muted">
@@ -157,7 +167,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                 </ul>
               </div>
 
-              <div className="order-2 overflow-hidden rounded-media border border-hairline bg-surface nav:order-none">
+              <div className="order-2 overflow-hidden rounded-media border border-hairline bg-surface nav:order-none nav:col-start-2 nav:row-start-1 nav:row-span-2 xl:col-start-3 xl:row-span-1">
                 <Image
                   src={item.thumb.src}
                   alt={item.thumb.alt}
