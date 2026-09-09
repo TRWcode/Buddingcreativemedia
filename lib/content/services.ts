@@ -255,9 +255,6 @@ export function serviceItemId(name: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-/** Hoeveel concrete diensten er in totaal zijn — geteld, niet overgeschreven. */
-export const serviceItemCount = services.reduce((total, service) => total + service.items.length, 0);
-
 /**
  * Eén beeld in de mozaïek naast de kop van `/diensten`, met het label van het
  * werk waar het uit komt.

@@ -7,14 +7,7 @@ import { MaskedLines } from "@/components/ui/MaskedLines";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { fadeIn } from "@/lib/motion";
-import {
-  serviceItemCount,
-  services,
-  servicesPage,
-  servicesShowcase,
-  type ShowcaseImage,
-} from "@/lib/content/services";
-import { site } from "@/lib/content/site";
+import { servicesPage, servicesShowcase, type ShowcaseImage } from "@/lib/content/services";
 
 /**
  * Eén beeld in de mozaïek. Het label onderin zegt uit welk werk het komt —
@@ -58,18 +51,6 @@ function ShowcaseTile({
         </span>
       </span>
     </Reveal>
-  );
-}
-
-/** Eén geteld feit naast de intro: cijfer in de display-letter, label eronder. */
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <span className="flex items-baseline gap-2.5">
-      <span className="font-display text-[1.75rem] font-bold leading-none tabular-nums text-brand">
-        {value}
-      </span>
-      <span className="text-[0.8rem] font-medium uppercase tracking-label text-muted">{label}</span>
-    </span>
   );
 }
 
@@ -147,20 +128,6 @@ export function ServicesHero() {
                   </Button>
                 </Magnetic>
               ) : null}
-            </Reveal>
-
-            {/* Twee getelde cijfers en de standplaats. Het maakt de belofte
-                "twee disciplines" hierboven meteen concreet: je weet hoe groot
-                de lijst is die je nog voor je hebt. */}
-            <Reveal
-              trigger="mount"
-              variants={fadeIn}
-              delay={1.1}
-              className="mt-10 flex flex-wrap items-center gap-x-9 gap-y-4 border-t border-hairline pt-7"
-            >
-              <Stat value={String(services.length).padStart(2, "0")} label="Disciplines" />
-              <Stat value={String(serviceItemCount).padStart(2, "0")} label="Diensten" />
-              <span className="text-[0.9rem] text-muted">{site.location}</span>
             </Reveal>
           </div>
 

@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CameraIcon, VideoIcon } from "@/components/ui/icons";
-import { cn } from "@/lib/cn";
 import { serviceItemId, services, servicesIndex } from "@/lib/content/services";
 import type { Service, ServiceItem } from "@/lib/content/services";
 
@@ -92,9 +91,6 @@ export function ServiceIndex() {
                     <h3 className="font-display text-[1.05rem] font-semibold uppercase tracking-label transition-colors duration-fast group-hover:text-brand">
                       {service.title}
                     </h3>
-                    <span className="text-[0.8rem] tabular-nums text-muted">
-                      {service.items.length} diensten
-                    </span>
                   </a>
                 </Reveal>
 
@@ -103,9 +99,8 @@ export function ServiceIndex() {
                     `li`, dus `last:` zou daar altijd aanslaan en overal een
                     dubbele lijn opleveren. */}
                 <ul className="border-b border-hairline">
-                  {service.items.map((item, index) => {
+                  {service.items.map((item) => {
                     const id = serviceItemId(item.name);
-                    const isActive = id === activeId;
 
                     return (
                       <li key={item.name}>
@@ -118,24 +113,12 @@ export function ServiceIndex() {
                           onFocus={() => setActiveId(id)}
                           className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-hairline py-4"
                         >
-                          <span
-                            aria-hidden
-                            className={cn(
-                              "w-6 shrink-0 font-sans text-[0.78rem] font-medium tabular-nums tracking-[0.1em]",
-                              "text-muted transition-colors duration-fast group-hover:text-brand",
-                              isActive && "nav:text-brand",
-                            )}
-                          >
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-
-                          <span
-                            className={cn(
-                              "font-display text-[clamp(1.1rem,1.6vw,1.35rem)] font-semibold uppercase tracking-title",
-                              "transition-colors duration-fast group-hover:text-brand",
-                              isActive && "nav:text-brand",
-                            )}
-                          >
+                          {/* Vaste kolombreedte vanaf de nav-breedte: de
+                              samenvattingen beginnen dan alle negen op dezelfde
+                              lijn in plaats van achter een rafelrand van namen.
+                              15rem is de langste naam op zijn grootste maat —
+                              een langere naam wikkelt netjes binnen de kolom. */}
+                          <span className="font-display text-[clamp(1.1rem,1.6vw,1.35rem)] font-semibold uppercase tracking-title transition-colors duration-fast group-hover:text-brand nav:w-[15rem]">
                             {item.name}
                           </span>
 
@@ -152,7 +135,7 @@ export function ServiceIndex() {
 
                           <span
                             aria-hidden
-                            className="ml-auto shrink-0 leading-none text-brand transition-transform duration-base ease-interact group-hover:translate-y-1"
+                            className="ml-auto shrink-0 leading-none text-muted transition-[color,transform] duration-base ease-interact group-hover:translate-y-1 group-hover:text-brand"
                           >
                             &darr;
                           </span>

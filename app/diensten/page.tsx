@@ -24,13 +24,8 @@ export default function DienstenPage() {
       <ServicesHero />
       <ServiceIndex />
 
-      {services.map((service, index) => (
-        <ServiceDetail
-          key={service.id}
-          service={service}
-          index={index}
-          total={services.length}
-        />
+      {services.map((service) => (
+        <ServiceDetail key={service.id} service={service} />
       ))}
 
       <ContactCta />

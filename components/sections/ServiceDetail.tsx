@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { MaskedLines } from "@/components/ui/MaskedLines";
@@ -37,23 +36,12 @@ const icons = {
  * stilstaande foto, en een play-knop die niets afspeelt is een belofte die de
  * pagina niet waarmaakt.
  */
-export function ServiceDetail({
-  service,
-  index,
-  total,
-}: {
-  service: Service;
-  index: number;
-  total: number;
-}) {
+export function ServiceDetail({ service }: { service: Service }) {
   const Icon = icons[service.icon];
-  const chapter = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
 
   return (
     <section id={service.id} aria-labelledby={`${service.id}-titel`}>
-      {/* `hero-legible` doet hier één ding: het kleurt de eyebrow wit. Grijs op
-          een foto valt weg, en de kop eronder heeft aan het doek genoeg. */}
-      <div className="hero-legible relative isolate flex min-h-[clamp(20rem,52vh,31rem)] flex-col justify-end overflow-hidden border-y border-hairline">
+      <div className="relative isolate flex min-h-[clamp(20rem,52vh,31rem)] flex-col justify-end overflow-hidden border-y border-hairline">
         <Image
           src={service.image.src}
           alt={service.image.alt}
@@ -80,11 +68,10 @@ export function ServiceDetail({
         <Container className="py-[clamp(2.5rem,6vh,4rem)] pt-[clamp(5rem,14vh,8rem)]">
           <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-9">
             <div>
-              <Reveal className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <Reveal className="mb-6">
                 <IconBadge>
                   <Icon className="size-[1.625rem]" />
                 </IconBadge>
-                <Eyebrow>{`Discipline ${chapter} · ${service.items.length} diensten`}</Eyebrow>
               </Reveal>
 
               <h2
@@ -120,7 +107,7 @@ export function ServiceDetail({
         {/* De laatste regel krijgt ook een haarlijn onder zich, zodat de lijst
             als blok wordt afgesloten in plaats van in het niets op te houden. */}
         <Stagger as="ul" className="border-b border-hairline">
-          {service.items.map((item, itemIndex) => (
+          {service.items.map((item) => (
             /* Drie kolommen op de nav-breedte: naam, tekst, beeld. Het beeld
                staat rechts omdat daar de ruimte al was — de tekstkolom loopt
                niet door tot de rand, dus zonder beeld eindigde elke regel in
@@ -140,26 +127,9 @@ export function ServiceDetail({
                   bovenaan de pagina springt hiernaartoe, en dan hoort de naam
                   boven aan het scherm te staan. */}
               <div id={serviceItemId(item.name)}>
-                {/* Een omlijnd cijfer in plaats van een gevuld: het geeft de
-                    regel het formaat van een hoofdstuknummer zonder de naam
-                    ernaast te beconcurreren. `-webkit-text-stroke` staat hier
-                    inline omdat de eigenschap met een streepje begint, en
-                    Tailwind dat in een klassenaam als een negatieve waarde
-                    leest. */}
-                <span
-                  aria-hidden
-                  style={{
-                    WebkitTextStroke: "1px var(--color-hairline-loud)",
-                    color: "transparent",
-                  }}
-                  className="block font-display text-[clamp(2.5rem,4vw,3.25rem)] font-bold leading-none tabular-nums"
-                >
-                  {String(itemIndex + 1).padStart(2, "0")}
-                </span>
-
                 {/* `break-words` is het vangnet voor een lange naam: die breekt
                     dan af in plaats van de kolom ernaast in te lopen. */}
-                <h3 className="mt-3.5 break-words font-display text-[clamp(1.3rem,2vw,1.6rem)] font-semibold uppercase tracking-title">
+                <h3 className="break-words font-display text-[clamp(1.3rem,2vw,1.6rem)] font-semibold uppercase tracking-title">
                   {item.name}
                 </h3>
 
