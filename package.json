@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
-    "framer-motion": "13.1.0",
+    "framer-motion": "14.7.1",
     "lenis": "1.3.26",
     "next": "16.4.3",
     "react": "^19.3.1",
